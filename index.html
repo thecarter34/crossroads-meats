@@ -305,9 +305,10 @@
     }
     .navbar.nav-hidden { transform: translateY(-100%); }
     .nav-logo {
-      display: flex; align-items: center; flex-shrink: 0;
-      text-decoration: none;
+      display: flex; align-items: center; gap: 12px;
+      flex-shrink: 0; text-decoration: none;
     }
+    .nav-logo img { height: 40px; width: auto; }
     .nav-logo-text {
       font-family: var(--font-display);
       font-size: 1.15rem; font-weight: 700; color: var(--ink);
@@ -886,6 +887,8 @@
       .nav-links { display: none; }
       .nav-actions { display: none; }
       .hamburger { display: flex; }
+      .nav-logo-text { display: none; }
+      .nav-logo img { height: 36px; }
       .mobile-menu { display: flex; }
       .mobile-sticky { display: flex; }
 
@@ -925,6 +928,7 @@
   <!-- NAVBAR -->
   <nav class="navbar" role="navigation" aria-label="Main navigation">
     <a href="#" class="nav-logo" aria-label="Crossroads of the North Meats and Cellar home">
+      <img src="assets/logo.jpeg" alt="Crossroads of the North Meats and Cellar" />
       <span class="nav-logo-text">Crossroads of the North</span>
     </a>
     <ul class="nav-links">
