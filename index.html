@@ -107,7 +107,63 @@
         { "@type": "OfferCatalog", "name": "Wisconsin Cheese" },
         { "@type": "OfferCatalog", "name": "Wine, Craft Beer & Gifts" }
       ]
-    }
+    },
+    "jobPosting": [
+      {
+        "@type": "JobPosting",
+        "title": "Store Manager",
+        "description": "Lead daily operations, our team, product quality, and the customer experience at our new family-owned butcher and cellar in Spooner, WI.",
+        "employmentType": "FULL_TIME",
+        "industry": "Food Retail",
+        "datePosted": "2026-07-03",
+        "validThrough": "2026-09-30",
+        "hiringOrganization": {
+          "@type": "Organization",
+          "name": "Crossroads of the North Meats and Cellar",
+          "sameAs": "https://crossroads-meats.pages.dev"
+        },
+        "jobLocation": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "118 Ash Street",
+            "addressLocality": "Spooner",
+            "addressRegion": "WI",
+            "postalCode": "54801",
+            "addressCountry": "US"
+          }
+        },
+        "directApply": false,
+        "url": "https://crossroads-meats.pages.dev/#hiring"
+      },
+      {
+        "@type": "JobPosting",
+        "title": "Weekly Cleaning Specialist",
+        "description": "One scheduled day a week to help keep our new family-owned butcher and cellar in Spooner, WI spotless. Flexible hours, great for students or retirees.",
+        "employmentType": "PART_TIME",
+        "industry": "Food Retail",
+        "datePosted": "2026-07-03",
+        "validThrough": "2026-09-30",
+        "hiringOrganization": {
+          "@type": "Organization",
+          "name": "Crossroads of the North Meats and Cellar",
+          "sameAs": "https://crossroads-meats.pages.dev"
+        },
+        "jobLocation": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "118 Ash Street",
+            "addressLocality": "Spooner",
+            "addressRegion": "WI",
+            "postalCode": "54801",
+            "addressCountry": "US"
+          }
+        },
+        "directApply": false,
+        "url": "https://crossroads-meats.pages.dev/#hiring"
+      }
+    ]
   }
   </script>
 
@@ -735,6 +791,157 @@
       .hero-wave { display: none; }
       .hero-trust { gap: 12px 16px; }
     }
+
+    /* ============================================
+       NOW HIRING SECTION
+       ============================================ */
+    .hiring {
+      padding: var(--section-padding);
+      background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      position: relative;
+    }
+
+    .hiring-container {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .hiring .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .hiring .section-intro {
+      max-width: 640px;
+      margin: 16px auto 0;
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .hiring-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: var(--space-6);
+      margin-bottom: 48px;
+    }
+
+    .hiring-card {
+      background-color: var(--bg-card);
+      background-image: none;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .hiring-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(192, 57, 43, 0.4);
+    }
+
+    .hiring-card-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hiring-type {
+      display: inline-block;
+      background-color: #C0392B;
+      background-image: none;
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 4px;
+    }
+
+    .hiring-reports {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-style: italic;
+    }
+
+    .hiring-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .hiring-summary {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.55;
+      margin-bottom: 24px;
+    }
+
+    .hiring-details {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 28px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .hiring-details li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .hiring-dot {
+      flex-shrink: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #C0392B;
+      background-image: none;
+      margin-top: 8px;
+    }
+
+    .hiring-details strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .hiring-apply {
+      align-self: flex-start;
+      margin-top: auto;
+    }
+
+    .hiring-foot {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-style: italic;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .hiring-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+      }
+      .hiring-card {
+        padding: var(--space-5);
+      }
+    }
   </style>
 </head>
 <body>
@@ -748,6 +955,7 @@
     <ul class="nav-links">
       <li><a href="#products">What We Carry</a></li>
       <li><a href="#about">Our Story</a></li>
+      <li><a href="#hiring">Now Hiring</a></li>
       <li><a href="#location">Visit Us</a></li>
       <li><a href="#reviews">Reviews</a></li>
     </ul>
@@ -766,6 +974,7 @@
   <div class="mobile-menu" id="mobileMenu">
     <a href="#products">What We Carry</a>
     <a href="#about">Our Story</a>
+    <a href="#hiring">Now Hiring</a>
     <a href="#location">Visit Us</a>
     <a href="#reviews">Reviews</a>
     <a href="#cta" class="btn-primary" style="margin-top: 20px;">
@@ -940,6 +1149,57 @@
           </div>
         </figure>
       </div>
+    </div>
+  </section>
+
+  <!-- NOW HIRING -->
+  <section class="hiring" id="hiring" aria-labelledby="hiring-heading">
+    <div class="hiring-container">
+      <header class="section-header reveal">
+        <p class="section-label">Now Hiring</p>
+        <h2 class="section-title" id="hiring-heading">Help us open the doors.</h2>
+        <p class="section-intro">We're putting the team together for opening day. If working at a local, family-owned butcher and cellar sounds right to you, we'd love to hear from you.</p>
+      </header>
+
+      <div class="hiring-grid">
+        <article class="hiring-card reveal">
+          <div class="hiring-card-head">
+            <span class="hiring-type">Full-Time</span>
+            <span class="hiring-reports">Reports to: Jen &amp; Dennis</span>
+          </div>
+          <h3 class="hiring-title">Store Manager</h3>
+          <p class="hiring-summary">Lead daily operations, our team, product quality, and the customer experience. Be the first manager of a brand-new Spooner business.</p>
+          <ul class="hiring-details">
+            <li><span class="hiring-dot"></span><div><strong>What you'll do:</strong> Open and close the store, supervise staff, train new hires, oversee meat case presentation and product rotation, manage inventory and vendor relationships, operate the POS, and keep the store clean, organized, and on-brand.</div></li>
+            <li><span class="hiring-dot"></span><div><strong>What we're looking for:</strong> 2+ years of retail, food service, or grocery management experience; strong leadership and communication skills; flexible schedule including weekends and holidays; food handler's certification (or willing to get one); 18 or older.</div></li>
+            <li><span class="hiring-dot"></span><div><strong>Compensation:</strong> Competitive salary, commensurate with experience — discussed during interview. ~40 hours per week.</div></li>
+          </ul>
+          <a href="https://drive.google.com/file/d/1ku48g4bTL73nScy4NnVduDxUE3OFLxhv/view?usp=sharing" target="_blank" rel="noopener" class="btn-primary hiring-apply">
+            <i class="ph ph-file-text" aria-hidden="true"></i>
+            Read full job description
+          </a>
+        </article>
+
+        <article class="hiring-card reveal">
+          <div class="hiring-card-head">
+            <span class="hiring-type">Part-Time</span>
+            <span class="hiring-reports">Reports to: Store Manager</span>
+          </div>
+          <h3 class="hiring-title">Weekly Cleaning Specialist</h3>
+          <p class="hiring-summary">One scheduled day a week to help keep our store spotless. Flexible hours, friendly team, great for students or retirees.</p>
+          <ul class="hiring-details">
+            <li><span class="hiring-dot"></span><div><strong>What you'll do:</strong> Deep-clean the sales floor, meat case, back room, restrooms, and cellar. Follow food-safety and sanitation standards, and help the team stay ready for customers every day.</div></li>
+            <li><span class="hiring-dot"></span><div><strong>What we're looking for:</strong> Reliable, detail-oriented, and comfortable working around a food retail environment. Flexible scheduling — one day per week, with occasional flexibility for special events.</div></li>
+            <li><span class="hiring-dot"></span><div><strong>Compensation:</strong> Hourly, discussed during interview. One scheduled shift per week.</div></li>
+          </ul>
+          <a href="https://m.me/61590342133702" target="_blank" rel="noopener" class="btn-primary hiring-apply">
+            <i class="ph ph-chat-circle-dots" aria-hidden="true"></i>
+            Message us to apply
+          </a>
+        </article>
+      </div>
+
+      <p class="hiring-foot reveal">Don't see your role? We're always interested in meeting good people. Send us a note and tell us what you'd bring to the counter.</p>
     </div>
   </section>
 
@@ -1144,6 +1404,7 @@
         <ul>
           <li><a href="#products">What We Carry</a></li>
           <li><a href="#about">Our Story</a></li>
+          <li><a href="#hiring">Now Hiring</a></li>
           <li><a href="#location">Visit Us</a></li>
           <li><a href="#reviews">Reviews</a></li>
           <li><a href="#faq">FAQ</a></li>
