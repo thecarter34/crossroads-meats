@@ -301,8 +301,9 @@
       backdrop-filter: saturate(180%) blur(20px);
       -webkit-backdrop-filter: saturate(180%) blur(20px);
       border-bottom: 1px solid var(--rule);
-      transition: box-shadow 0.3s;
+      transition: transform 0.3s ease, box-shadow 0.3s;
     }
+    .navbar.nav-hidden { transform: translateY(-100%); }
     .nav-logo {
       display: flex; align-items: center; flex-shrink: 0;
       text-decoration: none;
@@ -883,8 +884,6 @@
        ============================================ */
     @media (max-width: 968px) {
       .nav-links { display: none; }
-      .nav-cta span { display: none; }
-      .nav-cta { padding: 10px 12px; }
       .hamburger { display: flex; }
       .nav-logo-text { display: none; }
       .mobile-menu { display: flex; }
@@ -1399,15 +1398,44 @@
 
   <!-- JAVASCRIPT -->
   <script>
-    // Navbar scroll behavior (intensify blur on scroll)
+    // Navbar scroll behavior (intensify blur on scroll + hide on scroll down, show on scroll up)
     const navbar = document.querySelector('.navbar');
+    let lastScrollY = 0;
+    let scrollDirection = 'up';
+    const isMobile = () => window.matchMedia('(max-width: 968px)').matches;
+
     window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 50) {
+      const currentY = window.pageYOffset;
+
+      // Box-shadow on scroll (desktop + mobile)
+      if (currentY > 50) {
         navbar.classList.add('scrolled');
       } else {
         navbar.classList.remove('scrolled');
       }
-    });
+
+      // Hide/show on scroll direction (mobile only)
+      if (isMobile() && currentY > 100) {
+        if (currentY > lastScrollY + 4) {
+          // Scrolling down — hide
+          if (scrollDirection !== 'down') {
+            navbar.classList.add('nav-hidden');
+            scrollDirection = 'down';
+          }
+        } else if (currentY < lastScrollY - 4) {
+          // Scrolling up — show
+          if (scrollDirection !== 'up') {
+            navbar.classList.remove('nav-hidden');
+            scrollDirection = 'up';
+          }
+        }
+      } else {
+        // Near top or desktop — always show
+        navbar.classList.remove('nav-hidden');
+        scrollDirection = 'up';
+      }
+      lastScrollY = currentY;
+    }, { passive: true });
 
     // Mobile menu toggle
     const hamburger = document.querySelector('.hamburger');
