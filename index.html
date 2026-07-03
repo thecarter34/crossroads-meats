@@ -574,9 +574,16 @@
     .about-image img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
     .about-pull-quote {
       position: absolute; bottom: 24px; left: 24px; right: 24px;
-      padding: 24px 28px;
+      padding: 24px 28px 24px 56px;
       background: rgba(255, 255, 255, 0.97);
-      border-left: 2px solid var(--accent);
+    }
+    .about-pull-quote-mark {
+      position: absolute;
+      top: 6px; left: 16px;
+      font-family: var(--font-display);
+      font-size: 4.5rem; line-height: 1;
+      color: var(--accent);
+      font-style: italic;
     }
     .about-pull-quote p {
       font-family: var(--font-display);
@@ -652,37 +659,6 @@
       font-size: 1.05rem;
       color: var(--ink-muted);
       max-width: 600px; margin: 72px auto 0;
-    }
-
-    /* ============================================
-       STATS — single thin row, hairline rules
-       ============================================ */
-    .stats-section { padding: 0 24px; background: var(--bg-primary); }
-    .stats-container {
-      max-width: 1100px; margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border-top: 1px solid var(--rule);
-      border-bottom: 1px solid var(--rule);
-    }
-    .stat-item {
-      padding: 56px 24px;
-      text-align: center;
-      border-right: 1px solid var(--rule);
-    }
-    .stat-item:last-child { border-right: none; }
-    .stat-text {
-      font-family: var(--font-display) !important;
-      font-size: clamp(2.5rem, 5vw, 3.5rem) !important;
-      font-weight: 700 !important;
-      color: var(--ink) !important;
-      line-height: 1;
-      margin-bottom: 12px !important;
-    }
-    .stat-label {
-      font-size: 0.7rem; font-weight: 500;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--ink-muted);
     }
 
     /* ============================================
@@ -942,9 +918,6 @@
       .hero-trust { font-size: 0.62rem; gap: 12px; }
       .products-grid { grid-template-columns: 1fr; gap: 60px; }
       .section-header { margin-bottom: 60px; }
-      .stats-container { grid-template-columns: 1fr; }
-      .stat-item { border-right: none; border-bottom: 1px solid var(--rule); padding: 32px 16px; }
-      .stat-item:last-child { border-bottom: none; }
     }
   </style>
 </head>
@@ -1152,7 +1125,8 @@
         <figure style="position:relative; margin:0;">
           <img src="assets/stock-about.jpg" alt="Butcher counter with a selection of fresh cuts" loading="lazy" width="900" height="900" />
           <div class="about-pull-quote">
-            <p>"We're hands-on partners with our team and our community. We can't wait to open our doors."</p>
+            <span class="about-pull-quote-mark" aria-hidden="true">&ldquo;</span>
+            <p>We're hands-on partners with our team and our community. We can't wait to open our doors.</p>
           </div>
         </figure>
       </div>
@@ -1207,24 +1181,6 @@
       </div>
 
       <p class="hiring-foot reveal">Don't see your role? We're always interested in meeting good people. Send us a note and tell us what you'd bring to the counter.</p>
-    </div>
-  </section>
-
-  <!-- STATS -->
-  <section class="stats-section" aria-label="By the numbers">
-    <div class="stats-container">
-      <div class="stat-item">
-        <div class="stat-text">2</div>
-        <div class="stat-label">Owners</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-text">30+</div>
-        <div class="stat-label">Brat Flavors</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-text">30-Day</div>
-        <div class="stat-label">Dry-Aged Steaks</div>
-      </div>
     </div>
   </section>
 
