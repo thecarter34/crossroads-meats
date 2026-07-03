@@ -215,6 +215,99 @@
       }
     ]
   }
+  <!-- LocalBusiness (full) + WebSite + BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["LocalBusiness", "ButcherShop", "WineShop"],
+        "@id": "https://crossroads-meats.pages.dev/#business",
+        "name": "Crossroads of the North Meats and Cellar",
+        "alternateName": "Crossroads of the North",
+        "description": "Family-owned butcher and wine shop in Spooner, WI. Hand-cut meats, 30-day aged steaks, 30+ brat flavors, Wisconsin cheese, and a curated cellar.",
+        "url": "https://crossroads-meats.pages.dev",
+        "image": "https://crossroads-meats.pages.dev/assets/logo.jpeg",
+        "logo": "https://crossroads-meats.pages.dev/assets/logo.jpeg",
+        "priceRange": "$$",
+        "currenciesAccepted": "USD",
+        "paymentAccepted": "Cash, Credit Card",
+        "telephone": "",
+        "email": "info@jjctech.net",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "118 Ash Street",
+          "addressLocality": "Spooner",
+          "addressRegion": "WI",
+          "postalCode": "54801",
+          "addressCountry": "US"
+        },
+        "geo": { "@type": "GeoCoordinates", "latitude": 45.8225, "longitude": -91.8899 },
+        "areaServed": [
+          { "@type": "City", "name": "Spooner" },
+          { "@type": "City", "name": "Shell Lake" },
+          { "@type": "City", "name": "Hayward" },
+          { "@type": "City", "name": "Rice Lake" },
+          { "@type": "City", "name": "Minong" },
+          { "@type": "AdministrativeArea", "name": "Washburn County" }
+        ],
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "description": "Opening soon at 118 Ash Street, Spooner, WI 54801"
+        },
+        "founder": [
+          { "@type": "Person", "name": "Jen Lutz" },
+          { "@type": "Person", "name": "Dennis Lutz" }
+        ],
+        "employee": [
+          { "@type": "Role", "name": "Store Manager", "roleName": "Store Manager" }
+        ],
+        "knowsAbout": [
+          "Butchery", "Dry-aging", "Sausage making", "Wisconsin cheese", "Wine curation"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Products",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Hand-Cut Meats" }, "category": "Butchery" },
+            { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "30-Day Aged Steaks" }, "category": "Butchery" },
+            { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "House-Made Brats" }, "category": "Sausage" },
+            { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Snack Sticks & Jerky" }, "category": "Charcuterie" },
+            { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Wisconsin Cheese" }, "category": "Specialty Foods" },
+            { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Wine, Craft Beer & Gifts" }, "category": "Beverage & Gifts" }
+          ]
+        },
+        "sameAs": [
+          "https://www.facebook.com/people/Crossroads-of-the-North-Meats-and-Cellar/61590342133702/"
+        ],
+        "potentialAction": {
+          "@type": "OrderAction",
+          "target": "https://m.me/61590342133702",
+          "name": "Message us on Facebook Messenger"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://crossroads-meats.pages.dev/#website",
+        "url": "https://crossroads-meats.pages.dev",
+        "name": "Crossroads of the North Meats and Cellar",
+        "publisher": { "@id": "https://crossroads-meats.pages.dev/#business" },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://crossroads-meats.pages.dev/#home" },
+          { "@type": "ListItem", "position": 2, "name": "What We Carry", "item": "https://crossroads-meats.pages.dev/#products" },
+          { "@type": "ListItem", "position": 3, "name": "Our Story", "item": "https://crossroads-meats.pages.dev/#about" },
+          { "@type": "ListItem", "position": 4, "name": "Now Hiring", "item": "https://crossroads-meats.pages.dev/#hiring" },
+          { "@type": "ListItem", "position": 5, "name": "Reviews", "item": "https://crossroads-meats.pages.dev/#reviews" },
+          { "@type": "ListItem", "position": 6, "name": "FAQ", "item": "https://crossroads-meats.pages.dev/#faq" },
+          { "@type": "ListItem", "position": 7, "name": "Visit Us", "item": "https://crossroads-meats.pages.dev/#location" }
+        ]
+      }
+    ]
+  }
   </script>
 
     <style>
@@ -260,6 +353,175 @@
 
     @media (min-width: 969px) {
       body { padding-bottom: 0; }
+    }
+
+    /* ============================================
+       PRELOADER
+       ============================================ */
+    .preloader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--bg-primary);
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    .preloader.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .preloader-inner {
+      display: flex; flex-direction: column; align-items: center; gap: 24px;
+    }
+    .preloader-logo {
+      display: flex; gap: 0;
+      font-family: var(--font-display);
+      font-size: 4rem; font-weight: 900; line-height: 1;
+      color: var(--ink);
+      letter-spacing: -0.04em;
+    }
+    .preloader-mark {
+      display: inline-block;
+      animation: preloader-fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .preloader-mark:nth-child(2) { animation-delay: 0.15s; }
+    @keyframes preloader-fade-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .preloader-bar {
+      width: 120px; height: 1px;
+      background: var(--rule);
+      overflow: hidden;
+    }
+    .preloader-bar-fill {
+      display: block; width: 100%; height: 100%;
+      background: var(--ink);
+      transform: scaleX(0); transform-origin: left center;
+      animation: preloader-bar 1.4s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    }
+    @keyframes preloader-bar {
+      to { transform: scaleX(1); }
+    }
+    .preloader-text {
+      font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--ink-muted);
+      animation: preloader-fade-up 0.6s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    body.is-preloading { overflow: hidden; }
+
+    /* ============================================
+       IMAGE REVEAL (Ken Burns + grayscale-to-color)
+       ============================================ */
+    .img-reveal {
+      filter: grayscale(100%) saturate(0.6);
+      transform: scale(1.06);
+      opacity: 0.4;
+      transition: filter 1.2s ease-out, transform 1.2s ease-out, opacity 1.2s ease-out;
+    }
+    .img-reveal.is-revealed {
+      filter: grayscale(0%) saturate(1);
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    /* ============================================
+       STICKY CHAPTER MARKERS (desktop only, ≥1200px)
+       ============================================ */
+    .chapter-marker {
+      position: fixed; left: 28px; top: 50%;
+      transform: translateY(-50%) rotate(-90deg) translateX(0);
+      transform-origin: left center;
+      font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease, color 0.2s ease;
+      z-index: 50;
+      white-space: nowrap;
+    }
+    .chapter-marker.is-active { opacity: 0.8; pointer-events: auto; }
+    .chapter-marker:hover { color: var(--accent); opacity: 1; }
+    @media (max-width: 1199px) { .chapter-marker { display: none; } }
+
+    /* ============================================
+       IMAGE LIGHTBOX
+       ============================================ */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 10000;
+      background: rgba(10, 10, 10, 0.92);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      padding: 40px;
+    }
+    .lightbox.is-open { opacity: 1; visibility: visible; }
+    .lightbox-inner {
+      position: relative; max-width: 900px; width: 100%;
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
+    }
+    .lightbox-img {
+      max-width: 100%; max-height: 75vh;
+      object-fit: contain;
+      transform: scale(0.96);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .lightbox.is-open .lightbox-img { transform: scale(1); }
+    .lightbox-caption {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1rem; line-height: 1.5;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 600px; text-align: center;
+    }
+    .lightbox-close {
+      position: fixed; top: 24px; right: 24px;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .lightbox-close:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.6); }
+    .lightbox-close i { font-size: 1.2rem; }
+
+    /* ============================================
+       CUSTOM CURSOR (desktop only, ≥1024px)
+       ============================================ */
+    .has-custom-cursor,
+    .has-custom-cursor * { cursor: none; }
+    .has-custom-cursor a, .has-custom-cursor button,
+    .has-custom-cursor [role="button"] { cursor: none; }
+    .custom-cursor {
+      position: fixed; left: 0; top: 0;
+      width: 32px; height: 32px;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-16px, -16px);
+      transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+      z-index: 99999;
+      mix-blend-mode: difference;
+    }
+    .custom-cursor.is-expanded {
+      width: 56px; height: 56px;
+      transform: translate(-28px, -28px);
+      background: rgba(192, 57, 43, 0.12);
+      border-color: var(--accent);
+    }
+    .custom-cursor-dot {
+      position: fixed; left: 0; top: 0;
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-3px, -3px);
+      z-index: 99999;
+    }
+    @media (max-width: 1023px) {
+      .has-custom-cursor, .has-custom-cursor * { cursor: auto; }
+      .custom-cursor, .custom-cursor-dot { display: none; }
     }
 
     h1, h2, h3 {
@@ -924,6 +1186,17 @@
   </style>
 </head>
 <body>
+  <!-- PRELOADER -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-inner">
+      <div class="preloader-logo">
+        <span class="preloader-mark">C</span>
+        <span class="preloader-mark">N</span>
+      </div>
+      <div class="preloader-bar"><span class="preloader-bar-fill"></span></div>
+      <div class="preloader-text">Crossroads of the North</div>
+    </div>
+  </div>
 
   <!-- NAVBAR -->
   <nav class="navbar" role="navigation" aria-label="Main navigation">
@@ -1402,6 +1675,190 @@
 
   <!-- JAVASCRIPT -->
   <script>
+    // === PRELOADER ===
+    (function() {
+      const preloader = document.getElementById('preloader');
+      if (!preloader) return;
+      document.body.classList.add('is-preloading');
+      const hide = () => {
+        preloader.classList.add('is-hidden');
+        document.body.classList.remove('is-preloading');
+      };
+      // Wait for window load (so images are decoded) + small buffer for the bar to finish
+      if (document.readyState === 'complete') {
+        setTimeout(hide, 1400);
+      } else {
+        window.addEventListener('load', () => setTimeout(hide, 1400), { once: true });
+      }
+    })();
+
+    // === IMAGE REVEAL ON SCROLL ===
+    (function() {
+      // Mark product/about images for reveal animation
+      const revealImages = document.querySelectorAll('.product-image img, .about-image img');
+      revealImages.forEach((img, i) => {
+        img.classList.add('img-reveal');
+        img.style.transitionDelay = (i * 60) + 'ms';
+      });
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
+      revealImages.forEach(img => observer.observe(img));
+    })();
+
+    // === STICKY SECTION LABELS ===
+    (function() {
+      // Add the eyebrow label of each section as a sticky chapter-marker on the left
+      const sections = document.querySelectorAll('section[id]');
+      const isDesktop = () => window.matchMedia('(min-width: 1200px)').matches;
+      const labels = [];
+      sections.forEach(s => {
+        const label = s.querySelector('.section-label');
+        if (!label) return;
+        const text = label.textContent.trim();
+        const target = s.id;
+        const marker = document.createElement('a');
+        marker.href = '#' + target;
+        marker.className = 'chapter-marker';
+        marker.textContent = text;
+        marker.setAttribute('aria-label', 'Jump to ' + text);
+        document.body.appendChild(marker);
+        labels.push({ marker, target });
+      });
+
+      if (!('IntersectionObserver' in window)) return;
+
+      const visible = new Set();
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            visible.add(entry.target.id);
+            entry.target.classList.add('in-view');
+          } else {
+            visible.delete(entry.target.id);
+            entry.target.classList.remove('in-view');
+          }
+        });
+        // Show marker for the topmost visible section
+        const topmost = sections[Array.from(visible).length > 0 ? Array.from(visible)[0] : ''];
+      }, { threshold: 0.15, rootMargin: '-15% 0px -50% 0px' });
+
+      sections.forEach(s => observer.observe(s));
+
+      // Toggle marker visibility based on scroll position
+      const updateMarkers = () => {
+        if (!isDesktop()) {
+          labels.forEach(l => l.marker.classList.remove('is-active'));
+          return;
+        }
+        const scrollY = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = scrollY / Math.max(1, docHeight);
+        labels.forEach((l, i) => {
+          const section = document.getElementById(l.target);
+          if (!section) return;
+          const rect = section.getBoundingClientRect();
+          const isInView = rect.top < window.innerHeight * 0.5 && rect.bottom > 0;
+          l.marker.classList.toggle('is-active', isInView);
+        });
+      };
+      window.addEventListener('scroll', updateMarkers, { passive: true });
+      window.addEventListener('resize', updateMarkers);
+      updateMarkers();
+    })();
+
+    // === IMAGE LIGHTBOX ===
+    (function() {
+      // Build a single lightbox element
+      const lb = document.createElement('div');
+      lb.className = 'lightbox';
+      lb.setAttribute('aria-hidden', 'true');
+      lb.innerHTML = '<div class="lightbox-inner"><button class="lightbox-close" aria-label="Close"><i class="ph ph-x"></i></button><img class="lightbox-img" alt=""/><div class="lightbox-caption"></div></div>';
+      document.body.appendChild(lb);
+      const lbImg = lb.querySelector('.lightbox-img');
+      const lbCap = lb.querySelector('.lightbox-caption');
+      const lbClose = lb.querySelector('.lightbox-close');
+      const open = (src, alt, caption) => {
+        lbImg.src = src;
+        lbImg.alt = alt || '';
+        lbCap.textContent = caption || alt || '';
+        lb.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        lb.setAttribute('aria-hidden', 'false');
+      };
+      const close = () => {
+        lb.classList.remove('is-open');
+        document.body.style.overflow = '';
+        lb.setAttribute('aria-hidden', 'true');
+        setTimeout(() => { lbImg.src = ''; }, 400);
+      };
+      lbClose.addEventListener('click', close);
+      lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+      // Wire product images
+      document.querySelectorAll('.product-image img, .about-image img').forEach(img => {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', () => {
+          const card = img.closest('article');
+          const title = card?.querySelector('h3')?.textContent?.trim();
+          const summary = card?.querySelector('p')?.textContent?.trim();
+          const caption = title ? `${title}${summary ? ' — ' + summary : ''}` : img.alt;
+          open(img.src, img.alt, caption);
+        });
+      });
+    })();
+
+    // === CUSTOM CURSOR (desktop only) ===
+    (function() {
+      if (window.matchMedia('(pointer: coarse)').matches) return; // skip on touch
+      if (window.innerWidth < 1024) return;
+
+      const cursor = document.createElement('div');
+      cursor.className = 'custom-cursor';
+      document.body.appendChild(cursor);
+      const dot = document.createElement('div');
+      dot.className = 'custom-cursor-dot';
+      document.body.appendChild(dot);
+
+      let mx = 0, my = 0, cx = 0, cy = 0;
+      let raf;
+      document.addEventListener('mousemove', (e) => {
+        mx = e.clientX; my = e.clientY;
+        dot.style.transform = `translate(${mx - 3}px, ${my - 3}px)`;
+        if (!raf) {
+          raf = requestAnimationFrame(loop);
+        }
+      });
+      const loop = () => {
+        cx += (mx - cx) * 0.18;
+        cy += (my - cy) * 0.18;
+        cursor.style.transform = `translate(${cx - 16}px, ${cy - 16}px)`;
+        if (Math.abs(mx - cx) > 0.1 || Math.abs(my - cy) > 0.1) {
+          raf = requestAnimationFrame(loop);
+        } else {
+          raf = null;
+        }
+      };
+      // Hide default cursor over the page
+      document.documentElement.classList.add('has-custom-cursor');
+      // Expand on interactive elements
+      const expand = () => cursor.classList.add('is-expanded');
+      const shrink = () => cursor.classList.remove('is-expanded');
+      document.querySelectorAll('a, button, .product-card, .faq-question, .hiring-card, input, textarea, [role="button"]').forEach(el => {
+        el.addEventListener('mouseenter', expand);
+        el.addEventListener('mouseleave', shrink);
+      });
+    })();
+
+    // === SCHEMA.ORG: BREADCRUMBLIST (works on multi-page; harmless on one-pager) ===
+    // (LocalBusiness + JobPosting schemas are inline in the <head> as JSON-LD)
+
     // Navbar scroll behavior (intensify blur on scroll + hide on initial load, show on first scroll)
     const navbar = document.querySelector('.navbar');
     let hasScrolled = false;
