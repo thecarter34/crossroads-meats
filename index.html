@@ -375,18 +375,36 @@
     .hero-logo { max-width: 320px; margin: 0 auto 56px; }
     .hero-logo img { width: 100%; height: auto; }
 
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 12px;
-      font-size: 0.7rem; font-weight: 500;
-      letter-spacing: 0.22em; text-transform: uppercase;
+    .hero-badge { display: none; }
+
+    /* === Coming Soon badge — hero === */
+    .hero-opening-badge {
+      display: inline-flex; align-items: center; gap: 24px;
+      margin: 0 auto 64px;
+      padding: 0;
+    }
+    .hero-opening-rule {
+      display: block; width: 80px; height: 1px;
+      background: var(--accent);
+    }
+    .hero-opening-text {
+      display: inline-flex; flex-direction: column; align-items: center; gap: 10px;
+      text-align: center;
+    }
+    .hero-opening-eyebrow {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.75rem; font-weight: 400;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+    .hero-opening-date {
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.24em; text-transform: uppercase;
       color: var(--ink-muted);
-      margin-bottom: 56px;
+      line-height: 1;
     }
-    .hero-badge::before, .hero-badge::after {
-      content: ''; display: block; width: 32px; height: 1px;
-      background: var(--ink-muted); opacity: 0.4;
-    }
-    .hero-badge i { display: none; }
 
     .hero h1 {
       color: var(--ink);
@@ -868,6 +886,10 @@
       .hero { padding: 120px 20px 60px; min-height: 85vh; }
       .hero-badge { font-size: 0.65rem; margin-bottom: 40px; gap: 8px; }
       .hero-badge::before, .hero-badge::after { width: 20px; }
+      .hero-opening-badge { gap: 14px; margin-bottom: 48px; }
+      .hero-opening-rule { width: 40px; }
+      .hero-opening-eyebrow { font-size: 1.35rem; }
+      .hero-opening-date { font-size: 0.6rem; letter-spacing: 0.2em; }
       .hero-logo { max-width: 240px; margin-bottom: 48px; }
       .hero-actions { flex-direction: column; align-items: stretch; }
       .hero-actions .btn-primary, .hero-actions .btn-outline { justify-content: center; }
@@ -931,9 +953,13 @@
         <img src="assets/logo.jpeg" alt="Crossroads of the North Meats and Cellar logo" loading="eager" />
       </div>
 
-      <div class="hero-badge">
-        <i class="ph ph-map-pin" aria-hidden="true"></i>
-        Now Opening in Spooner, WI
+      <div class="hero-opening-badge" aria-label="Opening soon at 118 Ash Street, Spooner, WI">
+        <span class="hero-opening-rule" aria-hidden="true"></span>
+        <span class="hero-opening-text">
+          <span class="hero-opening-eyebrow">Coming Soon</span>
+          <span class="hero-opening-date">2026 Opening · 118 Ash Street, Spooner, WI</span>
+        </span>
+        <span class="hero-opening-rule" aria-hidden="true"></span>
       </div>
 
       <h1>Hand-cut. House-made.<br/><span>Spooner's newest butcher and cellar.</span></h1>
