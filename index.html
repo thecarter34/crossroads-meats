@@ -1169,15 +1169,15 @@
   <section class="stats-section" aria-label="By the numbers">
     <div class="stats-container">
       <div class="stat-item">
-        <div class="stat-text" data-count="2" data-suffix="">0</div>
+        <div class="stat-text">2</div>
         <div class="stat-label">Owners</div>
       </div>
       <div class="stat-item">
-        <div class="stat-text" data-count="30" data-suffix="+">0</div>
+        <div class="stat-text">30+</div>
         <div class="stat-label">Brat Flavors</div>
       </div>
       <div class="stat-item">
-        <div class="stat-text" data-count="30" data-suffix="-Day">0</div>
+        <div class="stat-text">30-Day</div>
         <div class="stat-label">Dry-Aged Steaks</div>
       </div>
     </div>
@@ -1437,40 +1437,9 @@
       });
     });
 
-    // Stats counter animation
-    const statTexts = document.querySelectorAll('.stat-text[data-count]');
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const target = parseInt(el.dataset.count);
-          const suffix = el.dataset.suffix || '';
-          let current = 0;
-          const step = target / 40;
-          const timer = setInterval(() => {
-            current += step;
-            if (current >= target) {
-              current = target;
-              clearInterval(timer);
-            }
-            el.textContent = Math.floor(current) + suffix;
-          }, 40);
-          counterObserver.unobserve(el);
-        }
-      });
-    }, { threshold: 0.5 });
-    statTexts.forEach(el => counterObserver.observe(el));
-
-    // === COUNTER SAFETY NET ===
-    setTimeout(() => {
-      statTexts.forEach(el => {
-        const target = parseInt(el.dataset.count);
-        const suffix = el.dataset.suffix || '';
-        if (target && el.textContent === '0') {
-          el.textContent = target + suffix;
-        }
-      });
-    }, 1500);
+    // === STAT COUNTERS ===
+    // (No count-up animation — values are rendered directly as static text
+    // to keep the editorial feel. Aesop / Kinfolk never animate numbers.)
   </script>
 </body>
 </html>
