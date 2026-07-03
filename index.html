@@ -1398,11 +1398,13 @@
 
   <!-- JAVASCRIPT -->
   <script>
-    // Navbar scroll behavior (intensify blur on scroll + hide on scroll down, show on scroll up)
+    // Navbar scroll behavior (intensify blur on scroll + hide on initial load, show on first scroll)
     const navbar = document.querySelector('.navbar');
-    let lastScrollY = 0;
-    let scrollDirection = 'up';
+    let hasScrolled = false;
     const isMobile = () => window.matchMedia('(max-width: 968px)').matches;
+
+    // Start hidden on mobile
+    if (isMobile()) navbar.classList.add('nav-hidden');
 
     window.addEventListener('scroll', () => {
       const currentY = window.pageYOffset;
@@ -1414,27 +1416,11 @@
         navbar.classList.remove('scrolled');
       }
 
-      // Hide/show on scroll direction (mobile only)
-      if (isMobile() && currentY > 100) {
-        if (currentY > lastScrollY + 4) {
-          // Scrolling down — hide
-          if (scrollDirection !== 'down') {
-            navbar.classList.add('nav-hidden');
-            scrollDirection = 'down';
-          }
-        } else if (currentY < lastScrollY - 4) {
-          // Scrolling up — show
-          if (scrollDirection !== 'up') {
-            navbar.classList.remove('nav-hidden');
-            scrollDirection = 'up';
-          }
-        }
-      } else {
-        // Near top or desktop — always show
+      // Show navbar on first scroll (mobile only) — then leave it visible
+      if (isMobile() && !hasScrolled && currentY > 30) {
         navbar.classList.remove('nav-hidden');
-        scrollDirection = 'up';
+        hasScrolled = true;
       }
-      lastScrollY = currentY;
     }, { passive: true });
 
     // Mobile menu toggle
