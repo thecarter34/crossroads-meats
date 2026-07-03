@@ -255,6 +255,11 @@
       background: var(--bg-primary);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      padding-bottom: 80px; /* reserve space for mobile sticky CTA */
+    }
+
+    @media (min-width: 969px) {
+      body { padding-bottom: 0; }
     }
 
     h1, h2, h3 {
@@ -298,15 +303,17 @@
       border-bottom: 1px solid var(--rule);
       transition: box-shadow 0.3s;
     }
-    .navbar.scrolled { box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04); }
-
-    .nav-logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-    .nav-logo img { height: 36px; width: auto; }
+    .nav-logo {
+      display: flex; align-items: center; flex-shrink: 0;
+      text-decoration: none;
+    }
     .nav-logo-text {
       font-family: var(--font-display);
-      font-size: 1.1rem; font-weight: 700; color: var(--ink);
+      font-size: 1.15rem; font-weight: 700; color: var(--ink);
       letter-spacing: -0.01em;
+      white-space: nowrap;
     }
+    .nav-logo:hover .nav-logo-text { color: var(--accent); }
 
     .nav-links { display: flex; gap: clamp(20px, 3vw, 40px); list-style: none; padding: 0; margin: 0; }
     .nav-links li { color: var(--ink); }
@@ -494,6 +501,7 @@
     .products {
       padding: var(--section-padding) 24px;
       background: var(--bg-primary);
+      border-top: 1px solid var(--rule);
     }
     .products-grid {
       max-width: 1240px; margin: 0 auto;
@@ -858,6 +866,43 @@
     }
 
     /* ============================================
+       MOBILE STICKY CTA (mobile only)
+       ============================================ */
+    .mobile-sticky {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0;
+      z-index: 999;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-top: 1px solid var(--rule);
+      padding: 12px 16px;
+      gap: 8px;
+      justify-content: center;
+    }
+    .mobile-sticky-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 20px;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      border-radius: 2px;
+      flex: 1;
+    }
+    .mobile-sticky-primary {
+      background: var(--accent);
+      color: #fff !important;
+      border: 1px solid var(--accent);
+    }
+    .mobile-sticky-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+    .mobile-sticky-secondary {
+      background: transparent;
+      color: var(--ink) !important;
+      border: 1px solid var(--ink);
+    }
+    .mobile-sticky-secondary:hover { background: var(--ink); color: #fff !important; }
+    .mobile-sticky-btn i { font-size: 1.1rem; }
+
+    /* ============================================
        MOBILE
        ============================================ */
     @media (max-width: 968px) {
@@ -867,6 +912,7 @@
       .hamburger { display: flex; }
       .nav-logo-text { display: none; }
       .mobile-menu { display: flex; }
+      .mobile-sticky { display: flex; }
 
       .products-grid { grid-template-columns: repeat(2, 1fr); gap: 48px 32px; }
       .about-container { grid-template-columns: 1fr; gap: 60px; }
@@ -907,7 +953,6 @@
   <!-- NAVBAR -->
   <nav class="navbar" role="navigation" aria-label="Main navigation">
     <a href="#" class="nav-logo" aria-label="Crossroads of the North Meats and Cellar home">
-      <img src="assets/logo.jpeg" alt="Crossroads of the North Meats and Cellar" />
       <span class="nav-logo-text">Crossroads of the North</span>
     </a>
     <ul class="nav-links">
@@ -953,11 +998,11 @@
         <img src="assets/logo.jpeg" alt="Crossroads of the North Meats and Cellar logo" loading="eager" />
       </div>
 
-      <div class="hero-opening-badge" aria-label="Opening soon at 118 Ash Street, Spooner, WI">
+      <div class="hero-opening-badge" aria-label="Coming soon at 118 Ash Street, Spooner, WI">
         <span class="hero-opening-rule" aria-hidden="true"></span>
         <span class="hero-opening-text">
           <span class="hero-opening-eyebrow">Coming Soon</span>
-          <span class="hero-opening-date">2026 Opening · 118 Ash Street, Spooner, WI</span>
+          <span class="hero-opening-date">2026 · Spooner, WI</span>
         </span>
         <span class="hero-opening-rule" aria-hidden="true"></span>
       </div>
@@ -1224,10 +1269,10 @@
 
       <div class="faq-item" role="listitem">
         <button class="faq-question" aria-expanded="false">
-          <span>When are you opening?</span>
+          <span>What are your hours?</span>
           <i class="ph ph-caret-down" aria-hidden="true"></i>
         </button>
-        <div class="faq-answer"><div class="faq-answer-inner">We're putting the finishing touches on 118 Ash Street and will announce our opening day soon. Follow us on Facebook for the latest.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">We're finalizing hours for our opening at 118 Ash Street. Follow us on Facebook for the latest — we'll post the full schedule as soon as it's set.</div></div>
       </div>
 
       <div class="faq-item" role="listitem">
@@ -1374,8 +1419,7 @@
       </div>
       <div class="footer-contact">
         <h4>Connect</h4>
-        <p><a href="https://m.me/61590342133702" target="_blank" rel="noopener">Message on Facebook</a></p>
-        <p><a href="https://www.facebook.com/people/Crossroads-of-the-North-Meats-and-Cellar/61590342133702/" target="_blank" rel="noopener">Like our page</a></p>
+        <p><a href="https://www.facebook.com/people/Crossroads-of-the-North-Meats-and-Cellar/61590342133702/" target="_blank" rel="noopener">Follow on Facebook</a></p>
         <p>118 Ash Street<br/>Spooner, WI 54801</p>
         <p>Hours: Opening Soon</p>
       </div>
@@ -1384,6 +1428,18 @@
       <p>&copy; 2026 Crossroads of the North Meats and Cellar &middot; Site by <a href="https://jjctech.net" target="_blank" rel="noopener" style="color: var(--accent-light);">JJC Tech</a></p>
     </div>
   </footer>
+
+  <!-- MOBILE STICKY CTA -->
+  <div class="mobile-sticky" role="region" aria-label="Quick contact">
+    <a href="https://m.me/61590342133702" target="_blank" rel="noopener" class="mobile-sticky-btn mobile-sticky-primary">
+      <i class="ph ph-chat-circle-dots" aria-hidden="true"></i>
+      <span>Message Us</span>
+    </a>
+    <a href="https://www.facebook.com/people/Crossroads-of-the-North-Meats-and-Cellar/61590342133702/" target="_blank" rel="noopener" class="mobile-sticky-btn mobile-sticky-secondary">
+      <i class="ph ph-facebook-logo" aria-hidden="true"></i>
+      <span>Follow</span>
+    </a>
+  </div>
 
   <!-- JAVASCRIPT -->
   <script>
