@@ -840,31 +840,38 @@
       background: var(--bg-primary);
     }
     .interior .container { max-width: 1240px; margin: 0 auto; }
-    .interior-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(2, 1fr);
+    .interior-strip {
+      display: flex;
       gap: 18px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-padding: 0 24px;
+      -webkit-overflow-scrolling: touch;
+      padding: 8px 0 24px;
       margin-top: 24px;
     }
+    .interior-strip::-webkit-scrollbar { height: 8px; }
+    .interior-strip::-webkit-scrollbar-track { background: var(--bg-alt); }
+    .interior-strip::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 4px; }
     .interior-figure {
       margin: 0;
+      flex: 0 0 auto;
       overflow: hidden;
       border: 1px solid var(--rule);
       background: var(--bg-alt);
       display: flex;
       flex-direction: column;
+      scroll-snap-align: start;
     }
     .interior-figure img {
-      width: 100%; flex: 1;
-      min-height: 0;
-      object-fit: cover; display: block;
-      transition: transform 0.6s ease;
+      display: block;
+      object-fit: contain;
+      width: auto;
+      height: 360px;
+      max-width: 100%;
+      background: var(--bg-primary);
     }
-    .interior-figure:hover img { transform: scale(1.02); }
-    /* 4×2 grid: each tile is 4:5 portrait */
-    .interior-figure--tall { aspect-ratio: auto; }
-    .interior-figure:not(.interior-figure--tall) { aspect-ratio: 4 / 5; }
     .interior-figure figcaption {
       display: block;
       padding: 14px 18px;
@@ -874,7 +881,7 @@
       color: var(--ink-muted);
       background: var(--bg-primary);
       border-top: 1px solid var(--rule);
-      flex-shrink: 0;
+      max-width: 360px;
     }
     .interior-attrib {
       margin-top: 32px;
@@ -902,12 +909,8 @@
       margin: 0 auto 28px;
       text-align: center;
     }
-    @media (max-width: 960px) {
-      .interior-grid { grid-template-columns: repeat(3, 1fr); }
-    }
     @media (max-width: 720px) {
-      .interior-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
-      .interior-figure:not(.interior-figure--tall) { aspect-ratio: 4 / 3; }
+      .interior-figure img { height: 260px; }
     }
 
     /* ============================================
@@ -1515,7 +1518,7 @@
         <p class="section-sub">Shots from around the shop — the coolers, the Cellar, the apparel racks, the products — as we get ready for soft opening Thursday, July 9. Stop in Thursday and you'll see the rest in person.</p>
       </header>
 
-      <div class="interior-grid reveal">
+      <div class="interior-strip reveal">
         <figure class="interior-figure">
           <img src="assets/shop-coolers.jpg" alt="Commercial refrigeration units installed at the shop, including glass-door merchandisers and a curved-glass deli case, ready for stocking" loading="lazy" />
           <figcaption>Coolers installed. Fresh cuts land this Thursday.</figcaption>
