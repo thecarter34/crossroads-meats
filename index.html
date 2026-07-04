@@ -884,6 +884,24 @@
       font-size: 1rem;
       color: var(--ink-muted);
     }
+    /* Subheads within interior (e.g. Shop / Stocking zones) */
+    .interior-subhead {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2vw, 1.7rem);
+      font-weight: 400;
+      color: var(--ink);
+      margin: 56px 0 8px;
+      text-align: center;
+    }
+    .interior-subhead:first-of-type { margin-top: 40px; }
+    .interior-sub.explainer {
+      font-size: 0.95rem;
+      color: var(--ink-muted);
+      line-height: 1.6;
+      max-width: 56ch;
+      margin: 0 auto 28px;
+      text-align: center;
+    }
     @media (max-width: 720px) {
       .interior-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
       .interior-figure:not(.interior-figure--tall) { aspect-ratio: 4 / 3; }
@@ -1491,9 +1509,10 @@
       <header class="section-header reveal">
         <p class="section-label">Sneak Peek</p>
         <h2 class="section-title" id="interior-heading">A look inside before opening day.</h2>
-        <p class="section-sub">A few shots from the shop as we get ready for Thursday, July 9. Stop in Thursday and you'll see the rest in person.</p>
+        <p class="section-sub">A few shots from the shop and the kind of merchandise we'll be stocking as we get ready for Thursday, July 9. Stop in and you'll see the rest in person.</p>
       </header>
 
+      <h3 class="interior-subhead reveal">The Shop at 118 Ash Street</h3>
       <div class="interior-grid reveal">
         <figure class="interior-figure interior-figure--tall">
           <img src="assets/shop-coolers.jpg" alt="Commercial refrigeration units installed at the shop, including glass-door merchandisers and a curved-glass deli case, ready for stocking" loading="lazy" />
@@ -1506,6 +1525,23 @@
         <figure class="interior-figure">
           <img src="assets/shop-interior-1.jpg" alt="Crossroads of the North branded apparel racks inside the shop, with Wisconsin-logo tees and hoodies on display" loading="lazy" />
           <figcaption>Branded apparel, ready to take home.</figcaption>
+        </figure>
+      </div>
+
+      <h3 class="interior-subhead reveal">Stocking from makers we like</h3>
+      <p class="interior-sub explainer reveal">A few of the gift and kitchen lines we'll be carrying — from small makers and wholesalers who share our taste. Stop in to see what we've put out on the shelves.</p>
+      <div class="interior-grid reveal">
+        <figure class="interior-figure">
+          <img src="assets/shop-interior-2.jpg" alt="Shop interior with rolling clothing racks, a whiskey-barrel display table, and a hanging floral basket" loading="lazy" />
+          <figcaption>Inside the shop, racks ready for product.</figcaption>
+        </figure>
+        <figure class="interior-figure">
+          <img src="assets/shop-merch-cuts.jpg" alt="Display shelves with wooden cutting boards, charcuterie boards, kitchen knives, candle tins, and gift baskets at a rural Wisconsin gift shop" loading="lazy" />
+          <figcaption>Cutting boards, candles, knives. Like these on day one.</figcaption>
+        </figure>
+        <figure class="interior-figure">
+          <img src="assets/shop-merch-towels.jpg" alt="Rustic home goods display featuring humorous printed tea towels on a black wire rack, with a wood-paneled wall behind" loading="lazy" />
+          <figcaption>Printed tea towels and kitchen linens from small labels.</figcaption>
         </figure>
       </div>
 
