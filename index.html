@@ -107,63 +107,7 @@
         { "@type": "OfferCatalog", "name": "Wisconsin Cheese" },
         { "@type": "OfferCatalog", "name": "Wine, Craft Beer & Gifts" }
       ]
-    },
-    "jobPosting": [
-      {
-        "@type": "JobPosting",
-        "title": "Store Manager",
-        "description": "The Store Manager is responsible for the day-to-day operations of Crossroads of the North Meats and Cellar. This person serves as the primary leader on the floor, ensuring excellent customer experiences, smooth store operations, team accountability, and product quality. Owners Jen and Dennis will be available as needed for guidance, decisions, and support. Full-time, exempt, approximately 40 hours per week. Reports to Jen & Dennis (Owners).",
-        "employmentType": "FULL_TIME",
-        "industry": "Food Retail",
-        "datePosted": "2026-07-03",
-        "validThrough": "2026-09-30",
-        "hiringOrganization": {
-          "@type": "Organization",
-          "name": "Crossroads of the North Meats and Cellar",
-          "sameAs": "https://crossroads-meats.pages.dev"
-        },
-        "jobLocation": {
-          "@type": "Place",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "118 Ash Street",
-            "addressLocality": "Spooner",
-            "addressRegion": "WI",
-            "postalCode": "54801",
-            "addressCountry": "US"
-          }
-        },
-        "directApply": false,
-        "url": "https://crossroads-meats.pages.dev/#hiring"
-      },
-      {
-        "@type": "JobPosting",
-        "title": "Weekly Cleaning Specialist",
-        "description": "One scheduled day a week to deep-clean the entire Crossroads of the North Meats and Cellar store in Spooner, WI. Approximately 3-5 hours per session. Reliable, detail-oriented, and a great fit for students or retirees. All cleaning supplies provided.",
-        "employmentType": "PART_TIME",
-        "industry": "Food Retail",
-        "datePosted": "2026-07-03",
-        "validThrough": "2026-09-30",
-        "hiringOrganization": {
-          "@type": "Organization",
-          "name": "Crossroads of the North Meats and Cellar",
-          "sameAs": "https://crossroads-meats.pages.dev"
-        },
-        "jobLocation": {
-          "@type": "Place",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "118 Ash Street",
-            "addressLocality": "Spooner",
-            "addressRegion": "WI",
-            "postalCode": "54801",
-            "addressCountry": "US"
-          }
-        },
-        "directApply": false,
-        "url": "https://crossroads-meats.pages.dev/#hiring"
-      }
-    ]
+    }
   }
   </script>
 
@@ -215,6 +159,8 @@
       }
     ]
   }
+  </script>
+
   <!-- LocalBusiness (full) + WebSite + BreadcrumbList -->
   <script type="application/ld+json">
   {
@@ -300,7 +246,7 @@
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://crossroads-meats.pages.dev/#home" },
           { "@type": "ListItem", "position": 2, "name": "What We Carry", "item": "https://crossroads-meats.pages.dev/#products" },
           { "@type": "ListItem", "position": 3, "name": "Our Story", "item": "https://crossroads-meats.pages.dev/#about" },
-          { "@type": "ListItem", "position": 4, "name": "Now Hiring", "item": "https://crossroads-meats.pages.dev/#hiring" },
+          { "@type": "ListItem", "position": 4, "name": "Now Hiring", "item": "https://crossroads-meats.pages.dev/hiring" },
           { "@type": "ListItem", "position": 5, "name": "Reviews", "item": "https://crossroads-meats.pages.dev/#reviews" },
           { "@type": "ListItem", "position": 6, "name": "FAQ", "item": "https://crossroads-meats.pages.dev/#faq" },
           { "@type": "ListItem", "position": 7, "name": "Visit Us", "item": "https://crossroads-meats.pages.dev/#location" }
@@ -893,6 +839,52 @@
     }
 
     /* ============================================
+       NOW HIRING CTA (homepage strip pointing to /hiring)
+       ============================================ */
+    .hiring-cta {
+      padding: var(--section-padding) 24px;
+      background: var(--bg-alt);
+    }
+    .hiring-cta-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr auto;
+      gap: 40px;
+      align-items: center;
+      padding: 48px 56px;
+      background: var(--bg-primary);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+    }
+    .hiring-cta-text .section-label { text-align: left; margin: 0 0 14px 0; }
+    .hiring-cta-title {
+      font-family: var(--f-display, Playfair Display), Georgia, serif;
+      font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+      margin: 0 0 12px 0;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+    .hiring-cta-sub {
+      font-family: var(--f-display, Playfair Display), Georgia, serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.55;
+      color: var(--ink-muted);
+      margin: 0;
+      max-width: 56ch;
+    }
+    .hiring-cta-button { flex-shrink: 0; }
+    @media (max-width: 720px) {
+      .hiring-cta-inner {
+        grid-template-columns: 1fr;
+        padding: 32px;
+        gap: 24px;
+      }
+      .hiring-cta-button { justify-self: start; }
+    }
+
+    /* ============================================
        NOW HIRING — 2-col with hairline divider
        ============================================ */
     .hiring {
@@ -1240,7 +1232,7 @@
     <ul class="nav-links">
       <li><a href="#products">What We Carry</a></li>
       <li><a href="#about">Our Story</a></li>
-      <li><a href="#hiring">Now Hiring</a></li>
+      <li><a href="hiring">Now Hiring</a></li>
       <li><a href="#location">Visit Us</a></li>
       <li><a href="#reviews">Reviews</a></li>
     </ul>
@@ -1259,7 +1251,7 @@
   <div class="mobile-menu" id="mobileMenu">
     <a href="#products">What We Carry</a>
     <a href="#about">Our Story</a>
-    <a href="#hiring">Now Hiring</a>
+    <a href="hiring">Now Hiring</a>
     <a href="#location">Visit Us</a>
     <a href="#reviews">Reviews</a>
     <a href="#cta" class="btn-primary" style="margin-top: 20px;">
@@ -1442,54 +1434,18 @@
     </div>
   </section>
 
-  <!-- NOW HIRING -->
-  <section class="hiring" id="hiring" aria-labelledby="hiring-heading">
-    <div class="hiring-container">
-      <header class="section-header reveal">
+  <!-- NOW HIRING — short CTA pointing to dedicated page -->
+  <section class="hiring-cta" id="hiring-cta" aria-labelledby="hiring-cta-heading">
+    <div class="hiring-cta-inner reveal">
+      <div class="hiring-cta-text">
         <p class="section-label">Now Hiring</p>
-        <h2 class="section-title" id="hiring-heading">Help us open the doors.</h2>
-        <p class="section-intro">We're putting the team together for opening day. If working at a local, family-owned butcher and cellar sounds right to you, we'd love to hear from you.</p>
-      </header>
-
-      <div class="hiring-grid">
-        <article class="hiring-card reveal">
-          <div class="hiring-card-head">
-            <span class="hiring-type">Full-Time · Exempt · ~40 hrs/wk</span>
-            <span class="hiring-reports">Reports to: Jen &amp; Dennis (Owners)</span>
-          </div>
-          <h3 class="hiring-title">Store Manager</h3>
-          <p class="hiring-summary">Lead day-to-day operations of our new family-owned butcher and cellar — customer experience, team accountability, and product quality. Owners Jen and Dennis will be available as needed for guidance, decisions, and support.</p>
-          <ul class="hiring-details">
-            <li><span class="hiring-dot"></span><div><strong>What you'll do:</strong> Open and close the store; maintain daily operational checklists. Supervise and support all staff (including cleaning personnel). Train new employees on procedures, product knowledge, and service standards. Oversee meat case presentation, product rotation, labeling, and quality control. Manage inventory counts, ordering, and vendor relationships with the owners. Handle customer concerns professionally. Operate the POS and ensure cash-drawer accuracy. Maintain compliance with health, food safety, and sanitation regulations. Communicate regularly with Jen &amp; Dennis on performance, staffing, and needs. Assist with pricing, promotions, and merchandising. Keep the store clean, organized, and visually appealing at all times.</div></li>
-            <li><span class="hiring-dot"></span><div><strong>What we're looking for:</strong> Minimum 2 years of retail, food service, or grocery management experience preferred. Strong leadership, communication, and organizational skills. Flexible schedule including weekends and holidays. Food handler's certification or willingness to obtain upon hire. Reliable transportation and consistent attendance. Experience in a meat, deli, or specialty food environment is a plus. 18 or older.</div></li>
-            <li><span class="hiring-dot"></span><div><strong>Compensation &amp; schedule:</strong> Full-time — approximately 40 hours per week. Competitive salary, commensurate with experience (discussed during interview). Schedule includes weekdays and weekends; specific days determined at hire.</div></li>
-          </ul>
-          <a href="https://drive.google.com/file/d/1ku48g4bTL73nScy4NnVduDxUE3OFLxhv/view?usp=sharing" target="_blank" rel="noopener" class="btn-primary hiring-apply">
-            <i class="ph ph-file-text" aria-hidden="true"></i>
-            Read full job description
-          </a>
-        </article>
-
-        <article class="hiring-card reveal">
-          <div class="hiring-card-head">
-            <span class="hiring-type">Part-Time · ~3–5 hrs/wk</span>
-            <span class="hiring-reports">Reports to: Store Manager</span>
-          </div>
-          <h3 class="hiring-title">Weekly Cleaning Specialist</h3>
-          <p class="hiring-summary">One scheduled day a week to deep-clean our store and keep it guest-ready. Reliable, detail-oriented, and a great fit for students or retirees.</p>
-          <ul class="hiring-details">
-            <li><span class="hiring-dot"></span><div><strong>What you'll do:</strong> Deep-clean the entire store on a weekly basis — floors (including behind counters and coolers), meat counter, prep area, display cases, shelving, fixtures, restrooms, interior windows, and back-of-house. Empty and sanitize trash receptacles, and report any maintenance or supply needs to the Store Manager.</div></li>
-            <li><span class="hiring-dot"></span><div><strong>What we're looking for:</strong> Previous commercial or retail cleaning experience preferred; strong attention to detail; ability to work efficiently and independently; physically able to bend, kneel, lift up to 30 lbs, and stand for extended periods; reliable and punctual — must honor the weekly scheduled day; 18 or older.</div></li>
-            <li><span class="hiring-dot"></span><div><strong>Compensation &amp; schedule:</strong> Once per week on a scheduled day (3–5 hours per session). Hourly or flat-rate, discussed during interview. All cleaning supplies provided.</div></li>
-          </ul>
-          <a href="https://drive.google.com/file/d/1E8G6HBNh6ZemBy858OsCR4Ens3NPebif/view?usp=sharing" target="_blank" rel="noopener" class="btn-primary hiring-apply">
-            <i class="ph ph-file-text" aria-hidden="true"></i>
-            Read full job description
-          </a>
-        </article>
+        <h2 class="hiring-cta-title" id="hiring-cta-heading">We're putting the team together.</h2>
+        <p class="hiring-cta-sub">Store Manager and Weekly Cleaning Specialist — full job descriptions, schedules, and apply instructions live on the hiring page.</p>
       </div>
-
-      <p class="hiring-foot reveal">Don't see your role? We're always interested in meeting good people. Send us a note and tell us what you'd bring to the counter.</p>
+      <a href="hiring" class="btn-primary hiring-cta-button">
+        <i class="ph ph-arrow-right" aria-hidden="true"></i>
+        See Open Positions
+      </a>
     </div>
   </section>
 
@@ -1639,7 +1595,7 @@
         <ul>
           <li><a href="#products">What We Carry</a></li>
           <li><a href="#about">Our Story</a></li>
-          <li><a href="#hiring">Now Hiring</a></li>
+          <li><a href="hiring">Now Hiring</a></li>
           <li><a href="#location">Visit Us</a></li>
           <li><a href="#reviews">Reviews</a></li>
           <li><a href="#faq">FAQ</a></li>
