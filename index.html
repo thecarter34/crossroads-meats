@@ -574,33 +574,30 @@
     .mobile-menu a:hover { color: var(--accent); }
 
     /* ============================================
-       HERO — charcoal-only, no photo
+       HERO — light gray (warm parchment), no photo
        ============================================ */
     .hero {
       min-height: 92vh;
       padding: 120px 24px 80px;
-      background: var(--bg-dark);
+      background: #EDE9E2;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       text-align: center;
       position: relative;
       overflow: hidden;
-      color: #ffffff;
+      color: var(--ink);
     }
-    /* Soft accent vignette so the charcoal reads as on-brand, not flat */
+    /* Soft warm-to-cool gradient so the gray reads as depth, not flat */
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse at 50% 18%, rgba(192, 57, 43, 0.16) 0%, transparent 55%),
-        radial-gradient(ellipse at 50% 90%, rgba(0, 0, 0, 0.55) 0%, rgba(10, 10, 10, 0) 70%);
+        radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.55) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 100%, rgba(20, 20, 20, 0.06) 0%, transparent 65%);
       z-index: 0;
       pointer-events: none;
     }
-    /* Hairline divider rules that frame the coming-soon text */
-    .hero::after {
-      display: none;
-    }
+    .hero::after { display: none; }
 
     .hero-glow, .hero-orb, .hero-wave, .hero-scroll { display: none !important; }
 
@@ -612,9 +609,6 @@
     .hero-logo { max-width: 220px; margin: 0 auto 32px; }
     .hero-logo img {
       width: 100%; height: auto;
-      /* Invert the black-on-white logo for the dark hero */
-      filter: invert(1) brightness(2.5) contrast(1.1);
-      mix-blend-mode: screen;
       position: relative;
       z-index: 6;
     }
@@ -639,25 +633,25 @@
       font-family: var(--font-display);
       font-style: italic;
       font-size: 1.75rem; font-weight: 400;
-      color: #ffffff;
+      color: var(--ink);
       letter-spacing: 0.02em;
       line-height: 1;
     }
     .hero-opening-date {
       font-size: 0.68rem; font-weight: 500;
       letter-spacing: 0.24em; text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.6);
+      color: var(--ink-muted);
       line-height: 1;
     }
 
     .hero h1 {
-      color: #ffffff;
+      color: var(--ink);
       margin: 0 0 24px 0;
       position: relative;
       z-index: 3;
     }
     .hero h1 span {
-      color: #ffffff;
+      color: var(--ink);
       font-style: normal;
     }
 
@@ -667,7 +661,7 @@
       font-weight: 400;
       font-size: clamp(1.1rem, 1.8vw, 1.4rem);
       line-height: 1.6;
-      color: rgba(255, 255, 255, 0.78);
+      color: var(--ink-muted);
       max-width: 580px; margin: 0 auto 40px;
     }
 
@@ -676,12 +670,12 @@
       margin-bottom: 24px;
     }
 
-    /* Dark-variant outline button (white border, white text) */
+    /* Light-variant outline button (ink border, ink text on gray) */
     .hero .btn-outline {
-      border-color: rgba(255, 255, 255, 0.5);
-      color: #ffffff !important;
+      border-color: var(--ink);
+      color: var(--ink) !important;
     }
-    .hero .btn-outline:hover { background: #ffffff; color: var(--ink) !important; }
+    .hero .btn-outline:hover { background: var(--ink); color: #fff !important; }
 
     .btn-primary {
       display: inline-flex; align-items: center; gap: 10px;
@@ -712,12 +706,12 @@
     .hero-trust {
       display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
       font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.6);
+      color: var(--ink-muted);
     }
     .hero-trust .trust-sep { display: none; }
     .hero-trust .trust-item { display: inline-flex; align-items: center; gap: 0; }
     .hero-trust .trust-item:not(:last-child)::after {
-      content: '·'; margin: 0 12px; color: rgba(255, 255, 255, 0.4);
+      content: '·'; margin: 0 12px; color: rgba(20, 20, 20, 0.25);
     }
     .hero-trust i { display: none; }
 
