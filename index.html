@@ -628,11 +628,11 @@
     .mobile-menu a:hover { color: var(--accent); }
 
     /* ============================================
-       HERO — white, centered, generous space
+       HERO — charcoal-only, no photo
        ============================================ */
     .hero {
-      min-height: 100vh;
-      padding: 120px 24px 60px;
+      min-height: 92vh;
+      padding: 120px 24px 80px;
       background: var(--bg-dark);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       text-align: center;
@@ -640,31 +640,22 @@
       overflow: hidden;
       color: #ffffff;
     }
-    /* Full-bleed butcher photo background with dark overlay */
+    /* Soft accent vignette so the charcoal reads as on-brand, not flat */
     .hero::before {
       content: '';
-      position: absolute; inset: 0;
-      background-image: url('assets/hero-bg.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      /* Desaturate to push it toward moody-charcoal, not warm-butcher */
-      filter: grayscale(40%) contrast(1.1) brightness(0.7);
-      transform: scale(1.05);
-      z-index: 0;
-    }
-    .hero::after {
-      content: '';
-      position: absolute; inset: 0;
+      position: absolute;
+      inset: 0;
       background:
-        radial-gradient(ellipse at center 50%, transparent 0%, rgba(10, 10, 10, 0.55) 60%, rgba(10, 10, 10, 0.85) 100%),
-        linear-gradient(180deg,
-          rgba(10, 10, 10, 0.55) 0%,
-          rgba(10, 10, 10, 0.35) 40%,
-          rgba(10, 10, 10, 0.45) 70%,
-          rgba(10, 10, 10, 0.85) 100%);
-      z-index: 1;
+        radial-gradient(ellipse at 50% 18%, rgba(192, 57, 43, 0.16) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 90%, rgba(0, 0, 0, 0.55) 0%, rgba(10, 10, 10, 0) 70%);
+      z-index: 0;
+      pointer-events: none;
     }
+    /* Hairline divider rules that frame the coming-soon text */
+    .hero::after {
+      display: none;
+    }
+
     .hero-glow, .hero-orb, .hero-wave, .hero-scroll { display: none !important; }
 
     /* Lift content above the background layers */
