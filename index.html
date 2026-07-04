@@ -560,9 +560,7 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       padding: 16px clamp(20px, 4vw, 48px);
       display: flex; align-items: center; justify-content: space-between; gap: 24px;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      background: #ffffff;
       border-bottom: 1px solid var(--rule);
       transition: transform 0.3s ease, box-shadow 0.3s;
     }
@@ -678,8 +676,10 @@
     .hero-logo img {
       width: 100%; height: auto;
       /* Invert the black-on-white logo for the dark hero */
-      filter: invert(1) brightness(1.05) contrast(0.95);
+      filter: invert(1) brightness(2.5) contrast(1.1);
       mix-blend-mode: screen;
+      position: relative;
+      z-index: 6;
     }
 
     .hero-badge { display: none; }
@@ -1151,41 +1151,39 @@
     }
 
     /* ============================================
-       MOBILE STICKY CTA (mobile only)
+       MOBILE FLOATING MESSAGE BUTTON (mobile only)
+       Appears after scrolling past the hero
        ============================================ */
-    .mobile-sticky {
+    .mobile-fab {
       display: none;
-      position: fixed; bottom: 0; left: 0; right: 0;
-      z-index: 999;
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border-top: 1px solid var(--rule);
-      padding: 12px 16px;
-      gap: 8px;
-      justify-content: center;
-    }
-    .mobile-sticky-btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 14px 20px;
-      font-size: 0.78rem; font-weight: 600;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      border-radius: 2px;
-      flex: 1;
-    }
-    .mobile-sticky-primary {
+      position: fixed;
+      bottom: 24px; right: 20px;
+      z-index: 998;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 18px;
       background: var(--accent);
       color: #fff !important;
-      border: 1px solid var(--accent);
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      border-radius: 999px;
+      box-shadow: 0 6px 24px rgba(10, 10, 10, 0.18), 0 2px 8px rgba(192, 57, 43, 0.32);
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      text-decoration: none;
     }
-    .mobile-sticky-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
-    .mobile-sticky-secondary {
-      background: transparent;
-      color: var(--ink) !important;
-      border: 1px solid var(--ink);
+    .mobile-fab.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
     }
-    .mobile-sticky-secondary:hover { background: var(--ink); color: #fff !important; }
-    .mobile-sticky-btn i { font-size: 1.1rem; }
+    .mobile-fab:hover { background: var(--accent-dark); }
+    .mobile-fab i { font-size: 1.2rem; }
+    .mobile-fab-label { display: inline-block; }
+
+    /* Remove the old body padding-bottom for sticky bar — no longer needed */
+    body { padding-bottom: 0 !important; }
 
     /* ============================================
        MOBILE
@@ -1197,7 +1195,7 @@
       .nav-logo-text { display: none; }
       .nav-logo img { height: 36px; }
       .mobile-menu { display: flex; }
-      .mobile-sticky { display: flex; }
+      .mobile-fab { display: inline-flex; }
 
       .products-grid { grid-template-columns: repeat(2, 1fr); gap: 48px 32px; }
       .about-container { grid-template-columns: 1fr; gap: 60px; }
@@ -1707,17 +1705,11 @@
     </div>
   </footer>
 
-  <!-- MOBILE STICKY CTA -->
-  <div class="mobile-sticky" role="region" aria-label="Quick contact">
-    <a href="https://m.me/61590342133702" target="_blank" rel="noopener" class="mobile-sticky-btn mobile-sticky-primary">
-      <i class="ph ph-chat-circle-dots" aria-hidden="true"></i>
-      <span>Message Us</span>
-    </a>
-    <a href="https://www.facebook.com/people/Crossroads-of-the-North-Meats-and-Cellar/61590342133702/" target="_blank" rel="noopener" class="mobile-sticky-btn mobile-sticky-secondary">
-      <i class="ph ph-facebook-logo" aria-hidden="true"></i>
-      <span>Follow</span>
-    </a>
-  </div>
+  <!-- MOBILE FLOATING MESSAGE BUTTON (appears after hero) -->
+  <a href="https://m.me/61590342133702" target="_blank" rel="noopener" class="mobile-fab" id="mobileFab" aria-label="Message us on Facebook" aria-hidden="true">
+    <i class="ph-fill ph-chat-circle-dots" aria-hidden="true"></i>
+    <span class="mobile-fab-label">Message Us</span>
+  </a>
 
   <!-- JAVASCRIPT -->
   <script>
@@ -1904,6 +1896,36 @@
 
     // === SCHEMA.ORG: BREADCRUMBLIST (works on multi-page; harmless on one-pager) ===
     // (LocalBusiness + JobPosting schemas are inline in the <head> as JSON-LD)
+
+    // === MOBILE FLOATING ACTION BUTTON (FAB) ===
+    (function() {
+      const fab = document.getElementById('mobileFab');
+      if (!fab) return;
+      const isMobile = () => window.matchMedia('(max-width: 968px)').matches;
+      const hero = document.getElementById('home');
+      if (!hero) return;
+
+      const updateFab = () => {
+        if (!isMobile()) {
+          fab.classList.remove('is-visible');
+          return;
+        }
+        const heroRect = hero.getBoundingClientRect();
+        // Show FAB only after hero is mostly scrolled past (bottom of hero above the bottom 30% of viewport)
+        const heroBottom = heroRect.bottom;
+        const triggerPoint = window.innerHeight * 0.3;
+        if (heroBottom < triggerPoint) {
+          fab.classList.add('is-visible');
+          fab.setAttribute('aria-hidden', 'false');
+        } else {
+          fab.classList.remove('is-visible');
+          fab.setAttribute('aria-hidden', 'true');
+        }
+      };
+      window.addEventListener('scroll', updateFab, { passive: true });
+      window.addEventListener('resize', updateFab);
+      updateFab();
+    })();
 
     // Navbar scroll behavior (intensify blur on scroll + hide on initial load, show on first scroll)
     const navbar = document.querySelector('.navbar');
