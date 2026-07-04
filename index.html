@@ -430,13 +430,14 @@
       transform-origin: left center;
       font-size: 0.85rem; font-weight: 600;
       letter-spacing: 0.28em; text-transform: uppercase;
-      color: var(--ink-muted);
+      color: rgba(10, 10, 10, 0.55);
       text-decoration: none;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.4s ease, color 0.2s ease;
       z-index: 50;
       white-space: nowrap;
+      mix-blend-mode: difference;
     }
     .chapter-marker.is-active { opacity: 0.8; pointer-events: auto; }
     .chapter-marker:hover { color: var(--accent); opacity: 1; }
@@ -531,7 +532,7 @@
       letter-spacing: -0.01em;
       margin: 0;
     }
-    h1 { font-size: clamp(2.5rem, 6vw, 5.5rem); line-height: 1.05; font-weight: 900; letter-spacing: -0.02em; }
+    h1 { font-size: clamp(2.25rem, 5vw, 4.5rem); line-height: 1.05; font-weight: 900; letter-spacing: -0.02em; }
     h2 { font-size: clamp(2rem, 4.5vw, 3.5rem); line-height: 1.1; }
     h3 { font-size: clamp(1.25rem, 2vw, 1.75rem); line-height: 1.25; }
     h4 {
@@ -632,26 +633,61 @@
        HERO — white, centered, generous space
        ============================================ */
     .hero {
-      min-height: 92vh;
-      padding: 140px 24px 80px;
-      background: var(--bg-primary);
+      min-height: 100vh;
+      padding: 120px 24px 60px;
+      background: var(--bg-dark);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       text-align: center;
       position: relative;
+      overflow: hidden;
+      color: #ffffff;
+    }
+    /* Full-bleed butcher photo background with dark overlay */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url('assets/hero-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      /* Desaturate to push it toward moody-charcoal, not warm-butcher */
+      filter: grayscale(40%) contrast(1.1) brightness(0.7);
+      transform: scale(1.05);
+      z-index: 0;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at center 50%, transparent 0%, rgba(10, 10, 10, 0.55) 60%, rgba(10, 10, 10, 0.85) 100%),
+        linear-gradient(180deg,
+          rgba(10, 10, 10, 0.55) 0%,
+          rgba(10, 10, 10, 0.35) 40%,
+          rgba(10, 10, 10, 0.45) 70%,
+          rgba(10, 10, 10, 0.85) 100%);
+      z-index: 1;
     }
     .hero-glow, .hero-orb, .hero-wave, .hero-scroll { display: none !important; }
 
+    /* Lift content above the background layers */
+    .hero, .hero > *, .hero h1, .hero h1 span, .hero p, .hero a, .hero button { position: relative; z-index: 5; }
+
     .hero-content { max-width: 920px; margin: 0 auto; display: contents; }
 
-    .hero-logo { max-width: 320px; margin: 0 auto 56px; }
-    .hero-logo img { width: 100%; height: auto; }
+    .hero-logo { max-width: 220px; margin: 0 auto 32px; }
+    .hero-logo img {
+      width: 100%; height: auto;
+      /* Invert the black-on-white logo for the dark hero */
+      filter: invert(1) brightness(1.05) contrast(0.95);
+      mix-blend-mode: screen;
+    }
 
     .hero-badge { display: none; }
 
-    /* === Coming Soon badge — hero === */
+    /* === Coming Soon badge — hero (dark variant) === */
     .hero-opening-badge {
       display: inline-flex; align-items: center; gap: 24px;
-      margin: 0 auto 64px;
+      margin: 0 auto 32px;
       padding: 0;
     }
     .hero-opening-rule {
@@ -666,23 +702,25 @@
       font-family: var(--font-display);
       font-style: italic;
       font-size: 1.75rem; font-weight: 400;
-      color: var(--ink);
+      color: #ffffff;
       letter-spacing: 0.02em;
       line-height: 1;
     }
     .hero-opening-date {
       font-size: 0.68rem; font-weight: 500;
       letter-spacing: 0.24em; text-transform: uppercase;
-      color: var(--ink-muted);
+      color: rgba(255, 255, 255, 0.6);
       line-height: 1;
     }
 
     .hero h1 {
-      color: var(--ink);
-      margin: 0 0 32px 0;
+      color: #ffffff;
+      margin: 0 0 24px 0;
+      position: relative;
+      z-index: 3;
     }
     .hero h1 span {
-      color: var(--ink);
+      color: #ffffff;
       font-style: normal;
     }
 
@@ -692,14 +730,21 @@
       font-weight: 400;
       font-size: clamp(1.1rem, 1.8vw, 1.4rem);
       line-height: 1.6;
-      color: var(--ink-muted);
-      max-width: 580px; margin: 0 auto 56px;
+      color: rgba(255, 255, 255, 0.78);
+      max-width: 580px; margin: 0 auto 40px;
     }
 
     .hero-actions {
       display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
-      margin-bottom: 80px;
+      margin-bottom: 24px;
     }
+
+    /* Dark-variant outline button (white border, white text) */
+    .hero .btn-outline {
+      border-color: rgba(255, 255, 255, 0.5);
+      color: #ffffff !important;
+    }
+    .hero .btn-outline:hover { background: #ffffff; color: var(--ink) !important; }
 
     .btn-primary {
       display: inline-flex; align-items: center; gap: 10px;
@@ -730,12 +775,12 @@
     .hero-trust {
       display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
       font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--ink-muted);
+      color: rgba(255, 255, 255, 0.6);
     }
     .hero-trust .trust-sep { display: none; }
     .hero-trust .trust-item { display: inline-flex; align-items: center; gap: 0; }
     .hero-trust .trust-item:not(:last-child)::after {
-      content: '·'; margin: 0 12px; color: var(--ink-faint);
+      content: '·'; margin: 0 12px; color: rgba(255, 255, 255, 0.4);
     }
     .hero-trust i { display: none; }
 
@@ -1169,14 +1214,15 @@
     }
 
     @media (max-width: 600px) {
-      .hero { padding: 120px 20px 60px; min-height: 85vh; }
+      .hero { padding: 100px 20px 40px; min-height: auto; }
       .hero-badge { font-size: 0.65rem; margin-bottom: 40px; gap: 8px; }
       .hero-badge::before, .hero-badge::after { width: 20px; }
-      .hero-opening-badge { gap: 14px; margin-bottom: 48px; }
+      .hero-opening-badge { gap: 14px; margin-bottom: 28px; }
       .hero-opening-rule { width: 40px; }
       .hero-opening-eyebrow { font-size: 1.35rem; }
       .hero-opening-date { font-size: 0.6rem; letter-spacing: 0.2em; }
-      .hero-logo { max-width: 240px; margin-bottom: 48px; }
+      .hero-logo { max-width: 200px; margin-bottom: 28px; }
+      .hero h1 { margin-bottom: 20px; }
       .hero-actions { flex-direction: column; align-items: stretch; }
       .hero-actions .btn-primary, .hero-actions .btn-outline { justify-content: center; }
       .hero-trust { font-size: 0.62rem; gap: 12px; }
