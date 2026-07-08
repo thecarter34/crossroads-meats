@@ -433,44 +433,6 @@
     .lightbox-close:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.6); }
     .lightbox-close i { font-size: 1.2rem; }
 
-    /* ============================================
-       CUSTOM CURSOR (desktop only, ≥1024px)
-       ============================================ */
-    .has-custom-cursor,
-    .has-custom-cursor * { cursor: none; }
-    .has-custom-cursor a, .has-custom-cursor button,
-    .has-custom-cursor [role="button"] { cursor: none; }
-    .custom-cursor {
-      position: fixed; left: 0; top: 0;
-      width: 32px; height: 32px;
-      border: 1px solid var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-16px, -16px);
-      transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
-      z-index: 99999;
-      mix-blend-mode: difference;
-    }
-    .custom-cursor.is-expanded {
-      width: 56px; height: 56px;
-      transform: translate(-28px, -28px);
-      background: rgba(192, 57, 43, 0.12);
-      border-color: var(--accent);
-    }
-    .custom-cursor-dot {
-      position: fixed; left: 0; top: 0;
-      width: 6px; height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-3px, -3px);
-      z-index: 99999;
-    }
-    @media (max-width: 1023px) {
-      .has-custom-cursor, .has-custom-cursor * { cursor: auto; }
-      .custom-cursor, .custom-cursor-dot { display: none; }
-    }
-
     h1, h2, h3 {
       font-family: var(--font-display);
       color: var(--ink);
@@ -502,8 +464,62 @@
     /* ============================================
        NAVBAR — white, hairline border
        ============================================ */
+    /* ============================================
+       HIRING BANNER — sticky accent strip above the nav
+       ============================================ */
+    .hiring-banner {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1001;
+      background: var(--accent);
+      color: #fff;
+      padding: 10px clamp(20px, 4vw, 48px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .hiring-banner.is-hidden { transform: translateY(-100%); opacity: 0; }
+    .hiring-banner-text {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hiring-banner-text i { font-size: 1rem; line-height: 1; }
+    .hiring-banner-cta {
+      color: #fff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: opacity 0.15s ease;
+    }
+    .hiring-banner-cta:hover { opacity: 0.8; }
+    .hiring-banner-close {
+      position: absolute;
+      right: clamp(12px, 2vw, 24px);
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      padding: 6px;
+      line-height: 1;
+      opacity: 0.85;
+      transition: opacity 0.15s ease;
+    }
+    .hiring-banner-close:hover { opacity: 1; }
+    .hiring-banner-close i { font-size: 1.05rem; }
+
     .navbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      position: fixed; top: 38px; left: 0; right: 0; z-index: 1000;
       padding: 16px clamp(20px, 4vw, 48px);
       display: flex; align-items: center; justify-content: space-between; gap: 24px;
       background: #ffffff;
@@ -511,6 +527,10 @@
       transition: transform 0.3s ease, box-shadow 0.3s;
     }
     .navbar.nav-hidden { transform: translateY(-100%); }
+    /* When banner is dismissed, navbar sits flush to the top again */
+    body.hiring-banner-dismissed .navbar { top: 0; }
+    body.hiring-banner-dismissed .hero,
+    body.hiring-banner-dismissed section:first-of-type { /* nothing — content reflows naturally */ }
     .nav-logo {
       display: flex; align-items: center; gap: 12px;
       flex-shrink: 0; text-decoration: none;
@@ -843,17 +863,67 @@
     .interior-strip {
       display: flex;
       gap: 18px;
-      overflow-x: auto;
+      overflow-x: hidden;
       overflow-y: hidden;
-      scroll-snap-type: x mandatory;
-      scroll-padding: 0 24px;
-      -webkit-overflow-scrolling: touch;
       padding: 8px 0 24px;
       margin-top: 24px;
+      /* Subtle fade at the edges so photos feel like they're entering/exiting the frame */
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%);
+              mask-image: linear-gradient(to right, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%);
     }
-    .interior-strip::-webkit-scrollbar { height: 8px; }
-    .interior-strip::-webkit-scrollbar-track { background: var(--bg-alt); }
-    .interior-strip::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 4px; }
+    /* Two copies of the track, side-by-side. Each runs the same animation, half a track out of phase, so the loop is seamless. */
+    .interior-track {
+      display: flex;
+      gap: 18px;
+      flex: 0 0 auto;
+      will-change: transform;
+      /* JS animates translateX via requestAnimationFrame.
+         Auto-scroll: ~100 px/sec (one figure+gap every ~5s). */
+    }
+    .interior-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      width: 44px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--bg-primary);
+      border: 1px solid var(--rule);
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+      transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+      /* Sit OUTSIDE the edge fade mask so they stay fully visible */
+      -webkit-mask-image: none;
+              mask-image: none;
+    }
+    .interior-arrow:hover {
+      background: var(--ink);
+      color: var(--bg-primary);
+      border-color: var(--ink);
+    }
+    .interior-arrow:active {
+      transform: translateY(-50%) scale(0.94);
+    }
+    .interior-arrow:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+    .interior-arrow i {
+      font-size: 1.1rem;
+      line-height: 1;
+      display: inline-flex;
+    }
+    .interior-arrow--prev { left: 12px; }
+    .interior-arrow--next { right: 12px; }
+
+    @media (max-width: 720px) {
+      .interior-arrow { display: none; }
+    }
     .interior-figure {
       margin: 0;
       flex: 0 0 auto;
@@ -862,7 +932,6 @@
       background: var(--bg-alt);
       display: flex;
       flex-direction: column;
-      scroll-snap-align: start;
     }
     .interior-figure img {
       display: block;
@@ -914,49 +983,200 @@
     }
 
     /* ============================================
-       NOW HIRING CTA (homepage strip pointing to /hiring)
+       THREE ROOMS — three feature tiles showcasing the shop's distinct spaces
+       Cellar / Apparel / Shop floor — uses Jen's photos at full size with editorial framing
+       ============================================ */
+    .rooms {
+      padding: var(--section-padding) 24px;
+      background: var(--bg-primary);
+      border-top: 1px solid var(--rule);
+    }
+    .rooms .container { max-width: 1320px; margin: 0 auto; }
+    .rooms-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 56px;
+    }
+    .room {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .room-frame {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background: var(--bg-alt);
+      margin-bottom: 24px;
+    }
+    .room-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
+    }
+    .room:hover .room-frame img {
+      transform: scale(1.04);
+      filter: saturate(0.92);
+    }
+    .room-num {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+      margin: 0 0 6px;
+      line-height: 1;
+    }
+    .room-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2vw, 1.75rem);
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 8px;
+      line-height: 1.2;
+      letter-spacing: -0.005em;
+    }
+    .room-desc {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--ink-muted);
+      margin: 0;
+      max-width: 38ch;
+    }
+    @media (max-width: 980px) {
+      .rooms-grid { grid-template-columns: 1fr; gap: 56px; }
+      .room-frame { aspect-ratio: 4 / 3; }
+    }
+
+    /* ============================================
+       NOW HIRING CTA — full-width accent band, primary "we want you" surface
        ============================================ */
     .hiring-cta {
-      padding: var(--section-padding) 24px;
-      background: var(--bg-alt);
+      padding: clamp(60px, 8vw, 100px) 24px;
+      background: var(--accent);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Subtle radial light leak from top-left to give the red some life without changing the brand color */
+    .hiring-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 60%);
+      pointer-events: none;
     }
     .hiring-cta-inner {
-      max-width: 1080px;
+      max-width: 1240px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1.4fr auto;
-      gap: 40px;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 56px;
       align-items: center;
-      padding: 48px 56px;
-      background: var(--bg-primary);
-      border: 1px solid var(--rule);
-      border-radius: 2px;
+      position: relative;
+      z-index: 1;
     }
-    .hiring-cta-text .section-label { text-align: left; margin: 0 0 14px 0; }
+    .hiring-cta-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: #fff;
+      margin: 0 0 18px 0;
+      opacity: 0.92;
+    }
+    .hiring-cta-eyebrow i { font-size: 1.1rem; }
     .hiring-cta-title {
-      font-family: var(--f-display, Playfair Display), Georgia, serif;
-      font-size: clamp(1.6rem, 2.4vw, 2.1rem);
-      margin: 0 0 12px 0;
-      line-height: 1.15;
-      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      margin: 0 0 16px 0;
+      line-height: 1.05;
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: -0.015em;
     }
-    .preloader-text {
-          font-family: var(--font-display);
-          font-style: italic;
-          font-size: 1.125rem;
-          line-height: 1.5;
-          color: var(--c-ink);
-          margin: 0;
-          text-align: center;
-        }
-    .hiring-cta-button { flex-shrink: 0; }
-    @media (max-width: 720px) {
-      .hiring-cta-inner {
-        grid-template-columns: 1fr;
-        padding: 32px;
-        gap: 24px;
-      }
-      .hiring-cta-button { justify-self: start; }
+    .hiring-cta-sub {
+      font-size: clamp(1rem, 1.4vw, 1.15rem);
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.92);
+      margin: 0 0 28px 0;
+      max-width: 52ch;
+    }
+    .hiring-cta-roles {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 32px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .hiring-cta-roles li {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: #fff;
+    }
+    .hiring-cta-roles li i { font-size: 0.95rem; }
+    .hiring-cta-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: #fff;
+      color: var(--accent);
+      border: none;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.18s ease, transform 0.18s ease;
+    }
+    .hiring-cta-cta:hover { background: var(--bg-alt); transform: translateY(-1px); }
+    .hiring-cta-cta i { font-size: 1rem; }
+
+    .hiring-cta-side {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+      gap: 18px;
+    }
+    .hiring-cta-quote {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1rem, 1.3vw, 1.15rem);
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.92);
+      margin: 0;
+      max-width: 32ch;
+    }
+    .hiring-cta-quote::before { content: '\201C'; margin-right: 4px; }
+    .hiring-cta-quote::after { content: '\201D'; margin-left: 4px; }
+    .hiring-cta-quote-attrib {
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.78);
+      margin: 0;
+    }
+
+    @media (max-width: 820px) {
+      .hiring-cta-inner { grid-template-columns: 1fr; gap: 36px; }
+      .hiring-cta-side { align-items: flex-start; text-align: left; }
+      .hiring-cta-roles { gap: 8px; }
+      .hiring-cta-roles li { font-size: 0.8rem; padding: 6px 12px; }
     }
 
     /* ============================================
@@ -1298,6 +1518,18 @@
     </div>
   </div>
 
+  <!-- HIRING BANNER — sticky accent strip, dismissible, persists across reloads -->
+  <div class="hiring-banner" id="hiringBanner" role="region" aria-label="Hiring announcement">
+    <span class="hiring-banner-text">
+      <i class="ph ph-briefcase" aria-hidden="true"></i>
+      We're hiring — Store Manager &amp; Cleaning Specialist positions open
+    </span>
+    <a href="hiring" class="hiring-banner-cta">See open positions →</a>
+    <button type="button" class="hiring-banner-close" aria-label="Dismiss hiring banner">
+      <i class="ph ph-x" aria-hidden="true"></i>
+    </button>
+  </div>
+
   <!-- NAVBAR -->
   <nav class="navbar" role="navigation" aria-label="Main navigation">
     <a href="#" class="nav-logo" aria-label="Crossroads of the North Meats and Cellar home">
@@ -1389,15 +1621,6 @@
     <div class="hero-wave" aria-hidden="true"></div>
   </section>
 
-  <!-- TRUST BAR -->
-  <section class="trustbar" aria-label="Our credentials">
-    <span class="trustbar-item"><i class="ph ph-house-line" aria-hidden="true"></i>Family-Owned</span>
-    <span class="trustbar-item"><i class="ph ph-storefront" aria-hidden="true"></i>Downtown Spooner</span>
-    <span class="trustbar-item"><i class="ph ph-fire" aria-hidden="true"></i>House-Made Brats</span>
-    <span class="trustbar-item"><i class="ph ph-leaf" aria-hidden="true"></i>Wisconsin Sourced</span>
-    <span class="trustbar-item"><i class="ph ph-wine" aria-hidden="true"></i>Curated Cellar</span>
-  </section>
-
   <!-- WHAT WE CARRY (replaces .services 4-card grid) -->
   <section class="products" id="products" aria-labelledby="products-heading">
     <header class="section-header">
@@ -1470,9 +1693,9 @@
       <div class="about-content reveal">
         <span class="about-badge"><i class="ph ph-users-three" aria-hidden="true"></i>Family-Owned &amp; Hands-On</span>
         <h2 id="about-heading">A family-owned butcher and cellar, rooted in Spooner.</h2>
-        <p>Crossroads of the North Meats and Cellar is the work of Jen and Dennis Lutz — a family-owned shop built for a town they love. Spooner sits at the crossroads of Wisconsin's railroad history, lake country, and working farms, and that heritage runs through everything we do: hand-cut meat, house-made brats, and a curated cellar picked with care.</p>
+        <p>Crossroads of the North Meats and Cellar is the work of the Lutz family — a family-owned shop built for a town they love. Spooner sits at the crossroads of Wisconsin's railroad history, lake country, and working farms, and that heritage runs through everything we do: hand-cut meat, house-made brats, and a curated cellar picked with care.</p>
         <p>We're putting the finishing touches on 118 Ash Street, right in the heart of downtown. Our plan is simple — bring back the kind of local butcher and corner store where you know who's behind the counter, where the brats are made in-house, and where the cheese and wine were chosen by someone who actually tried them.</p>
-        <p>Jen and Dennis are committed to being hands-on partners with their team and their community. They can't wait to open the doors and welcome you in.</p>
+        <p>The Lutz family is committed to being hands-on partners with their team and their community. They can't wait to open the doors and welcome you in.</p>
         <div class="about-pillars">
           <div class="about-pillar">
             <span class="about-pillar-icon"><i class="ph ph-knife" aria-hidden="true"></i></span>
@@ -1492,7 +1715,7 @@
             <span class="about-pillar-icon"><i class="ph ph-heart" aria-hidden="true"></i></span>
             <div>
               <h3>Hands-on owners</h3>
-              <p>Jen and Dennis are at the counter, not in a boardroom.</p>
+              <p>The Lutz family is at the counter, not in a boardroom.</p>
             </div>
           </div>
         </div>
@@ -1509,60 +1732,122 @@
     </div>
   </section>
 
+  <!-- THREE ROOMS — three feature tiles for the shop's distinct spaces -->
+  <section class="rooms" id="rooms" aria-labelledby="rooms-heading">
+    <div class="container">
+      <header class="section-header reveal">
+        <p class="section-label">Three Rooms, One Shop</p>
+        <h2 class="section-title" id="rooms-heading">Step inside the rooms the Lutz family built.</h2>
+        <p class="section-sub">Hand-cut meats behind the counter. Wisconsin cheese on the boards. A cellar curated bottle by bottle. Here's what you'll find when you walk through the door.</p>
+      </header>
+
+      <div class="rooms-grid">
+        <figure class="room reveal">
+          <div class="room-frame">
+            <img src="assets/jen-IMG_7223.jpg" alt="Curated wine and spirits display against a dark wall — bottles, glassware, and decorative greenery" loading="lazy" />
+          </div>
+          <p class="room-num">01 — The Cellar</p>
+          <h3 class="room-title">A curated cellar, bottle by bottle.</h3>
+          <p class="room-desc">Wines chosen for weeknight dinners and special occasions, plus a tight craft-beer shelf. Every label was tasted and approved by the Lutz family.</p>
+        </figure>
+
+        <figure class="room reveal">
+          <div class="room-frame">
+            <img src="assets/jen-IMG_7222.jpg" alt="Branded apparel display — Crossroads of the North tees, hoodies, and crewnecks on rolling racks inside the shop" loading="lazy" />
+          </div>
+          <p class="room-num">02 — The Apparel Rack</p>
+          <h3 class="room-title">Wear the shop home.</h3>
+          <p class="room-desc">Soft-tees, hoodies, and crewnecks with the Crossroads of the North mark. Designed for the drive home, the cookout, and the cabin weekend.</p>
+        </figure>
+
+        <figure class="room reveal">
+          <div class="room-frame">
+            <img src="assets/jen-IMG_7221.jpg" alt="Wide view of the shop interior — whiskey-barrel display table in front of the cellar wall, with apparel racks and storefront window light" loading="lazy" />
+          </div>
+          <p class="room-num">03 — The Floor</p>
+          <h3 class="room-title">Built for slow browsing.</h3>
+          <p class="room-desc">A whiskey-barrel table, rolling racks, and a storefront window that pours in northern-Wisconsin light. The shop is laid out so you can take your time.</p>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <!-- INTERIOR — soft opening sneak peek (real photos) -->
   <section class="interior" id="interior" aria-labelledby="interior-heading">
     <div class="container">
       <header class="section-header reveal">
         <p class="section-label">Sneak Peek</p>
         <h2 class="section-title" id="interior-heading">A look inside before opening day.</h2>
-        <p class="section-sub">Shots from around the shop — the coolers, the Cellar, the apparel racks, the products — as we get ready for soft opening Thursday, July 9. Stop in Thursday and you'll see the rest in person.</p>
+        <p class="section-sub">Shots from around the shop — the coolers, the Cellar, the apparel racks, the products — drifting by as we get ready for soft opening Thursday, July 9. Stop in Thursday and you'll see the rest in person.</p>
       </header>
 
-      <div class="interior-strip reveal">
-        <figure class="interior-figure">
-          <img src="assets/shop-coolers.jpg" alt="Commercial refrigeration units installed at the shop, including glass-door merchandisers and a curved-glass deli case, ready for stocking" loading="lazy" />
-          <figcaption>Coolers installed. Fresh cuts land this Thursday.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/shop-cellar.jpg" alt="Wood and wrought-iron wine rack with curated bottle selection" loading="lazy" />
-          <figcaption>The Cellar. Curated wine and craft beer.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/shop-cleaver.jpg" alt="Fieldstone wall framing a wooden doorway with a large decorative meat cleaver suspended above the entry, leading into a back room" loading="lazy" />
-          <figcaption>The entry. Stone wall, antique cleaver, and the workshop behind.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/shop-barrel.jpg" alt="A whiskey-barrel display table in the shop holding drink coasters and small gift items, with a hanging floral basket above" loading="lazy" />
-          <figcaption>The barrel. Drink coasters, gifts, and bottled specialties.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/shop-interior-1.jpg" alt="Crossroads of the North branded apparel racks inside the shop, with Wisconsin-logo tees and hoodies on display" loading="lazy" />
-          <figcaption>Branded apparel, ready to take home.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/shop-interior-2.jpg" alt="Shop interior with rolling clothing racks, a whiskey-barrel display table, and a hanging floral basket" loading="lazy" />
-          <figcaption>Inside the shop, racks ready for product.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/shop-merch-cuts.jpg" alt="Display shelves with wooden cutting boards, charcuterie boards, kitchen knives, candle tins, and gift baskets" loading="lazy" />
-          <figcaption>Cutting boards, candles, knives. The kitchen lines we'll be carrying.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/shop-merch-towels.jpg" alt="Rustic home goods display featuring humorous printed tea towels on a black wire rack, with a wood-paneled wall behind" loading="lazy" />
-          <figcaption>Printed tea towels and kitchen linens. Humor optional, quality required.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/jen-IMG_7221.jpg" alt="Wide view of the shop interior: a whiskey-barrel display table in front of the curated cellar wall, with apparel racks and storefront window light behind" loading="lazy" />
-          <figcaption>The shop, coming together. Barrel, cellar wall, and storefront.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/jen-IMG_7222.jpg" alt="Branded apparel display — Crossroads of the North tees, hoodies, and crewnecks on rolling racks inside the shop" loading="lazy" />
-          <figcaption>More of the apparel line — tees, hoodies, and crewnecks.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/jen-IMG_7223.jpg" alt="Curated wine and spirits display against a dark wall, with bottles, glassware, and decorative greenery" loading="lazy" />
-          <figcaption>Wine, spirits, and the small details that make it feel like the shop.</figcaption>
-        </figure>
+      <div class="interior-strip reveal" aria-label="Photos from around the shop, scrolling automatically">
+        <button type="button" class="interior-arrow interior-arrow--prev" aria-label="Previous photos">
+          <i class="ph ph-caret-left" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="interior-arrow interior-arrow--next" aria-label="Next photos">
+          <i class="ph ph-caret-right" aria-hidden="true"></i>
+        </button>
+        <div class="interior-track" aria-hidden="true">
+          <figure class="interior-figure">
+            <img src="assets/shop-coolers.jpg" alt="Commercial refrigeration units installed at the shop, including glass-door merchandisers and a curved-glass deli case, ready for stocking" loading="lazy" />
+            <figcaption>Coolers installed. Fresh cuts land this Thursday.</figcaption>
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-cellar.jpg" alt="Wood and wrought-iron wine rack with curated bottle selection" loading="lazy" />
+            <figcaption>The Cellar. Curated wine and craft beer.</figcaption>
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-cleaver.jpg" alt="Fieldstone wall framing a wooden doorway with a large decorative meat cleaver suspended above the entry, leading into a back room" loading="lazy" />
+            <figcaption>The entry. Stone wall, antique cleaver, and the workshop behind.</figcaption>
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-barrel.jpg" alt="A whiskey-barrel display table in the shop holding drink coasters and small gift items, with a hanging floral basket above" loading="lazy" />
+            <figcaption>The barrel. Drink coasters, gifts, and bottled specialties.</figcaption>
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-interior-1.jpg" alt="Crossroads of the North branded apparel racks inside the shop, with Wisconsin-logo tees and hoodies on display" loading="lazy" />
+            <figcaption>Branded apparel, ready to take home.</figcaption>
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-interior-2.jpg" alt="Shop interior with rolling clothing racks, a whiskey-barrel display table, and a hanging floral basket" loading="lazy" />
+            <figcaption>Inside the shop, racks ready for product.</figcaption>
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-merch-cuts.jpg" alt="Display shelves with wooden cutting boards, charcuterie boards, kitchen knives, candle tins, and gift baskets" loading="lazy" />
+            <figcaption>Cutting boards, candles, knives. The kitchen lines we'll be carrying.</figcaption>
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-merch-towels.jpg" alt="Rustic home goods display featuring humorous printed tea towels on a black wire rack, with a wood-paneled wall behind" loading="lazy" />
+            <figcaption>Printed tea towels and kitchen linens. Humor optional, quality required.</figcaption>
+          </figure>
+        </div>
+        <div class="interior-track">
+          <figure class="interior-figure">
+            <img src="assets/shop-coolers.jpg" alt="" loading="eager" role="presentation" />
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-cellar.jpg" alt="" loading="eager" role="presentation" />
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-cleaver.jpg" alt="" loading="eager" role="presentation" />
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-barrel.jpg" alt="" loading="eager" role="presentation" />
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-interior-1.jpg" alt="" loading="eager" role="presentation" />
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-interior-2.jpg" alt="" loading="eager" role="presentation" />
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-merch-cuts.jpg" alt="" loading="eager" role="presentation" />
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-merch-towels.jpg" alt="" loading="eager" role="presentation" />
+          </figure>
+        </div>
       </div>
 
       <p class="interior-attrib reveal">
@@ -1571,18 +1856,29 @@
     </div>
   </section>
 
-  <!-- NOW HIRING — short CTA pointing to dedicated page -->
+  <!-- NOW HIRING — full-width accent band, primary "we want you" surface -->
   <section class="hiring-cta" id="hiring-cta" aria-labelledby="hiring-cta-heading">
     <div class="hiring-cta-inner reveal">
-      <div class="hiring-cta-text">
-        <p class="section-label">Now Hiring</p>
+      <div class="hiring-cta-primary">
+        <p class="hiring-cta-eyebrow">
+          <i class="ph ph-briefcase" aria-hidden="true"></i>
+          Now Hiring — Soft-Opening Team
+        </p>
         <h2 class="hiring-cta-title" id="hiring-cta-heading">We're putting the team together.</h2>
-        <p class="hiring-cta-sub">Store Manager and Weekly Cleaning Specialist — full job descriptions, schedules, and apply instructions live on the hiring page.</p>
+        <p class="hiring-cta-sub">The Lutz family is hiring for soft opening Thursday, July 9. Full job descriptions, schedules, and apply instructions live on the hiring page.</p>
+        <ul class="hiring-cta-roles" aria-label="Open positions">
+          <li><i class="ph ph-storefront" aria-hidden="true"></i>Store Manager</li>
+          <li><i class="ph ph-sparkle" aria-hidden="true"></i>Weekly Cleaning Specialist</li>
+        </ul>
+        <a href="hiring" class="hiring-cta-cta">
+          See Open Positions
+          <i class="ph ph-arrow-right" aria-hidden="true"></i>
+        </a>
       </div>
-      <a href="hiring" class="btn-primary hiring-cta-button">
-        <i class="ph ph-arrow-right" aria-hidden="true"></i>
-        See Open Positions
-      </a>
+      <div class="hiring-cta-side">
+        <p class="hiring-cta-quote">We're hands-on partners with our team and our community. If that sounds like you, we want to hear from you.</p>
+        <p class="hiring-cta-quote-attrib">— The Lutz Family</p>
+      </div>
     </div>
   </section>
 
@@ -1855,6 +2151,108 @@
       updateMarkers();
     })();
 
+    // === HIRING BANNER — dismiss + persist for the session ===
+    (function() {
+      const banner = document.getElementById('hiringBanner');
+      const closeBtn = banner && banner.querySelector('.hiring-banner-close');
+      const STORAGE_KEY = 'hiringBannerDismissed';
+      if (!banner || !closeBtn) return;
+
+      // Restore previous dismissal state for this browser
+      if (sessionStorage.getItem(STORAGE_KEY) === '1') {
+        banner.classList.add('is-hidden');
+        document.body.classList.add('hiring-banner-dismissed');
+      }
+
+      closeBtn.addEventListener('click', () => {
+        banner.classList.add('is-hidden');
+        document.body.classList.add('hiring-banner-dismissed');
+        sessionStorage.setItem(STORAGE_KEY, '1');
+      });
+    })();
+
+    // === GALLERY MARQUEE — JS-driven auto-scroll + click-to-advance arrows ===
+    (function() {
+      // Respect users who don't want motion
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // Auto-scroll speed (px per second). Calm editorial pace.
+      const SCROLL_SPEED = prefersReducedMotion ? 0 : 100;
+
+      const strips = document.querySelectorAll('.interior-strip');
+      strips.forEach(strip => {
+        const track = strip.querySelector('.interior-track');
+        if (!track) return;
+
+        // Track width = 2x the photo set width (because we duplicate the track for seamless loop).
+        // The "one loop" distance we translate before wrapping is trackWidth / 2.
+        const trackWidth = track.scrollWidth / 2;
+
+        // One figure + gap = "step" for arrow clicks
+        const firstFigure = track.querySelector('.interior-figure');
+        const trackStyles = getComputedStyle(track);
+        const gap = parseFloat(trackStyles.columnGap || trackStyles.gap) || 18;
+        const step = (firstFigure ? firstFigure.offsetWidth : 320) + gap;
+
+        // Current translateX offset (negative = scrolled left)
+        let offset = 0;
+        let lastTime = null;
+        let isDragging = false;
+
+        const applyTransform = () => {
+          track.style.transform = `translate3d(${offset}px, 0, 0)`;
+        };
+
+        // Wrap to [-(trackWidth), 0]
+        const wrap = (val) => {
+          if (val < -trackWidth) return val + trackWidth;
+          if (val > 0) return val - trackWidth;
+          return val;
+        };
+
+        // Animation loop
+        const tick = (now) => {
+          if (lastTime === null) lastTime = now;
+          const dt = (now - lastTime) / 1000; // seconds since last frame
+          lastTime = now;
+
+          const paused = isDragging || SCROLL_SPEED === 0;
+          if (!paused) {
+            offset = wrap(offset - SCROLL_SPEED * dt);
+            applyTransform();
+          }
+
+          requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+
+        // Pointer drag pause (mouse-down + hold = user is actively interacting)
+        strip.addEventListener('pointerdown', () => {
+          isDragging = true;
+          strip.classList.add('is-dragging');
+        });
+        const release = () => {
+          if (!isDragging) return;
+          isDragging = false;
+          strip.classList.remove('is-dragging');
+        };
+        strip.addEventListener('pointerup', release);
+        strip.addEventListener('pointercancel', release);
+        strip.addEventListener('pointerleave', release);
+
+        // Click-to-advance arrows
+        const arrows = strip.querySelectorAll('.interior-arrow');
+        arrows.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const isNext = btn.classList.contains('interior-arrow--next');
+            offset = wrap(offset - (isNext ? step : -step));
+            applyTransform();
+            // Reset lastTime so the next frame doesn't try to "catch up"
+            lastTime = null;
+          });
+        });
+      });
+    })();
+
     // === IMAGE LIGHTBOX ===
     (function() {
       // Build a single lightbox element
@@ -1894,48 +2292,6 @@
           const caption = title ? `${title}${summary ? ' — ' + summary : ''}` : img.alt;
           open(img.src, img.alt, caption);
         });
-      });
-    })();
-
-    // === CUSTOM CURSOR (desktop only) ===
-    (function() {
-      if (window.matchMedia('(pointer: coarse)').matches) return; // skip on touch
-      if (window.innerWidth < 1024) return;
-
-      const cursor = document.createElement('div');
-      cursor.className = 'custom-cursor';
-      document.body.appendChild(cursor);
-      const dot = document.createElement('div');
-      dot.className = 'custom-cursor-dot';
-      document.body.appendChild(dot);
-
-      let mx = 0, my = 0, cx = 0, cy = 0;
-      let raf;
-      document.addEventListener('mousemove', (e) => {
-        mx = e.clientX; my = e.clientY;
-        dot.style.transform = `translate(${mx - 3}px, ${my - 3}px)`;
-        if (!raf) {
-          raf = requestAnimationFrame(loop);
-        }
-      });
-      const loop = () => {
-        cx += (mx - cx) * 0.18;
-        cy += (my - cy) * 0.18;
-        cursor.style.transform = `translate(${cx - 16}px, ${cy - 16}px)`;
-        if (Math.abs(mx - cx) > 0.1 || Math.abs(my - cy) > 0.1) {
-          raf = requestAnimationFrame(loop);
-        } else {
-          raf = null;
-        }
-      };
-      // Hide default cursor over the page
-      document.documentElement.classList.add('has-custom-cursor');
-      // Expand on interactive elements
-      const expand = () => cursor.classList.add('is-expanded');
-      const shrink = () => cursor.classList.remove('is-expanded');
-      document.querySelectorAll('a, button, .product-card, .faq-question, .hiring-card, input, textarea, [role="button"]').forEach(el => {
-        el.addEventListener('mouseenter', expand);
-        el.addEventListener('mouseleave', shrink);
       });
     })();
 
