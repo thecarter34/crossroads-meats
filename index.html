@@ -451,7 +451,9 @@
 
     p { margin: 0 0 1em 0; }
     a { color: var(--ink); text-decoration: none; transition: color 0.2s; }
-    a:hover { color: var(--accent); }
+    a:not(.hiring-banner-link):not(.hiring-banner-close):hover { color: var(--accent); }
+    .hiring-banner-link, .hiring-banner-link:hover,
+    .hiring-banner-icon, .hiring-banner-icon:hover { color: #fff; fill: #fff; }
     img { max-width: 100%; display: block; }
     button { font-family: inherit; cursor: pointer; }
 
