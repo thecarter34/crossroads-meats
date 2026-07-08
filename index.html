@@ -805,17 +805,32 @@
     .interior-strip {
       display: flex;
       gap: 18px;
-      overflow-x: auto;
+      overflow-x: hidden;
       overflow-y: hidden;
-      scroll-snap-type: x mandatory;
-      scroll-padding: 0 24px;
-      -webkit-overflow-scrolling: touch;
       padding: 8px 0 24px;
       margin-top: 24px;
+      /* Subtle fade at the edges so photos feel like they're entering/exiting the frame */
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%);
+              mask-image: linear-gradient(to right, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%);
     }
-    .interior-strip::-webkit-scrollbar { height: 8px; }
-    .interior-strip::-webkit-scrollbar-track { background: var(--bg-alt); }
-    .interior-strip::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 4px; }
+    /* Two copies of the track, side-by-side. Each runs the same animation, half a track out of phase, so the loop is seamless. */
+    .interior-track {
+      display: flex;
+      gap: 18px;
+      flex: 0 0 auto;
+      animation: interior-marquee 60s linear infinite;
+      will-change: transform;
+    }
+    .interior-strip:hover .interior-track,
+    .interior-strip:focus-within .interior-track { animation-play-state: paused; }
+    .interior-strip.is-dragging .interior-track { animation-play-state: paused; }
+    @keyframes interior-marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .interior-track { animation: none; }
+    }
     .interior-figure {
       margin: 0;
       flex: 0 0 auto;
@@ -824,7 +839,6 @@
       background: var(--bg-alt);
       display: flex;
       flex-direction: column;
-      scroll-snap-align: start;
     }
     .interior-figure img {
       display: block;
@@ -873,6 +887,73 @@
     }
     @media (max-width: 720px) {
       .interior-figure img { height: 260px; }
+    }
+
+    /* ============================================
+       THREE ROOMS — three feature tiles showcasing the shop's distinct spaces
+       Cellar / Apparel / Shop floor — uses Jen's photos at full size with editorial framing
+       ============================================ */
+    .rooms {
+      padding: var(--section-padding) 24px;
+      background: var(--bg-primary);
+      border-top: 1px solid var(--rule);
+    }
+    .rooms .container { max-width: 1320px; margin: 0 auto; }
+    .rooms-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 56px;
+    }
+    .room {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .room-frame {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background: var(--bg-alt);
+      margin-bottom: 24px;
+    }
+    .room-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
+    }
+    .room:hover .room-frame img {
+      transform: scale(1.04);
+      filter: saturate(0.92);
+    }
+    .room-num {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+      margin: 0 0 6px;
+      line-height: 1;
+    }
+    .room-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2vw, 1.75rem);
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 8px;
+      line-height: 1.2;
+      letter-spacing: -0.005em;
+    }
+    .room-desc {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--ink-muted);
+      margin: 0;
+      max-width: 38ch;
+    }
+    @media (max-width: 980px) {
+      .rooms-grid { grid-template-columns: 1fr; gap: 56px; }
+      .room-frame { aspect-ratio: 4 / 3; }
     }
 
     /* ============================================
@@ -1462,60 +1543,116 @@
     </div>
   </section>
 
+  <!-- THREE ROOMS — three feature tiles for the shop's distinct spaces -->
+  <section class="rooms" id="rooms" aria-labelledby="rooms-heading">
+    <div class="container">
+      <header class="section-header reveal">
+        <p class="section-label">Three Rooms, One Shop</p>
+        <h2 class="section-title" id="rooms-heading">Step inside the rooms Jen &amp; Dennis built.</h2>
+        <p class="section-sub">Hand-cut meats behind the counter. Wisconsin cheese on the boards. A cellar curated bottle by bottle. Here's what you'll find when you walk through the door.</p>
+      </header>
+
+      <div class="rooms-grid">
+        <figure class="room reveal">
+          <div class="room-frame">
+            <img src="assets/jen-IMG_7223.jpg" alt="Curated wine and spirits display against a dark wall — bottles, glassware, and decorative greenery" loading="lazy" />
+          </div>
+          <p class="room-num">01 — The Cellar</p>
+          <h3 class="room-title">A curated cellar, bottle by bottle.</h3>
+          <p class="room-desc">Wines chosen for weeknight dinners and special occasions, plus a tight craft-beer shelf. Every label was tasted and approved by Jen &amp; Dennis.</p>
+        </figure>
+
+        <figure class="room reveal">
+          <div class="room-frame">
+            <img src="assets/jen-IMG_7222.jpg" alt="Branded apparel display — Crossroads of the North tees, hoodies, and crewnecks on rolling racks inside the shop" loading="lazy" />
+          </div>
+          <p class="room-num">02 — The Apparel Rack</p>
+          <h3 class="room-title">Wear the shop home.</h3>
+          <p class="room-desc">Soft-tees, hoodies, and crewnecks with the Crossroads of the North mark. Designed for the drive home, the cookout, and the cabin weekend.</p>
+        </figure>
+
+        <figure class="room reveal">
+          <div class="room-frame">
+            <img src="assets/jen-IMG_7221.jpg" alt="Wide view of the shop interior — whiskey-barrel display table in front of the cellar wall, with apparel racks and storefront window light" loading="lazy" />
+          </div>
+          <p class="room-num">03 — The Floor</p>
+          <h3 class="room-title">Built for slow browsing.</h3>
+          <p class="room-desc">A whiskey-barrel table, rolling racks, and a storefront window that pours in northern-Wisconsin light. The shop is laid out so you can take your time.</p>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <!-- INTERIOR — soft opening sneak peek (real photos) -->
   <section class="interior" id="interior" aria-labelledby="interior-heading">
     <div class="container">
       <header class="section-header reveal">
         <p class="section-label">Sneak Peek</p>
         <h2 class="section-title" id="interior-heading">A look inside before opening day.</h2>
-        <p class="section-sub">Shots from around the shop — the coolers, the Cellar, the apparel racks, the products — as we get ready for soft opening Thursday, July 9. Stop in Thursday and you'll see the rest in person.</p>
+        <p class="section-sub">Shots from around the shop — the coolers, the Cellar, the apparel racks, the products — drifting by as we get ready for soft opening Thursday, July 9. Stop in Thursday and you'll see the rest in person.</p>
       </header>
 
-      <div class="interior-strip reveal">
-        <figure class="interior-figure">
-          <img src="assets/shop-coolers.jpg" alt="Commercial refrigeration units installed at the shop, including glass-door merchandisers and a curved-glass deli case, ready for stocking" loading="lazy" />
-          <figcaption>Coolers installed. Fresh cuts land this Thursday.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/shop-cellar.jpg" alt="Wood and wrought-iron wine rack with curated bottle selection" loading="lazy" />
-          <figcaption>The Cellar. Curated wine and craft beer.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/shop-cleaver.jpg" alt="Fieldstone wall framing a wooden doorway with a large decorative meat cleaver suspended above the entry, leading into a back room" loading="lazy" />
-          <figcaption>The entry. Stone wall, antique cleaver, and the workshop behind.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/shop-barrel.jpg" alt="A whiskey-barrel display table in the shop holding drink coasters and small gift items, with a hanging floral basket above" loading="lazy" />
-          <figcaption>The barrel. Drink coasters, gifts, and bottled specialties.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/shop-interior-1.jpg" alt="Crossroads of the North branded apparel racks inside the shop, with Wisconsin-logo tees and hoodies on display" loading="lazy" />
-          <figcaption>Branded apparel, ready to take home.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/shop-interior-2.jpg" alt="Shop interior with rolling clothing racks, a whiskey-barrel display table, and a hanging floral basket" loading="lazy" />
-          <figcaption>Inside the shop, racks ready for product.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/shop-merch-cuts.jpg" alt="Display shelves with wooden cutting boards, charcuterie boards, kitchen knives, candle tins, and gift baskets" loading="lazy" />
-          <figcaption>Cutting boards, candles, knives. The kitchen lines we'll be carrying.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/shop-merch-towels.jpg" alt="Rustic home goods display featuring humorous printed tea towels on a black wire rack, with a wood-paneled wall behind" loading="lazy" />
-          <figcaption>Printed tea towels and kitchen linens. Humor optional, quality required.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/jen-IMG_7221.jpg" alt="Wide view of the shop interior: a whiskey-barrel display table in front of the curated cellar wall, with apparel racks and storefront window light behind" loading="lazy" />
-          <figcaption>The shop, coming together. Barrel, cellar wall, and storefront.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/jen-IMG_7222.jpg" alt="Branded apparel display — Crossroads of the North tees, hoodies, and crewnecks on rolling racks inside the shop" loading="lazy" />
-          <figcaption>More of the apparel line — tees, hoodies, and crewnecks.</figcaption>
-        </figure>
-        <figure class="interior-figure">
-          <img src="assets/jen-IMG_7223.jpg" alt="Curated wine and spirits display against a dark wall, with bottles, glassware, and decorative greenery" loading="lazy" />
-          <figcaption>Wine, spirits, and the small details that make it feel like the shop.</figcaption>
-        </figure>
+      <div class="interior-strip reveal" aria-label="Photos from around the shop, scrolling automatically">
+        <div class="interior-track" aria-hidden="true">
+          <figure class="interior-figure">
+            <img src="assets/shop-coolers.jpg" alt="Commercial refrigeration units installed at the shop, including glass-door merchandisers and a curved-glass deli case, ready for stocking" loading="lazy" />
+            <figcaption>Coolers installed. Fresh cuts land this Thursday.</figcaption>
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-cellar.jpg" alt="Wood and wrought-iron wine rack with curated bottle selection" loading="lazy" />
+            <figcaption>The Cellar. Curated wine and craft beer.</figcaption>
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-cleaver.jpg" alt="Fieldstone wall framing a wooden doorway with a large decorative meat cleaver suspended above the entry, leading into a back room" loading="lazy" />
+            <figcaption>The entry. Stone wall, antique cleaver, and the workshop behind.</figcaption>
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-barrel.jpg" alt="A whiskey-barrel display table in the shop holding drink coasters and small gift items, with a hanging floral basket above" loading="lazy" />
+            <figcaption>The barrel. Drink coasters, gifts, and bottled specialties.</figcaption>
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-interior-1.jpg" alt="Crossroads of the North branded apparel racks inside the shop, with Wisconsin-logo tees and hoodies on display" loading="lazy" />
+            <figcaption>Branded apparel, ready to take home.</figcaption>
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-interior-2.jpg" alt="Shop interior with rolling clothing racks, a whiskey-barrel display table, and a hanging floral basket" loading="lazy" />
+            <figcaption>Inside the shop, racks ready for product.</figcaption>
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-merch-cuts.jpg" alt="Display shelves with wooden cutting boards, charcuterie boards, kitchen knives, candle tins, and gift baskets" loading="lazy" />
+            <figcaption>Cutting boards, candles, knives. The kitchen lines we'll be carrying.</figcaption>
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-merch-towels.jpg" alt="Rustic home goods display featuring humorous printed tea towels on a black wire rack, with a wood-paneled wall behind" loading="lazy" />
+            <figcaption>Printed tea towels and kitchen linens. Humor optional, quality required.</figcaption>
+          </figure>
+        </div>
+        <div class="interior-track">
+          <figure class="interior-figure">
+            <img src="assets/shop-coolers.jpg" alt="" loading="eager" role="presentation" />
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-cellar.jpg" alt="" loading="eager" role="presentation" />
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-cleaver.jpg" alt="" loading="eager" role="presentation" />
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-barrel.jpg" alt="" loading="eager" role="presentation" />
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-interior-1.jpg" alt="" loading="eager" role="presentation" />
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-interior-2.jpg" alt="" loading="eager" role="presentation" />
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-merch-cuts.jpg" alt="" loading="eager" role="presentation" />
+          </figure>
+          <figure class="interior-figure">
+            <img src="assets/shop-merch-towels.jpg" alt="" loading="eager" role="presentation" />
+          </figure>
+        </div>
       </div>
 
       <p class="interior-attrib reveal">
@@ -1806,6 +1943,26 @@
       window.addEventListener('scroll', updateMarkers, { passive: true });
       window.addEventListener('resize', updateMarkers);
       updateMarkers();
+    })();
+
+    // === GALLERY MARQUEE — pause on drag/touch within the auto-scrolling strip ===
+    (function() {
+      const strips = document.querySelectorAll('.interior-strip');
+      strips.forEach(strip => {
+        let pressed = false;
+        strip.addEventListener('pointerdown', () => {
+          pressed = true;
+          strip.classList.add('is-dragging');
+        });
+        const release = () => {
+          if (!pressed) return;
+          pressed = false;
+          strip.classList.remove('is-dragging');
+        };
+        strip.addEventListener('pointerup', release);
+        strip.addEventListener('pointercancel', release);
+        strip.addEventListener('pointerleave', release);
+      });
     })();
 
     // === IMAGE LIGHTBOX ===
