@@ -44,7 +44,7 @@
   <meta name="twitter:site" content="@crossroadsnorth" />
 
   <!-- Phosphor Icons via jsDelivr (NOT unpkg) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css?v=20260708" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/jpeg" href="assets/logo.jpeg" />
@@ -465,7 +465,7 @@
        NAVBAR — white, hairline border
        ============================================ */
     /* ============================================
-       HIRING BANNER — sticky accent strip above the nav
+       HIRING BANNER — slim sticky pill, dismissible
        ============================================ */
     .hiring-banner {
       position: fixed;
@@ -473,37 +473,33 @@
       z-index: 1001;
       background: var(--accent);
       color: #fff;
-      padding: 10px clamp(20px, 4vw, 48px);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 16px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      gap: 8px;
+      padding: 7px 48px 7px 20px; /* room for close btn */
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
     .hiring-banner.is-hidden { transform: translateY(-100%); opacity: 0; }
-    .hiring-banner-text {
+    .hiring-banner-link {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-    }
-    .hiring-banner-text i { font-size: 1rem; line-height: 1; }
-    .hiring-banner-cta {
+      gap: 7px;
       color: #fff;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-thickness: 1px;
+      text-decoration: none;
+      font-size: 0.8rem;
       font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
       white-space: nowrap;
-      transition: opacity 0.15s ease;
     }
-    .hiring-banner-cta:hover { opacity: 0.8; }
+    .hiring-banner-icon {
+      flex-shrink: 0;
+      color: #fff;
+    }
     .hiring-banner-close {
       position: absolute;
-      right: clamp(12px, 2vw, 24px);
+      right: clamp(12px, 2vw, 20px);
       top: 50%;
       transform: translateY(-50%);
       background: none;
@@ -512,14 +508,14 @@
       cursor: pointer;
       padding: 6px;
       line-height: 1;
-      opacity: 0.85;
+      opacity: 0.8;
       transition: opacity 0.15s ease;
     }
     .hiring-banner-close:hover { opacity: 1; }
-    .hiring-banner-close i { font-size: 1.05rem; }
+    .hiring-banner-close svg { display: block; }
 
     .navbar {
-      position: fixed; top: 38px; left: 0; right: 0; z-index: 1000;
+      position: fixed; top: 30px; left: 0; right: 0; z-index: 1000;
       padding: 16px clamp(20px, 4vw, 48px);
       display: flex; align-items: center; justify-content: space-between; gap: 24px;
       background: #ffffff;
@@ -1518,15 +1514,18 @@
     </div>
   </div>
 
-  <!-- HIRING BANNER — sticky accent strip, dismissible, persists across reloads -->
+  <!-- HIRING BANNER — slim sticky pill, dismissible, persists across reloads -->
   <div class="hiring-banner" id="hiringBanner" role="region" aria-label="Hiring announcement">
-    <span class="hiring-banner-text">
-      <i class="ph ph-briefcase" aria-hidden="true"></i>
-      We're hiring — Store Manager &amp; Cleaning Specialist positions open
-    </span>
-    <a href="hiring" class="hiring-banner-cta">See open positions →</a>
+    <a href="hiring" class="hiring-banner-link">
+      <svg class="hiring-banner-icon" width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false">
+        <path d="M216,64H176V48a24,24,0,0,0-24-24H104A24,24,0,0,0,80,48V64H40A16,16,0,0,0,24,80V208a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V80A16,16,0,0,0,216,64ZM96,48a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8V64H96ZM216,208H40V80H216V208Zm-72-72a16,16,0,1,1-16-16A16,16,0,0,1,144,136Z"></path>
+      </svg>
+      Now Hiring <span aria-hidden="true">↗</span>
+    </a>
     <button type="button" class="hiring-banner-close" aria-label="Dismiss hiring banner">
-      <i class="ph ph-x" aria-hidden="true"></i>
+      <svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false">
+        <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
+      </svg>
     </button>
   </div>
 
