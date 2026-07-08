@@ -493,7 +493,10 @@
       text-transform: uppercase;
       white-space: nowrap;
     }
-    .hiring-banner-link i { font-size: 0.95rem; line-height: 1; }
+    .hiring-banner-icon {
+      flex-shrink: 0;
+      color: #fff;
+    }
     .hiring-banner-close {
       position: absolute;
       right: clamp(12px, 2vw, 20px);
@@ -509,7 +512,7 @@
       transition: opacity 0.15s ease;
     }
     .hiring-banner-close:hover { opacity: 1; }
-    .hiring-banner-close i { font-size: 0.9rem; }
+    .hiring-banner-close svg { display: block; }
 
     .navbar {
       position: fixed; top: 30px; left: 0; right: 0; z-index: 1000;
@@ -1514,11 +1517,15 @@
   <!-- HIRING BANNER — slim sticky pill, dismissible, persists across reloads -->
   <div class="hiring-banner" id="hiringBanner" role="region" aria-label="Hiring announcement">
     <a href="hiring" class="hiring-banner-link">
-      <i class="ph ph-briefcase" aria-hidden="true"></i>
+      <svg class="hiring-banner-icon" width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false">
+        <path d="M216,64H176V48a24,24,0,0,0-24-24H104A24,24,0,0,0,80,48V64H40A16,16,0,0,0,24,80V208a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V80A16,16,0,0,0,216,64ZM96,48a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8V64H96ZM216,208H40V80H216V208Zm-72-72a16,16,0,1,1-16-16A16,16,0,0,1,144,136Z"></path>
+      </svg>
       Now Hiring <span aria-hidden="true">↗</span>
     </a>
     <button type="button" class="hiring-banner-close" aria-label="Dismiss hiring banner">
-      <i class="ph ph-x" aria-hidden="true"></i>
+      <svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false">
+        <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
+      </svg>
     </button>
   </div>
 
