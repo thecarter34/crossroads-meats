@@ -818,18 +818,53 @@
       display: flex;
       gap: 18px;
       flex: 0 0 auto;
-      animation: interior-marquee 60s linear infinite;
       will-change: transform;
+      /* JS animates translateX via requestAnimationFrame.
+         Auto-scroll: ~100 px/sec (one figure+gap every ~5s). */
     }
-    .interior-strip:hover .interior-track,
-    .interior-strip:focus-within .interior-track { animation-play-state: paused; }
-    .interior-strip.is-dragging .interior-track { animation-play-state: paused; }
-    @keyframes interior-marquee {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
+    .interior-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      width: 44px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--bg-primary);
+      border: 1px solid var(--rule);
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+      transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+      /* Sit OUTSIDE the edge fade mask so they stay fully visible */
+      -webkit-mask-image: none;
+              mask-image: none;
     }
-    @media (prefers-reduced-motion: reduce) {
-      .interior-track { animation: none; }
+    .interior-arrow:hover {
+      background: var(--ink);
+      color: var(--bg-primary);
+      border-color: var(--ink);
+    }
+    .interior-arrow:active {
+      transform: translateY(-50%) scale(0.94);
+    }
+    .interior-arrow:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+    .interior-arrow i {
+      font-size: 1.1rem;
+      line-height: 1;
+      display: inline-flex;
+    }
+    .interior-arrow--prev { left: 12px; }
+    .interior-arrow--next { right: 12px; }
+
+    @media (max-width: 720px) {
+      .interior-arrow { display: none; }
     }
     .interior-figure {
       margin: 0;
@@ -1593,6 +1628,12 @@
       </header>
 
       <div class="interior-strip reveal" aria-label="Photos from around the shop, scrolling automatically">
+        <button type="button" class="interior-arrow interior-arrow--prev" aria-label="Previous photos">
+          <i class="ph ph-caret-left" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="interior-arrow interior-arrow--next" aria-label="Next photos">
+          <i class="ph ph-caret-right" aria-hidden="true"></i>
+        </button>
         <div class="interior-track" aria-hidden="true">
           <figure class="interior-figure">
             <img src="assets/shop-coolers.jpg" alt="Commercial refrigeration units installed at the shop, including glass-door merchandisers and a curved-glass deli case, ready for stocking" loading="lazy" />
@@ -1945,23 +1986,85 @@
       updateMarkers();
     })();
 
-    // === GALLERY MARQUEE — pause on drag/touch within the auto-scrolling strip ===
+    // === GALLERY MARQUEE — JS-driven auto-scroll + click-to-advance arrows ===
     (function() {
+      // Respect users who don't want motion
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // Auto-scroll speed (px per second). Calm editorial pace.
+      const SCROLL_SPEED = prefersReducedMotion ? 0 : 100;
+
       const strips = document.querySelectorAll('.interior-strip');
       strips.forEach(strip => {
-        let pressed = false;
+        const track = strip.querySelector('.interior-track');
+        if (!track) return;
+
+        // Track width = 2x the photo set width (because we duplicate the track for seamless loop).
+        // The "one loop" distance we translate before wrapping is trackWidth / 2.
+        const trackWidth = track.scrollWidth / 2;
+
+        // One figure + gap = "step" for arrow clicks
+        const firstFigure = track.querySelector('.interior-figure');
+        const trackStyles = getComputedStyle(track);
+        const gap = parseFloat(trackStyles.columnGap || trackStyles.gap) || 18;
+        const step = (firstFigure ? firstFigure.offsetWidth : 320) + gap;
+
+        // Current translateX offset (negative = scrolled left)
+        let offset = 0;
+        let lastTime = null;
+        let isDragging = false;
+
+        const applyTransform = () => {
+          track.style.transform = `translate3d(${offset}px, 0, 0)`;
+        };
+
+        // Wrap to [-(trackWidth), 0]
+        const wrap = (val) => {
+          if (val < -trackWidth) return val + trackWidth;
+          if (val > 0) return val - trackWidth;
+          return val;
+        };
+
+        // Animation loop
+        const tick = (now) => {
+          if (lastTime === null) lastTime = now;
+          const dt = (now - lastTime) / 1000; // seconds since last frame
+          lastTime = now;
+
+          const paused = isDragging || SCROLL_SPEED === 0;
+          if (!paused) {
+            offset = wrap(offset - SCROLL_SPEED * dt);
+            applyTransform();
+          }
+
+          requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+
+        // Pointer drag pause (mouse-down + hold = user is actively interacting)
         strip.addEventListener('pointerdown', () => {
-          pressed = true;
+          isDragging = true;
           strip.classList.add('is-dragging');
         });
         const release = () => {
-          if (!pressed) return;
-          pressed = false;
+          if (!isDragging) return;
+          isDragging = false;
           strip.classList.remove('is-dragging');
         };
         strip.addEventListener('pointerup', release);
         strip.addEventListener('pointercancel', release);
         strip.addEventListener('pointerleave', release);
+
+        // Click-to-advance arrows
+        const arrows = strip.querySelectorAll('.interior-arrow');
+        arrows.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const isNext = btn.classList.contains('interior-arrow--next');
+            offset = wrap(offset - (isNext ? step : -step));
+            applyTransform();
+            // Reset lastTime so the next frame doesn't try to "catch up"
+            lastTime = null;
+          });
+        });
       });
     })();
 
