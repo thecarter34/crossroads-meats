@@ -433,44 +433,6 @@
     .lightbox-close:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.6); }
     .lightbox-close i { font-size: 1.2rem; }
 
-    /* ============================================
-       CUSTOM CURSOR (desktop only, ≥1024px)
-       ============================================ */
-    .has-custom-cursor,
-    .has-custom-cursor * { cursor: none; }
-    .has-custom-cursor a, .has-custom-cursor button,
-    .has-custom-cursor [role="button"] { cursor: none; }
-    .custom-cursor {
-      position: fixed; left: 0; top: 0;
-      width: 32px; height: 32px;
-      border: 1px solid var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-16px, -16px);
-      transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
-      z-index: 99999;
-      mix-blend-mode: difference;
-    }
-    .custom-cursor.is-expanded {
-      width: 56px; height: 56px;
-      transform: translate(-28px, -28px);
-      background: rgba(192, 57, 43, 0.12);
-      border-color: var(--accent);
-    }
-    .custom-cursor-dot {
-      position: fixed; left: 0; top: 0;
-      width: 6px; height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-3px, -3px);
-      z-index: 99999;
-    }
-    @media (max-width: 1023px) {
-      .has-custom-cursor, .has-custom-cursor * { cursor: auto; }
-      .custom-cursor, .custom-cursor-dot { display: none; }
-    }
-
     h1, h2, h3 {
       font-family: var(--font-display);
       color: var(--ink);
@@ -1389,15 +1351,6 @@
     <div class="hero-wave" aria-hidden="true"></div>
   </section>
 
-  <!-- TRUST BAR -->
-  <section class="trustbar" aria-label="Our credentials">
-    <span class="trustbar-item"><i class="ph ph-house-line" aria-hidden="true"></i>Family-Owned</span>
-    <span class="trustbar-item"><i class="ph ph-storefront" aria-hidden="true"></i>Downtown Spooner</span>
-    <span class="trustbar-item"><i class="ph ph-fire" aria-hidden="true"></i>House-Made Brats</span>
-    <span class="trustbar-item"><i class="ph ph-leaf" aria-hidden="true"></i>Wisconsin Sourced</span>
-    <span class="trustbar-item"><i class="ph ph-wine" aria-hidden="true"></i>Curated Cellar</span>
-  </section>
-
   <!-- WHAT WE CARRY (replaces .services 4-card grid) -->
   <section class="products" id="products" aria-labelledby="products-heading">
     <header class="section-header">
@@ -1894,48 +1847,6 @@
           const caption = title ? `${title}${summary ? ' — ' + summary : ''}` : img.alt;
           open(img.src, img.alt, caption);
         });
-      });
-    })();
-
-    // === CUSTOM CURSOR (desktop only) ===
-    (function() {
-      if (window.matchMedia('(pointer: coarse)').matches) return; // skip on touch
-      if (window.innerWidth < 1024) return;
-
-      const cursor = document.createElement('div');
-      cursor.className = 'custom-cursor';
-      document.body.appendChild(cursor);
-      const dot = document.createElement('div');
-      dot.className = 'custom-cursor-dot';
-      document.body.appendChild(dot);
-
-      let mx = 0, my = 0, cx = 0, cy = 0;
-      let raf;
-      document.addEventListener('mousemove', (e) => {
-        mx = e.clientX; my = e.clientY;
-        dot.style.transform = `translate(${mx - 3}px, ${my - 3}px)`;
-        if (!raf) {
-          raf = requestAnimationFrame(loop);
-        }
-      });
-      const loop = () => {
-        cx += (mx - cx) * 0.18;
-        cy += (my - cy) * 0.18;
-        cursor.style.transform = `translate(${cx - 16}px, ${cy - 16}px)`;
-        if (Math.abs(mx - cx) > 0.1 || Math.abs(my - cy) > 0.1) {
-          raf = requestAnimationFrame(loop);
-        } else {
-          raf = null;
-        }
-      };
-      // Hide default cursor over the page
-      document.documentElement.classList.add('has-custom-cursor');
-      // Expand on interactive elements
-      const expand = () => cursor.classList.add('is-expanded');
-      const shrink = () => cursor.classList.remove('is-expanded');
-      document.querySelectorAll('a, button, .product-card, .faq-question, .hiring-card, input, textarea, [role="button"]').forEach(el => {
-        el.addEventListener('mouseenter', expand);
-        el.addEventListener('mouseleave', shrink);
       });
     })();
 
