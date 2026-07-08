@@ -464,46 +464,41 @@
     /* ============================================
        NAVBAR — white, hairline border
        ============================================ */
-    /* ============================================
-       HIRING BANNER — sticky accent strip above the nav
-       ============================================ */
+    /* ===========================================
+       HIRING BANNER — slim sticky pill, dismissible
+       =========================================== */
     .hiring-banner {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1001;
       background: var(--accent);
       color: #fff;
-      padding: 10px clamp(20px, 4vw, 48px);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 16px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      gap: 8px;
+      padding: 7px 48px 7px 20px; /* room for close btn */
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
     .hiring-banner.is-hidden { transform: translateY(-100%); opacity: 0; }
-    .hiring-banner-text {
+    .hiring-banner-link {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-    }
-    .hiring-banner-text i { font-size: 1rem; line-height: 1; }
-    .hiring-banner-cta {
+      gap: 7px;
       color: #fff;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-thickness: 1px;
+      text-decoration: none;
+      font-size: 0.8rem;
       font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
       white-space: nowrap;
       transition: opacity 0.15s ease;
     }
-    .hiring-banner-cta:hover { opacity: 0.8; }
+    .hiring-banner-link:hover { opacity: 0.82; }
+    .hiring-banner-link i { font-size: 0.95rem; line-height: 1; }
     .hiring-banner-close {
       position: absolute;
-      right: clamp(12px, 2vw, 24px);
+      right: clamp(12px, 2vw, 20px);
       top: 50%;
       transform: translateY(-50%);
       background: none;
@@ -512,14 +507,14 @@
       cursor: pointer;
       padding: 6px;
       line-height: 1;
-      opacity: 0.85;
+      opacity: 0.8;
       transition: opacity 0.15s ease;
     }
     .hiring-banner-close:hover { opacity: 1; }
-    .hiring-banner-close i { font-size: 1.05rem; }
+    .hiring-banner-close i { font-size: 0.9rem; }
 
     .navbar {
-      position: fixed; top: 38px; left: 0; right: 0; z-index: 1000;
+      position: fixed; top: 30px; left: 0; right: 0; z-index: 1000;
       padding: 16px clamp(20px, 4vw, 48px);
       display: flex; align-items: center; justify-content: space-between; gap: 24px;
       background: #ffffff;
@@ -1518,13 +1513,12 @@
     </div>
   </div>
 
-  <!-- HIRING BANNER — sticky accent strip, dismissible, persists across reloads -->
+  <!-- HIRING BANNER — slim sticky pill, dismissible, persists across reloads -->
   <div class="hiring-banner" id="hiringBanner" role="region" aria-label="Hiring announcement">
-    <span class="hiring-banner-text">
+    <a href="hiring" class="hiring-banner-link">
       <i class="ph ph-briefcase" aria-hidden="true"></i>
-      We're hiring — Store Manager &amp; Cleaning Specialist positions open
-    </span>
-    <a href="hiring" class="hiring-banner-cta">See open positions →</a>
+      Now Hiring <span aria-hidden="true">↗</span>
+    </a>
     <button type="button" class="hiring-banner-close" aria-label="Dismiss hiring banner">
       <i class="ph ph-x" aria-hidden="true"></i>
     </button>
