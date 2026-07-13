@@ -800,13 +800,33 @@
     .bundle-card {
       background: var(--bg-primary);
       border: 1px solid var(--rule);
-      padding: 36px 32px;
       display: flex; flex-direction: column;
+      overflow: hidden;
       transition: border-color 0.25s ease, transform 0.25s ease;
     }
     .bundle-card:hover {
       border-color: var(--accent);
       transform: translateY(-2px);
+    }
+    .bundle-card-image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: var(--bg-alt);
+      margin-bottom: 0;
+    }
+    .bundle-card-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .bundle-card:hover .bundle-card-image img {
+      transform: scale(1.03);
+    }
+    .bundle-card-body {
+      padding: 28px 32px 36px;
+      display: flex; flex-direction: column;
+      flex: 1;
     }
     .bundle-card-head {
       display: flex; align-items: baseline; justify-content: space-between;
@@ -1784,26 +1804,35 @@
       </header>
       <div class="bundles-grid">
         <article class="bundle-card reveal">
-          <div class="bundle-card-head">
-            <h3>Freezer Beef Package</h3>
-            <span class="bundle-price">Starting at $40</span>
+          <div class="bundle-card-image">
+            <img src="assets/freezer-beef-rolls.jpg"
+                 alt="Crossroads of the North freezer stocked with vacuum-sealed ground beef rolls in branded packaging"
+                 loading="lazy" width="1000" height="1000" />
           </div>
-          <p>Hand-cut steaks, roasts, and ground beef bundled for stocking the freezer. Bulk pork packages and custom meat bundles also available — ask in-store or message us for current cuts.</p>
-          <a href="#contact" class="bundle-card-cta" data-bundle-cta="freezer">
-            Inquire about this bundle
-            <i class="ph ph-arrow-right" aria-hidden="true"></i>
-          </a>
+          <div class="bundle-card-body">
+            <div class="bundle-card-head">
+              <h3>Freezer Beef Package</h3>
+              <span class="bundle-price">Starting at $40</span>
+            </div>
+            <p>Hand-cut steaks, roasts, and ground beef bundled for stocking the freezer. Bulk pork packages and custom meat bundles also available — ask in-store or message us for current cuts.</p>
+            <a href="https://m.me/61590342133702?text=Hi%21%20I%27d%20like%20to%20inquire%20about%20the%20Freezer%20Beef%20Package." target="_blank" rel="noopener" class="bundle-card-cta">
+              Message us about this bundle
+              <i class="ph ph-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
         </article>
         <article class="bundle-card reveal reveal-delay-1">
-          <div class="bundle-card-head">
-            <h3>Custom Gift Baskets</h3>
-            <span class="bundle-price">Starting at $25</span>
+          <div class="bundle-card-body">
+            <div class="bundle-card-head">
+              <h3>Custom Gift Baskets</h3>
+              <span class="bundle-price">Starting at $25</span>
+            </div>
+            <p>Wisconsin cheese, house-made jerky and snack sticks, and curated bottles from our cellar. Built to order for holidays, thank-you gifts, corporate, and housewarmings.</p>
+            <a href="gift-baskets.html" class="bundle-card-cta">
+              See gift basket options
+              <i class="ph ph-arrow-right" aria-hidden="true"></i>
+            </a>
           </div>
-          <p>Wisconsin cheese, house-made jerky and snack sticks, and curated bottles from our cellar. Built to order for holidays, thank-you gifts, corporate, and housewarmings.</p>
-          <a href="gift-baskets.html" class="bundle-card-cta">
-            See gift basket options
-            <i class="ph ph-arrow-right" aria-hidden="true"></i>
-          </a>
         </article>
       </div>
     </div>
