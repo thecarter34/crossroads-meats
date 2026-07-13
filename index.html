@@ -114,7 +114,8 @@
             { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "House-Made Brats" } },
             { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Snack Sticks and Jerky" } },
             { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Wisconsin Cheese" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Wine, Craft Beer, and Gifts" } }
+            { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Local Wine and Craft Beer Recommendations" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Wild Game Trim for Sausage" } }
           ]
         },
         "potentialAction": {
@@ -1692,7 +1693,7 @@
 
       <h1>Hand-cut. House-made.<br/><span>Spooner's newest butcher and cellar.</span></h1>
       <h2 class="hero-differentiators">Hand-cut steaks · 30-day dry-aged beef · 30+ house-made brat flavors · Wisconsin cheese &amp; wine</h2>
-      <p class="hero-sub">Grand opening Saturday, July 18. 30-day aged steaks, 30+ brat flavors, Wisconsin cheese, freezer beef packages, gift baskets, and a curated wine and craft beer selection — at 118 Ash Street in Spooner. Curbside pickup available.</p>
+      <p class="hero-sub">Grand opening Saturday, July 18. 30-day aged steaks, 30+ brat flavors, Wisconsin cheese, freezer beef packages, custom meat bundles, gift baskets &amp; boxes, and a curated wine and craft beer selection recommended by the Lutz family — at 118 Ash Street in Spooner. Curbside pickup available.</p>
 
       <div class="hero-actions">
         <a href="https://m.me/61590342133702" target="_blank" rel="noopener" class="btn-primary">
@@ -1770,7 +1771,7 @@
         <div class="product-body">
           <span class="product-icon"><i class="ph ph-package" aria-hidden="true"></i></span>
           <h3>Snack Sticks &amp; Jerky</h3>
-          <p>Hand-seasoned and smoked. Stock-up cuts for the cabin, the road, and the tailgate.</p>
+          <p>Hand-seasoned and smoked in-house. Wild game trim from your deer turned into snack sticks and jerky by request.</p>
         </div>
       </article>
 
@@ -1787,8 +1788,8 @@
         <div class="product-image"><img src="assets/stock-wine.jpg" alt="Curated wine, craft beer and local gifts" loading="lazy" width="600" height="900" /></div>
         <div class="product-body">
           <span class="product-icon"><i class="ph ph-wine" aria-hidden="true"></i></span>
-          <h3>Wine, Craft Beer &amp; Gifts</h3>
-          <p>A curated cellar of bottles, six-packs, and locally-made gifts. Pet food and treats too.</p>
+          <h3>Local Wine &amp; Craft Beer Recommendations</h3>
+          <p>The Lutz family's personal picks for the cellar — curated bottles and six-packs, chosen for weeknight dinners and cabin weekends. Pet food &amp; treats also stocked.</p>
         </div>
       </article>
 
@@ -1824,7 +1825,7 @@
         <article class="bundle-card reveal reveal-delay-1">
           <div class="bundle-card-body">
             <div class="bundle-card-head">
-              <h3>Custom Gift Baskets</h3>
+              <h3>Gift Baskets &amp; Boxes</h3>
               <span class="bundle-price">Starting at $25</span>
             </div>
             <p>Wisconsin cheese, house-made jerky and snack sticks, and curated bottles from our cellar. Built to order for holidays, thank-you gifts, corporate, and housewarmings.</p>
@@ -2037,8 +2038,8 @@
   <section class="reviews" id="reviews" aria-labelledby="reviews-heading">
     <header class="section-header">
       <p class="section-label">Word of Mouth</p>
-      <h2 class="section-title" id="reviews-heading">Word's still spreading.</h2>
-      <p class="section-sub">Grand opening Saturday, July 18 at 118 Ash Street. Be the first to leave a review on Facebook once you've stopped in.</p>
+      <h2 class="section-title" id="reviews-heading">Tell us how we did.</h2>
+      <p class="section-sub">We've opened at 118 Ash Street. If you've stopped in, we'd love to hear from you — find us on Google and leave a review.</p>
     </header>
 
     <div class="reviews-pitch reveal">
@@ -2050,11 +2051,12 @@
         <i class="ph-fill ph-star"></i>
       </div>
       <h3>Be the first to review us.</h3>
-      <p>No reviews yet — we're a brand-new shop. Once we open, we'd love to hear what you think. Drop a note on our Facebook page and help us get started.</p>
+      <p>No reviews yet — we're a brand-new shop. Once you've visited, we'd love to hear what you think. Drop a note on our Google Business Profile and help us get started.</p>
       <div class="cta-row">
-        <a href="https://www.facebook.com/people/Crossroads-of-the-North-Meats-and-Cellar/61590342133702/" target="_blank" rel="noopener" class="btn-primary">
-          <i class="ph ph-facebook-logo" aria-hidden="true"></i>
-          Leave a review on Facebook
+        <!-- GBP write-review URL pulled from My Business API on 2026-07-13: placeId=ChIJ_2nDKJe1rVIR2E4IrwkfItc. Verify in GBP dashboard if it ever 404s. -->
+        <a href="https://search.google.com/local/writereview?placeid=ChIJ_2nDKJe1rVIR2E4IrwkfItc" target="_blank" rel="noopener" class="btn-primary">
+          <i class="ph ph-google-logo" aria-hidden="true"></i>
+          Leave us a Google review
         </a>
       </div>
     </div>
@@ -2384,7 +2386,8 @@
       // Respect users who don't want motion
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       // Auto-scroll speed (px per second). Calm editorial pace.
-      const SCROLL_SPEED = prefersReducedMotion ? 0 : 100;
+      <!-- Carousel speed: reduced from 100 to 50 px/sec on 2026-07-13 per Josh's request -->
+      const SCROLL_SPEED = prefersReducedMotion ? 0 : 50;
 
       const strips = document.querySelectorAll('.interior-strip');
       strips.forEach(strip => {
