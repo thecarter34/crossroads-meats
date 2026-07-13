@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spooner Butcher Shop | Crossroads of the North Meats &amp; Cellar</title>
-  <meta name="description" content="Family-owned butcher shop and curated cellar in Spooner, WI. Shop hand-cut meats, 30-day aged steaks, 30+ brat flavors, Wisconsin cheese, wine, and craft beer." />
+  <title>Butcher &amp; Cellar in Spooner, WI | Crossroads of the North</title>
+  <meta name="description" content="Family-owned butcher shop and cellar in Spooner, WI — hand-cut steaks, 30-day dry-aged beef, 30+ house-made brat flavors, Wisconsin cheese, wine, and craft beer." />
   <meta name="author" content="Crossroads of the North Meats and Cellar" />
   <!-- Robots & Crawling -->
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:150, max-video-preview:-1" />
   <meta name="googlebot" content="index, follow" />
   <link rel="canonical" href="https://crossroadsmeatsandcellar.com/" />
 
@@ -27,8 +27,8 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://crossroadsmeatsandcellar.com/" />
-  <meta property="og:title" content="Spooner Butcher Shop | Crossroads of the North Meats &amp; Cellar" />
-  <meta property="og:description" content="Family-owned butcher shop and curated cellar in Spooner, WI. Shop hand-cut meats, aged steaks, house-made brats, Wisconsin cheese, wine, and craft beer." />
+  <meta property="og:title" content="Butcher &amp; Cellar in Spooner, WI | Crossroads of the North" />
+  <meta property="og:description" content="Family-owned butcher shop and cellar in Spooner, WI — hand-cut steaks, 30-day dry-aged beef, 30+ house-made brat flavors, Wisconsin cheese, wine, and craft beer." />
   <meta property="og:image" content="https://crossroadsmeatsandcellar.com/assets/logo.jpeg" />
   <meta property="og:image:alt" content="Crossroads of the North Meats and Cellar logo" />
   <meta property="og:image:width" content="1320" />
@@ -38,8 +38,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Spooner Butcher Shop | Crossroads of the North Meats &amp; Cellar" />
-  <meta name="twitter:description" content="Family-owned butcher shop and curated cellar in Spooner, WI. Shop hand-cut meats, aged steaks, house-made brats, Wisconsin cheese, wine, and craft beer." />
+  <meta name="twitter:title" content="Butcher &amp; Cellar in Spooner, WI | Crossroads of the North" />
+  <meta name="twitter:description" content="Family-owned butcher shop and cellar in Spooner, WI — hand-cut steaks, 30-day dry-aged beef, 30+ house-made brat flavors, Wisconsin cheese, wine, and craft beer." />
   <meta name="twitter:image" content="https://crossroadsmeatsandcellar.com/assets/logo.jpeg" />
 
   <!-- Phosphor Icons via jsDelivr (NOT unpkg) -->
@@ -54,7 +54,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
   <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" /></noscript>
 
   <!-- Structured Data - LocalBusiness + WebSite -->
   <script type="application/ld+json">
@@ -79,6 +80,7 @@
           "postalCode": "54801",
           "addressCountry": "US"
         },
+        "telephone": "+1-715-416-0989",
         "geo": {
           "@type": "GeoCoordinates",
           "latitude": 45.8225,
@@ -169,6 +171,38 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Not at launch, but ask us in-store about catering and large orders."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer custom meat cutting in Spooner?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — we cut to your specifications. From a quarter cow to a custom steak order, tell us what you need and we'll cut it fresh. Ask in-store or message us on Facebook to get started."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you process deer or wild game in Spooner?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We process venison and other wild game — drop off your deer and we can turn it into sausage, snack sticks, jerky, or custom cuts. Call ahead during hunting season (we get busy in November)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you have gift baskets with Wisconsin cheese and meat?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — we build custom cheese and meat gift baskets perfect for holidays, thank-you gifts, or a taste of northern Wisconsin. Stop in or message us to put one together."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where are you located — are you on Hwy 63?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We're at 118 Ash Street in Spooner, WI — just off Hwy 63, making us an easy stop between Minneapolis and Duluth. Open during posted hours."
         }
       }
     ]
@@ -653,6 +687,17 @@
     }
     .hero-trust i { display: none; }
 
+    .hero-differentiators {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: clamp(0.85rem, 1.2vw, 1.05rem);
+      letter-spacing: 0.04em;
+      color: var(--ink-muted);
+      max-width: 720px;
+      margin: 18px auto 0;
+      text-align: center;
+    }
+
     /* ============================================
        SECTION HEADER PATTERN (shared)
        ============================================ */
@@ -671,6 +716,24 @@
       font-size: 1.15rem; line-height: 1.6;
       color: var(--ink-muted);
       max-width: 640px; margin: 0 auto;
+    }
+
+    /* ============================================
+       INTRO — brand voice paragraph after hero
+       ============================================ */
+    .intro {
+      padding: clamp(48px, 6vw, 80px) 24px;
+      background: var(--bg-alt);
+      text-align: center;
+    }
+    .intro p {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+      line-height: 1.7;
+      color: var(--ink-body);
+      max-width: 680px;
+      margin: 0 auto;
     }
 
     /* ============================================
@@ -1497,7 +1560,7 @@
 
     <div class="hero-content">
       <div class="hero-logo">
-        <img src="assets/logo.jpeg" alt="Crossroads of the North Meats and Cellar logo" loading="eager" />
+        <img src="assets/logo.jpeg" alt="Crossroads of the North Meats and Cellar logo" loading="eager" fetchpriority="high" width="1320" height="712" />
       </div>
 
       <div class="hero-opening-badge" aria-label="Soft opening Thursday, July 9 at 118 Ash Street, Spooner, WI">
@@ -1510,6 +1573,7 @@
       </div>
 
       <h1>Hand-cut. House-made.<br/><span>Spooner's newest butcher and cellar.</span></h1>
+      <h2 class="hero-differentiators">Hand-cut steaks · 30-day dry-aged beef · 30+ house-made brat flavors · Wisconsin cheese &amp; wine</h2>
       <p class="hero-sub">Soft opening Thursday, July 9. 30-day aged steaks, 30+ brat flavors, Wisconsin cheese, and a curated wine and craft beer selection — at 118 Ash Street in Spooner.</p>
 
       <div class="hero-actions">
@@ -1542,6 +1606,11 @@
     <div class="hero-wave" aria-hidden="true"></div>
   </section>
 
+  <!-- INTRO -->
+  <section class="intro" id="about-intro">
+    <p>Crossroads of the North Meats and Cellar is a family-owned butcher shop and specialty food store in Spooner, Wisconsin — right on Hwy 63 between Minneapolis and Duluth. We hand-cut our steaks, age them 30 days, and make more than 30 bratwurst flavors in-house. Whether you're stocking up for the cabin, planning a weekend grill session, or hunting for the perfect Wisconsin cheese and wine pairing, you'll find it here.</p>
+  </section>
+
   <!-- WHAT WE CARRY (replaces .services 4-card grid) -->
   <section class="products" id="products" aria-labelledby="products-heading">
     <header class="section-header">
@@ -1552,7 +1621,7 @@
     <div class="products-grid" role="list">
 
       <article class="product-card reveal" role="listitem">
-        <div class="product-image"><img src="assets/stock-handcut.jpeg" alt="Hand-cut ribeye steaks on a rustic cutting board" loading="lazy" /></div>
+        <div class="product-image"><img src="assets/stock-handcut.jpeg" alt="Hand-cut ribeye steaks on a rustic cutting board" loading="lazy" width="1600" height="900" /></div>
         <div class="product-body">
           <span class="product-icon"><i class="ph ph-knife" aria-hidden="true"></i></span>
           <h3>Hand-Cut Meats</h3>
@@ -1561,7 +1630,7 @@
       </article>
 
       <article class="product-card reveal reveal-delay-1" role="listitem">
-        <div class="product-image"><img src="assets/stock-dryaged.jpeg" alt="Marbled dry-aged steaks with cleaver, olive oil, and fresh herbs" loading="lazy" /></div>
+        <div class="product-image"><img src="assets/stock-dryaged.jpeg" alt="Marbled dry-aged steaks with cleaver, olive oil, and fresh herbs" loading="lazy" width="1200" height="800" /></div>
         <div class="product-body">
           <span class="product-icon"><i class="ph ph-star" aria-hidden="true"></i></span>
           <h3>30-Day Aged Steaks</h3>
@@ -1570,7 +1639,7 @@
       </article>
 
       <article class="product-card reveal reveal-delay-2" role="listitem">
-        <div class="product-image"><img src="assets/stock-brats-grill.webp" alt="House-made bratwurst sizzling on the grill" loading="lazy" /></div>
+        <div class="product-image"><img src="assets/stock-brats-grill.webp" alt="House-made bratwurst sizzling on the grill" loading="lazy" width="800" height="534" /></div>
         <div class="product-body">
           <span class="product-icon"><i class="ph ph-fire" aria-hidden="true"></i></span>
           <h3>30+ House-Made Brats</h3>
@@ -1579,7 +1648,7 @@
       </article>
 
       <article class="product-card reveal reveal-delay-3" role="listitem">
-        <div class="product-image"><img src="assets/stock-snack-sticks.jpeg" alt="Smoked cheese-filled snack sticks in a vintage pail" loading="lazy" /></div>
+        <div class="product-image"><img src="assets/stock-snack-sticks.jpeg" alt="Smoked cheese-filled snack sticks in a vintage pail" loading="lazy" width="800" height="800" /></div>
         <div class="product-body">
           <span class="product-icon"><i class="ph ph-package" aria-hidden="true"></i></span>
           <h3>Snack Sticks &amp; Jerky</h3>
@@ -1588,7 +1657,7 @@
       </article>
 
       <article class="product-card reveal" role="listitem">
-        <div class="product-image"><img src="assets/stock-cheese.jpg" alt="Wisconsin cheese and cheese curds" loading="lazy" /></div>
+        <div class="product-image"><img src="assets/stock-cheese.jpg" alt="Wisconsin cheese and cheese curds" loading="lazy" width="900" height="600" /></div>
         <div class="product-body">
           <span class="product-icon"><i class="ph ph-cow" aria-hidden="true"></i></span>
           <h3>Wisconsin Cheese</h3>
@@ -1597,7 +1666,7 @@
       </article>
 
       <article class="product-card reveal reveal-delay-1" role="listitem">
-        <div class="product-image"><img src="assets/stock-wine.jpg" alt="Curated wine, craft beer and local gifts" loading="lazy" /></div>
+        <div class="product-image"><img src="assets/stock-wine.jpg" alt="Curated wine, craft beer and local gifts" loading="lazy" width="600" height="900" /></div>
         <div class="product-body">
           <span class="product-icon"><i class="ph ph-wine" aria-hidden="true"></i></span>
           <h3>Wine, Craft Beer &amp; Gifts</h3>
@@ -1665,7 +1734,7 @@
       <div class="rooms-grid">
         <figure class="room reveal">
           <div class="room-frame">
-            <img src="assets/jen-IMG_7223.jpg" alt="Curated wine and spirits display against a dark wall — bottles, glassware, and decorative greenery" loading="lazy" />
+            <img src="assets/jen-IMG_7223.jpg" alt="Curated wine and spirits display against a dark wall — bottles, glassware, and decorative greenery" loading="lazy" width="800" height="600" />
           </div>
           <p class="room-num">01 — The Cellar</p>
           <h3 class="room-title">A curated cellar, bottle by bottle.</h3>
@@ -1674,7 +1743,7 @@
 
         <figure class="room reveal">
           <div class="room-frame">
-            <img src="assets/jen-IMG_7222.jpg" alt="Branded apparel display — Crossroads of the North tees, hoodies, and crewnecks on rolling racks inside the shop" loading="lazy" />
+            <img src="assets/jen-IMG_7222.jpg" alt="Branded apparel display — Crossroads of the North tees, hoodies, and crewnecks on rolling racks inside the shop" loading="lazy" width="600" height="800" />
           </div>
           <p class="room-num">02 — The Apparel Rack</p>
           <h3 class="room-title">Wear the shop home.</h3>
@@ -1683,7 +1752,7 @@
 
         <figure class="room reveal">
           <div class="room-frame">
-            <img src="assets/jen-IMG_7221.jpg" alt="Wide view of the shop interior — whiskey-barrel display table in front of the cellar wall, with apparel racks and storefront window light" loading="lazy" />
+            <img src="assets/jen-IMG_7221.jpg" alt="Wide view of the shop interior — whiskey-barrel display table in front of the cellar wall, with apparel racks and storefront window light" loading="lazy" width="600" height="800" />
           </div>
           <p class="room-num">03 — The Floor</p>
           <h3 class="room-title">Built for slow browsing.</h3>
@@ -1711,62 +1780,62 @@
         </button>
         <div class="interior-track" aria-hidden="true">
           <figure class="interior-figure">
-            <img src="assets/shop-coolers.jpg" alt="Commercial refrigeration units installed at the shop, including glass-door merchandisers and a curved-glass deli case, ready for stocking" loading="lazy" />
+            <img src="assets/shop-coolers.jpg" alt="Commercial refrigeration units installed at the shop, including glass-door merchandisers and a curved-glass deli case, ready for stocking" loading="lazy" width="800" height="600" />
             <figcaption>Coolers installed. Fresh cuts land this Thursday.</figcaption>
           </figure>
           <figure class="interior-figure">
-            <img src="assets/shop-cellar.jpg" alt="Wood and wrought-iron wine rack with curated bottle selection" loading="lazy" />
+            <img src="assets/shop-cellar.jpg" alt="Wood and wrought-iron wine rack with curated bottle selection" loading="lazy" width="600" height="800" />
             <figcaption>The Cellar. Curated wine and craft beer.</figcaption>
           </figure>
           <figure class="interior-figure">
-            <img src="assets/shop-cleaver.jpg" alt="Fieldstone wall framing a wooden doorway with a large decorative meat cleaver suspended above the entry, leading into a back room" loading="lazy" />
+            <img src="assets/shop-cleaver.jpg" alt="Fieldstone wall framing a wooden doorway with a large decorative meat cleaver suspended above the entry, leading into a back room" loading="lazy" width="800" height="600" />
             <figcaption>The entry. Stone wall, antique cleaver, and the workshop behind.</figcaption>
           </figure>
           <figure class="interior-figure">
-            <img src="assets/shop-barrel.jpg" alt="A whiskey-barrel display table in the shop holding drink coasters and small gift items, with a hanging floral basket above" loading="lazy" />
+            <img src="assets/shop-barrel.jpg" alt="A whiskey-barrel display table in the shop holding drink coasters and small gift items, with a hanging floral basket above" loading="lazy" width="600" height="800" />
             <figcaption>The barrel. Drink coasters, gifts, and bottled specialties.</figcaption>
           </figure>
           <figure class="interior-figure">
-            <img src="assets/shop-interior-1.jpg" alt="Crossroads of the North branded apparel racks inside the shop, with Wisconsin-logo tees and hoodies on display" loading="lazy" />
+            <img src="assets/shop-interior-1.jpg" alt="Crossroads of the North branded apparel racks inside the shop, with Wisconsin-logo tees and hoodies on display" loading="lazy" width="800" height="600" />
             <figcaption>Branded apparel, ready to take home.</figcaption>
           </figure>
           <figure class="interior-figure">
-            <img src="assets/shop-interior-2.jpg" alt="Shop interior with rolling clothing racks, a whiskey-barrel display table, and a hanging floral basket" loading="lazy" />
+            <img src="assets/shop-interior-2.jpg" alt="Shop interior with rolling clothing racks, a whiskey-barrel display table, and a hanging floral basket" loading="lazy" width="600" height="800" />
             <figcaption>Inside the shop, racks ready for product.</figcaption>
           </figure>
           <figure class="interior-figure">
-            <img src="assets/shop-merch-cuts.jpg" alt="Display shelves with wooden cutting boards, charcuterie boards, kitchen knives, candle tins, and gift baskets" loading="lazy" />
+            <img src="assets/shop-merch-cuts.jpg" alt="Display shelves with wooden cutting boards, charcuterie boards, kitchen knives, candle tins, and gift baskets" loading="lazy" width="800" height="600" />
             <figcaption>Cutting boards, candles, knives. The kitchen lines we'll be carrying.</figcaption>
           </figure>
           <figure class="interior-figure">
-            <img src="assets/shop-merch-towels.jpg" alt="Rustic home goods display featuring humorous printed tea towels on a black wire rack, with a wood-paneled wall behind" loading="lazy" />
+            <img src="assets/shop-merch-towels.jpg" alt="Rustic home goods display featuring humorous printed tea towels on a black wire rack, with a wood-paneled wall behind" loading="lazy" width="600" height="800" />
             <figcaption>Printed tea towels and kitchen linens. Humor optional, quality required.</figcaption>
           </figure>
         </div>
         <div class="interior-track">
           <figure class="interior-figure">
-            <img src="assets/shop-coolers.jpg" alt="" loading="eager" role="presentation" />
+            <img src="assets/shop-coolers.jpg" alt="" loading="eager" role="presentation" width="800" height="600" />
           </figure>
           <figure class="interior-figure">
-            <img src="assets/shop-cellar.jpg" alt="" loading="eager" role="presentation" />
+            <img src="assets/shop-cellar.jpg" alt="" loading="eager" role="presentation" width="600" height="800" />
           </figure>
           <figure class="interior-figure">
-            <img src="assets/shop-cleaver.jpg" alt="" loading="eager" role="presentation" />
+            <img src="assets/shop-cleaver.jpg" alt="" loading="eager" role="presentation" width="800" height="600" />
           </figure>
           <figure class="interior-figure">
-            <img src="assets/shop-barrel.jpg" alt="" loading="eager" role="presentation" />
+            <img src="assets/shop-barrel.jpg" alt="" loading="eager" role="presentation" width="600" height="800" />
           </figure>
           <figure class="interior-figure">
-            <img src="assets/shop-interior-1.jpg" alt="" loading="eager" role="presentation" />
+            <img src="assets/shop-interior-1.jpg" alt="" loading="eager" role="presentation" width="800" height="600" />
           </figure>
           <figure class="interior-figure">
-            <img src="assets/shop-interior-2.jpg" alt="" loading="eager" role="presentation" />
+            <img src="assets/shop-interior-2.jpg" alt="" loading="eager" role="presentation" width="600" height="800" />
           </figure>
           <figure class="interior-figure">
-            <img src="assets/shop-merch-cuts.jpg" alt="" loading="eager" role="presentation" />
+            <img src="assets/shop-merch-cuts.jpg" alt="" loading="eager" role="presentation" width="800" height="600" />
           </figure>
           <figure class="interior-figure">
-            <img src="assets/shop-merch-towels.jpg" alt="" loading="eager" role="presentation" />
+            <img src="assets/shop-merch-towels.jpg" alt="" loading="eager" role="presentation" width="600" height="800" />
           </figure>
         </div>
       </div>
@@ -1878,6 +1947,38 @@
         <div class="faq-answer"><div class="faq-answer-inner">Not at launch, but ask us in-store about catering and large orders.</div></div>
       </div>
 
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>Do you offer custom meat cutting in Spooner?</span>
+          <i class="ph ph-caret-down" aria-hidden="true"></i>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes — we cut to your specifications. From a quarter cow to a custom steak order, tell us what you need and we'll cut it fresh. Ask in-store or message us on Facebook to get started.</div></div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>Do you process deer or wild game in Spooner?</span>
+          <i class="ph ph-caret-down" aria-hidden="true"></i>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">We process venison and other wild game — drop off your deer and we can turn it into sausage, snack sticks, jerky, or custom cuts. Call ahead during hunting season (we get busy in November).</div></div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>Do you have gift baskets with Wisconsin cheese and meat?</span>
+          <i class="ph ph-caret-down" aria-hidden="true"></i>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes — we build custom cheese and meat gift baskets perfect for holidays, thank-you gifts, or a taste of northern Wisconsin. Stop in or message us to put one together.</div></div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>Where are you located — are you on Hwy 63?</span>
+          <i class="ph ph-caret-down" aria-hidden="true"></i>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">We're at 118 Ash Street in Spooner, WI — just off Hwy 63, making us an easy stop between Minneapolis and Duluth. Open during posted hours.</div></div>
+      </div>
+
     </div>
   </section>
 
@@ -1908,7 +2009,7 @@
           <span class="location-card-icon"><i class="ph ph-chat-circle-dots" aria-hidden="true"></i></span>
           <div>
             <h4>Get in touch</h4>
-            <p>The fastest way to reach us right now is <a href="https://m.me/61590342133702" target="_blank" rel="noopener">Facebook Messenger</a>. We'll be at the counter soon.</p>
+            <p>The fastest way to reach us right now is <a href="https://m.me/61590342133702" target="_blank" rel="noopener">Facebook Messenger</a>. Or call <a href="tel:+17154160989">(715) 416-0989</a>. We'll be at the counter soon.</p>
           </div>
         </div>
       </div>
@@ -1941,7 +2042,7 @@
   <footer class="site-footer" role="contentinfo">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="assets/logo.jpeg" alt="Crossroads of the North Meats and Cellar" />
+        <img src="assets/logo.jpeg" alt="Crossroads of the North Meats and Cellar" width="1320" height="712" />
         <p>Crossroads of the North — hand-cut meats, 30-day aged steaks, and a curated cellar in Spooner, Wisconsin.</p>
       </div>
       <div class="footer-links">
@@ -1958,6 +2059,7 @@
       <div class="footer-contact">
         <h4>Connect</h4>
         <p><a href="https://www.facebook.com/people/Crossroads-of-the-North-Meats-and-Cellar/61590342133702/" target="_blank" rel="noopener">Follow on Facebook</a></p>
+        <p><a href="tel:+17154160989">(715) 416-0989</a></p>
         <p>118 Ash Street<br/>Spooner, WI 54801</p>
         <p>Hours: Soft Opening July 9</p>
       </div>
