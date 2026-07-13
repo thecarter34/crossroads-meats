@@ -1,3 +1,6 @@
 
 # Wrangler local cache (added by wrangler dev)
 .wrangler/
+
+# Local Hermes working notes (plans/desktop-attachments) — not part of site repo
+.hermes/
