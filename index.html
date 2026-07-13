@@ -146,7 +146,7 @@
         "name": "What are your hours?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Open Thursday through Sunday, 10 AM to 6 PM. We're at 118 Ash Street, Spooner, WI. Closed Monday, Tuesday, and Wednesday."
+          "text": "We're open Thursday through Sunday, 10 AM to 6 PM (closed Monday, Tuesday, Wednesday). Grand opening Saturday, July 18 at 118 Ash Street, Spooner, WI."
         }
       },
       {
@@ -175,10 +175,34 @@
       },
       {
         "@type": "Question",
-        "name": "Do you deliver?",
+        "name": "Do you offer curbside pickup?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Not at launch, but ask us in-store about catering and large orders."
+          "text": "Yes — call us at (715) 416-0989 when you arrive and we'll bring your order out. Curbside pickup works for everything we sell, including freezer beef packages, gift baskets, and party trays."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you do catering or party trays?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — we build meat and cheese party trays and catering platters for holidays, grad parties, the cabin, and corporate events. Call ahead or message us on Facebook to put one together."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you have freezer beef packages?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — our Freezer Beef Package starts at $40 and bundles hand-cut steaks, roasts, and ground beef. We also offer bulk pork packages and meat bundles. Stop in or message us for current availability."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much do gift baskets cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Gift baskets start at $25 and are built to order with Wisconsin cheese, house-made jerky and snack sticks, and curated bottles. Tell us the occasion and we'll put one together."
         }
       },
       {
@@ -751,6 +775,72 @@
       padding: var(--section-padding) 24px;
       background: var(--bg-primary);
       border-top: 1px solid var(--rule);
+    }
+
+    /* ---------- BUNDLES CALLOUT ---------- */
+    .bundles {
+      padding: clamp(56px, 8vw, 96px) 24px;
+      background: var(--bg-alt);
+      border-top: 1px solid var(--rule);
+    }
+    .bundles-inner {
+      max-width: 1240px; margin: 0 auto;
+    }
+    .bundles-header {
+      text-align: center;
+      margin-bottom: clamp(40px, 5vw, 64px);
+    }
+    .bundles-header .section-label { display: inline-block; margin-bottom: 12px; }
+    .bundles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      max-width: 980px; margin: 0 auto;
+    }
+    .bundle-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--rule);
+      padding: 36px 32px;
+      display: flex; flex-direction: column;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+    .bundle-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .bundle-card-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 16px; margin-bottom: 16px;
+    }
+    .bundle-card-head h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--ink); letter-spacing: -0.01em;
+    }
+    .bundle-price {
+      font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .bundle-card p {
+      color: var(--ink-body);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .bundle-card-cta {
+      margin-top: auto;
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent);
+    }
+    .bundle-card-cta:hover { color: var(--accent-dark); }
+    @media (max-width: 720px) {
+      .bundles-grid { grid-template-columns: 1fr; }
+      .bundle-card-head { flex-direction: column; align-items: flex-start; gap: 6px; }
     }
     .products-grid {
       max-width: 1240px; margin: 0 auto;
@@ -1571,10 +1661,10 @@
         <img src="assets/logo.jpeg" alt="Crossroads of the North Meats and Cellar logo" loading="eager" fetchpriority="high" width="1320" height="712" />
       </div>
 
-      <div class="hero-opening-badge" aria-label="Soft opening Thursday, July 9 at 118 Ash Street, Spooner, WI">
+      <div class="hero-opening-badge" aria-label="Grand Opening Saturday, July 18 at 118 Ash Street, Spooner, WI">
         <span class="hero-opening-rule" aria-hidden="true"></span>
         <span class="hero-opening-text">
-          <span class="hero-opening-eyebrow">Soft Opening · Thursday, July 9</span>
+          <span class="hero-opening-eyebrow">Grand Opening · Saturday, July 18</span>
           <span class="hero-opening-date">2026 · 118 Ash Street, Spooner</span>
         </span>
         <span class="hero-opening-rule" aria-hidden="true"></span>
@@ -1582,7 +1672,7 @@
 
       <h1>Hand-cut. House-made.<br/><span>Spooner's newest butcher and cellar.</span></h1>
       <h2 class="hero-differentiators">Hand-cut steaks · 30-day dry-aged beef · 30+ house-made brat flavors · Wisconsin cheese &amp; wine</h2>
-      <p class="hero-sub">Soft opening Thursday, July 9. 30-day aged steaks, 30+ brat flavors, Wisconsin cheese, and a curated wine and craft beer selection — at 118 Ash Street in Spooner.</p>
+      <p class="hero-sub">Grand opening Saturday, July 18. 30-day aged steaks, 30+ brat flavors, Wisconsin cheese, freezer beef packages, gift baskets, and a curated wine and craft beer selection — at 118 Ash Street in Spooner. Curbside pickup available.</p>
 
       <div class="hero-actions">
         <a href="https://m.me/61590342133702" target="_blank" rel="noopener" class="btn-primary">
@@ -1616,7 +1706,7 @@
 
   <!-- INTRO -->
   <section class="intro" id="about-intro">
-    <p>Crossroads of the North Meats and Cellar is a family-owned butcher shop and specialty food store in Spooner, Wisconsin — right on Hwy 63 between Minneapolis and Duluth. We hand-cut our steaks, age them 30 days, and make more than 30 bratwurst flavors in-house. Whether you're stocking up for the cabin, planning a weekend grill session, or hunting for the perfect Wisconsin cheese and wine pairing, you'll find it here.</p>
+    <p>Crossroads of the North Meats and Cellar is a family-owned butcher shop and specialty food store in Spooner, Wisconsin — right on Hwy 63 between Minneapolis and Duluth. We hand-cut our steaks, age them 30 days, and make more than 30 bratwurst flavors in-house. Stock the freezer with our bulk beef and pork packages, build a custom gift basket, or order a party tray for the weekend. Curbside pickup available. Whether you're stocking up for the cabin, planning a weekend grill session, or hunting for the perfect Wisconsin cheese and wine pairing, you'll find it here.</p>
   </section>
 
   <!-- WHAT WE CARRY (replaces .services 4-card grid) -->
@@ -1682,6 +1772,40 @@
         </div>
       </article>
 
+    </div>
+  </section>
+
+  <!-- BUNDLES — Freezer Beef & Gift Baskets -->
+  <section class="bundles" id="bundles" aria-labelledby="bundles-heading">
+    <div class="bundles-inner">
+      <header class="bundles-header reveal">
+        <p class="section-label">Bundles &amp; Built-to-Order</p>
+        <h2 class="section-title" id="bundles-heading">Stock up. Send something good.</h2>
+      </header>
+      <div class="bundles-grid">
+        <article class="bundle-card reveal">
+          <div class="bundle-card-head">
+            <h3>Freezer Beef Package</h3>
+            <span class="bundle-price">Starting at $40</span>
+          </div>
+          <p>Hand-cut steaks, roasts, and ground beef bundled for stocking the freezer. Bulk pork packages and custom meat bundles also available — ask in-store or message us for current cuts.</p>
+          <a href="#contact" class="bundle-card-cta" data-bundle-cta="freezer">
+            Inquire about this bundle
+            <i class="ph ph-arrow-right" aria-hidden="true"></i>
+          </a>
+        </article>
+        <article class="bundle-card reveal reveal-delay-1">
+          <div class="bundle-card-head">
+            <h3>Custom Gift Baskets</h3>
+            <span class="bundle-price">Starting at $25</span>
+          </div>
+          <p>Wisconsin cheese, house-made jerky and snack sticks, and curated bottles from our cellar. Built to order for holidays, thank-you gifts, corporate, and housewarmings.</p>
+          <a href="gift-baskets.html" class="bundle-card-cta">
+            See gift basket options
+            <i class="ph ph-arrow-right" aria-hidden="true"></i>
+          </a>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -1776,7 +1900,7 @@
       <header class="section-header reveal">
         <p class="section-label">Sneak Peek</p>
         <h2 class="section-title" id="interior-heading">A look inside before opening day.</h2>
-        <p class="section-sub">Shots from around the shop — the coolers, the Cellar, the apparel racks, the products — drifting by as we get ready for soft opening Thursday, July 9. Stop in Thursday and you'll see the rest in person.</p>
+        <p class="section-sub">Shots from around the shop — the coolers, the Cellar, the apparel racks, the products. Stop in during our open hours (Thu – Sun, 10 AM – 6 PM) and see the rest in person.</p>
       </header>
 
       <div class="interior-strip reveal" aria-label="Photos from around the shop, scrolling automatically">
@@ -1863,7 +1987,7 @@
           Now Hiring — Soft-Opening Team
         </p>
         <h2 class="hiring-cta-title" id="hiring-cta-heading">We're putting the team together.</h2>
-        <p class="hiring-cta-sub">The Lutz family is hiring for soft opening Thursday, July 9. Full job descriptions, schedules, and apply instructions live on the hiring page.</p>
+        <p class="hiring-cta-sub">The Lutz family is hiring for the counter and the cleaning crew. Full job descriptions, schedules, and apply instructions live on the hiring page.</p>
         <ul class="hiring-cta-roles" aria-label="Open positions">
           <li><i class="ph ph-storefront" aria-hidden="true"></i>Store Manager</li>
           <li><i class="ph ph-sparkle" aria-hidden="true"></i>Weekly Cleaning Specialist</li>
@@ -1885,7 +2009,7 @@
     <header class="section-header">
       <p class="section-label">Word of Mouth</p>
       <h2 class="section-title" id="reviews-heading">Word's still spreading.</h2>
-      <p class="section-sub">Soft opening Thursday, July 9 at 118 Ash Street. Be the first to leave a review on Facebook once you've stopped in.</p>
+      <p class="section-sub">Grand opening Saturday, July 18 at 118 Ash Street. Be the first to leave a review on Facebook once you've stopped in.</p>
     </header>
 
     <div class="reviews-pitch reveal">
@@ -1920,7 +2044,7 @@
           <span>What are your hours?</span>
           <i class="ph ph-caret-down" aria-hidden="true"></i>
         </button>
-        <div class="faq-answer"><div class="faq-answer-inner">Open Thursday through Sunday, 10 AM to 6 PM. We're at 118 Ash Street, Spooner, WI. Closed Monday, Tuesday, and Wednesday.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">We're open Thursday through Sunday, 10 AM to 6 PM (closed Monday, Tuesday, Wednesday). Grand opening Saturday, July 18 at 118 Ash Street, Spooner, WI.</div></div>
       </div>
 
       <div class="faq-item" role="listitem">
@@ -1949,10 +2073,34 @@
 
       <div class="faq-item" role="listitem">
         <button class="faq-question" aria-expanded="false">
-          <span>Do you deliver?</span>
+          <span>Do you offer curbside pickup?</span>
           <i class="ph ph-caret-down" aria-hidden="true"></i>
         </button>
-        <div class="faq-answer"><div class="faq-answer-inner">Not at launch, but ask us in-store about catering and large orders.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes — call us at (715) 416-0989 when you arrive and we'll bring your order out. Curbside pickup works for everything we sell, including freezer beef packages, gift baskets, and party trays.</div></div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>Do you do catering or party trays?</span>
+          <i class="ph ph-caret-down" aria-hidden="true"></i>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes — we build meat and cheese party trays and catering platters for holidays, grad parties, the cabin, and corporate events. Call ahead or message us on Facebook to put one together.</div></div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>Do you have freezer beef packages?</span>
+          <i class="ph ph-caret-down" aria-hidden="true"></i>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes — our Freezer Beef Package starts at $40 and bundles hand-cut steaks, roasts, and ground beef. We also offer bulk pork packages and meat bundles. Stop in or message us for current availability.</div></div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>How much do gift baskets cost?</span>
+          <i class="ph ph-caret-down" aria-hidden="true"></i>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Gift baskets start at $25 and are built to order with Wisconsin cheese, house-made jerky and snack sticks, and curated bottles. Tell us the occasion and we'll put one together.</div></div>
       </div>
 
       <div class="faq-item" role="listitem">
