@@ -2,8 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://crossroadsmeatsandcellar.com/</loc>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://crossroadsmeatsandcellar.com/hiring</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://crossroadsmeatsandcellar.com/custom-cutting</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://crossroadsmeatsandcellar.com/venison-processing</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://crossroadsmeatsandcellar.com/cabin-provisions</loc>
+    <changefreq>monthly</changefreq>
   </url>
 </urlset>
