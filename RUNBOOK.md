@@ -1,9 +1,9 @@
 # Crossroads of the North Meats & Cellar — Client Runbook
 
 > **Status:** Maintenance
-> **Next:** Schedule GBP screen-share with Dennis (~30 min); clean up GSC sitemap submissions in UI; branding assets
-> **Blocker:** GBP UI-only follow-ups (Q&A, serviceItems, verification, MON-WED hours) require Dennis's screen-share; GSC OAuth is read-only
-> **Last touched:** 2026-07-13
+> **Next:** Dennis feedback: (1) Spooner = pre-packaged from Amery sister facility — sourcing copy updated across all pages; (2) "CRN Meats & Cellar" short name adopted in nav, footers, titles, meta. Awaiting Dennis review on dev preview.
+> **Blocker:** 🟡 Awaiting Dennis review of CRN name + Amery sourcing changes on dev preview.
+> **Last touched:** 2026-07-14
 
 > Living document for the JJCTech engagement with **Jen & Dennis Lutz**
 > Owner: Josh (JJCTech)
