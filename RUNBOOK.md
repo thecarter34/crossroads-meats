@@ -91,6 +91,65 @@ Contents at the project root: docs (RUNBOOK, BRAND, audits, transfer-prep, BUILD
 
 ---
 
+## 4V — Local dev server for change verification (Jul 14)
+
+**Use a local Python HTTP server to verify HTML changes before pushing.** Do NOT rely on CF Pages preview URLs (`dev.crossroads-meats.pages.dev`) — they alias to old builds and lag the actual `dev` branch by several minutes. Run the server locally, hit it with `curl` or the browser, and confirm changes are correct before `git push`.
+
+### Start the server
+
+```bash
+# Background, bound to localhost only
+python3 -m http.server 8765 --bind 127.0.0.1 &
+# From /workspace/clients/crossroads_meats_and_cellar/
+```
+
+### Smoke test all pages
+
+```bash
+for page in "" custom-cutting cabin-provisions gift-baskets venison-processing hiring 404; do
+  if [ -z "$page" ]; then url="http://127.0.0.1:8765/"; else url="http://127.0.0.1:8765/$page.html"; fi
+  code=$(curl -s -o /dev/null -w "%{http_code}" "$url")
+  echo "$page: $code"
+done
+# Expected: index/custom-cutting/cabin-provisions/gift-baskets/venison-processing/hiring/404 all 200
+```
+
+### Visual review
+
+Load `http://127.0.0.1:8765/` in a browser (the Hermes browser tool works) and check the changes you're working on. No build, no deploy, no CF API call needed.
+
+### Ad-hoc content checks
+
+```bash
+# Confirm no "hand-cut" / "cut in-house" claims slip back into body copy
+grep -rn "hand-cut\|cut in-house\|butcher-cut\|on the block" /workspace/clients/crossroads_meats_and_cellar/*.html \
+  | grep -v "sister facility in Amery\|alt=\"Hand-cut ribeye"
+
+# Confirm all 5 sub-page nav links exist on every page
+for f in /workspace/clients/crossroads_meats_and_cellar/*.html; do
+  echo "=== $(basename $f) ==="
+  awk '/<nav class="navbar/,/<\/nav>/' "$f" | grep -oE 'href="[^"]+"' | sort -u
+done
+```
+
+### Stop the server
+
+```bash
+# Find and kill the python http.server
+pkill -f "http.server 8765"
+```
+
+### Why this matters
+
+On Jul 14, three rounds of CF Pages previews (`b93cb669`, `4b5a9e46`, `6999b439`) all showed stale content because:
+- `dev.crossroads-meats.pages.dev` aliases to the wrong build
+- Each push triggers a new build, but the alias doesn't update until the build finishes
+- The build ID URL is the right one but takes a minute to become reachable
+
+A local server is instant, always correct (serves from the actual working tree), and never out of sync. **Use it for every iteration before pushing.**
+
+---
+
 ## 5. Content / open items
 
 ### Site content (current state)
@@ -119,7 +178,7 @@ Contents at the project root: docs (RUNBOOK, BRAND, audits, transfer-prep, BUILD
 | 2 | **Branding assets** (logo, photos, palette) | Replace placeholder | 🟡 waiting on client | Low |
 | 3 | **GSC sitemap cleanup** | Manually delete mistaken homepage sitemap entry; resubmit `/sitemap.xml` | 🟡 GSC OAuth is read-only — UI only | Low |
 | 4 | **Re-audit at 2 weeks post-launch** | Confirm warm-cache FCP ~300ms | 🟢 scheduled via cron `b38c43bff207` for 2026-07-27 | Low |
-| 5 | **CF Pages preview URL pattern (Jul 14)** | `dev.crossroads-meats.pages.dev` is **stale** — alias points to old builds. Correct pattern: `https://<build-id>.crossroads-meats.pages.dev/`. Get the latest ID via `curl .../pages/projects/crossroads-meats/deployments?per_page=1` (see RUNBOOK §4F for the API). | 🟢 documented | Low |
+| 5 | ~~CF Pages preview URL pattern (Jul 14)~~ | — | 🟢 RESOLVED 2026-07-14 — replaced by local dev server (§4V) | — |
 | 5 | ~~Squarespace login~~ | — | 🟢 RESOLVED 2026-07-13 (NS flipped) | — |
 | 6 | ~~Google account for GBP~~ | — | 🟢 RESOLVED 2026-07-13 (Dennis created GBP, JJCTech is Manager) | — |
 | 7 | ~~`www` redirect~~ | — | 🟢 CANCELLED 2026-07-13 (3-yr Squarespace registration, no urgency) | — |
@@ -138,7 +197,7 @@ Contents at the project root: docs (RUNBOOK, BRAND, audits, transfer-prep, BUILD
 |---|---|
 | 2026-07-14 | Sourcing copy corrected across all pages: Spooner is pre-packaged from sister facility in Amery. Hero rewritten ("Pre-packaged from our sister facility. House-made brats. Spooner's newest butcher and cellar."), 6-card "Hand-Cut Meats" renamed "Hand-Cut in Amery", "Cut in-house" pillar renamed "Cut in Amery, finished in Spooner", schema product updated, meta/OG/Twitter updated. House-made brats/snack sticks/jerky still attributed to Spooner (correct). |
 | 2026-07-14 | CRN Meats & Cellar short name rolled out across all pages (logo, title, preloader, footer, mobile menu). Sub-page navs unified to 7 items each: Home, What We Carry, Custom Cutting, Cabin Provisions, Gift Baskets, Venison Processing, Now Hiring, Visit Us. Sub-page footers unified to same Explore set. |
-| 2026-07-14 | CF Pages preview URL: `dev.crossroads-meats.pages.dev` is stale; correct pattern is `https://<build-id>.crossroads-meats.pages.dev/`. Get latest build ID via `curl -H "Authorization: Bearer $CF_API" "https://api.cloudflare.com/client/v4/accounts/$ACCT/pages/projects/crossroads-meats/deployments?per_page=1"`. |
+| 2026-07-14 | **Local dev server workflow adopted for change verification** (`python3 -m http.server 8765 --bind 127.0.0.1`). Faster than CF Pages preview URLs, never out of sync with working tree, no API calls. See §4V. |
 | 2026-07-13 | GBP photo upload via API (16 photos, uniform 1920×1080). Revises the `google-business-profile-optimization` skill pitfall #4: `mybusiness.googleapis.com/v4/.../media` IS alive, single-call upload works. |
 | 2026-07-13 | `www` redirect CANCELLED; Registrar transfer DEFERRED. Squarespace holds 3-yr registration (~Jun 2029). Apex is canonical. |
 | 2026-07-13 | NS flipped to Cloudflare; prod apex LIVE. CF Pages custom domain attached, SSL via Google CA, audit clean. |
