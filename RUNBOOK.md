@@ -1,8 +1,8 @@
 # Crossroads of the North Meats & Cellar — Client Runbook
 
 > **Status:** Maintenance
-> **Next:** Dennis feedback: (1) Spooner = pre-packaged from Amery sister facility — sourcing copy updated across all pages; (2) "CRN Meats & Cellar" short name adopted in nav, footers, titles, meta. Awaiting Dennis review on dev preview.
-> **Blocker:** 🟡 Awaiting Dennis review of CRN name + Amery sourcing changes on dev preview.
+> **Next:** Dennis feedback: (1) Spooner = pre-packaged from Amery sister facility — sourcing copy updated across all pages; (2) "CRN Meats & Cellar" short name adopted in nav, footers, titles, meta; (3) Venison service removed from Spooner — /venison-processing is now a pointer page to Amery Meat Market. Awaiting Dennis review on dev preview.
+> **Blocker:** 🟡 Awaiting Dennis review of CRN name + Amery sourcing + venison-pivot changes on dev preview.
 > **Last touched:** 2026-07-14
 
 > Living document for the JJCTech engagement with **Jen & Dennis Lutz**
@@ -195,6 +195,7 @@ A local server is instant, always correct (serves from the actual working tree),
 
 | Date | Decision |
 |---|---|
+| 2026-07-14 | **Venison service removed from Spooner (per Dennis via Josh).** `venison-processing.html` rewritten as a pointer page to Amery Meat Market (116 Central St, 715-268-7515, amerymeatmarket.com). Index FAQ answers corrected for both custom-meat-cutting and wild-game questions (both JSON-LD and visible accordion). `hiring.html` Weekly Cleaning Specialist description drops "meat counter, prep area" (neither exists at Spooner). `custom-cutting.html` intro rephrased for clarity. `sitemap.xml` adds `<priority>0.5</priority>` to /venison-processing to demote. Schema.org `Service` for venison processing removed. Plan: `.hermes/plans/venison-pivot.md`. Verified on local http.server 8765 — NOT pushed to dev. |
 | 2026-07-14 | Sourcing copy corrected across all pages: Spooner is pre-packaged from sister facility in Amery. Hero rewritten ("Pre-packaged from our sister facility. House-made brats. Spooner's newest butcher and cellar."), 6-card "Hand-Cut Meats" renamed "Hand-Cut in Amery", "Cut in-house" pillar renamed "Cut in Amery, finished in Spooner", schema product updated, meta/OG/Twitter updated. House-made brats/snack sticks/jerky still attributed to Spooner (correct). |
 | 2026-07-14 | CRN Meats & Cellar short name rolled out across all pages (logo, title, preloader, footer, mobile menu). Sub-page navs unified to 7 items each: Home, What We Carry, Custom Cutting, Cabin Provisions, Gift Baskets, Venison Processing, Now Hiring, Visit Us. Sub-page footers unified to same Explore set. |
 | 2026-07-14 | **Local dev server workflow adopted for change verification** (`python3 -m http.server 8765 --bind 127.0.0.1`). Faster than CF Pages preview URLs, never out of sync with working tree, no API calls. See §4V. |
