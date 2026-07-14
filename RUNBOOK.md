@@ -119,6 +119,7 @@ Contents at the project root: docs (RUNBOOK, BRAND, audits, transfer-prep, BUILD
 | 2 | **Branding assets** (logo, photos, palette) | Replace placeholder | 🟡 waiting on client | Low |
 | 3 | **GSC sitemap cleanup** | Manually delete mistaken homepage sitemap entry; resubmit `/sitemap.xml` | 🟡 GSC OAuth is read-only — UI only | Low |
 | 4 | **Re-audit at 2 weeks post-launch** | Confirm warm-cache FCP ~300ms | 🟢 scheduled via cron `b38c43bff207` for 2026-07-27 | Low |
+| 5 | **CF Pages preview URL pattern (Jul 14)** | `dev.crossroads-meats.pages.dev` is **stale** — alias points to old builds. Correct pattern: `https://<build-id>.crossroads-meats.pages.dev/`. Get the latest ID via `curl .../pages/projects/crossroads-meats/deployments?per_page=1` (see RUNBOOK §4F for the API). | 🟢 documented | Low |
 | 5 | ~~Squarespace login~~ | — | 🟢 RESOLVED 2026-07-13 (NS flipped) | — |
 | 6 | ~~Google account for GBP~~ | — | 🟢 RESOLVED 2026-07-13 (Dennis created GBP, JJCTech is Manager) | — |
 | 7 | ~~`www` redirect~~ | — | 🟢 CANCELLED 2026-07-13 (3-yr Squarespace registration, no urgency) | — |
@@ -135,7 +136,9 @@ Contents at the project root: docs (RUNBOOK, BRAND, audits, transfer-prep, BUILD
 
 | Date | Decision |
 |---|---|
-| 2026-07-13 | PR #6 shipped to `prd` — valid sitemap, production canonicals, real 404s, corrected schema. Josh authorized explicitly in chat. |
+| 2026-07-14 | Sourcing copy corrected across all pages: Spooner is pre-packaged from sister facility in Amery. Hero rewritten ("Pre-packaged from our sister facility. House-made brats. Spooner's newest butcher and cellar."), 6-card "Hand-Cut Meats" renamed "Hand-Cut in Amery", "Cut in-house" pillar renamed "Cut in Amery, finished in Spooner", schema product updated, meta/OG/Twitter updated. House-made brats/snack sticks/jerky still attributed to Spooner (correct). |
+| 2026-07-14 | CRN Meats & Cellar short name rolled out across all pages (logo, title, preloader, footer, mobile menu). Sub-page navs unified to 7 items each: Home, What We Carry, Custom Cutting, Cabin Provisions, Gift Baskets, Venison Processing, Now Hiring, Visit Us. Sub-page footers unified to same Explore set. |
+| 2026-07-14 | CF Pages preview URL: `dev.crossroads-meats.pages.dev` is stale; correct pattern is `https://<build-id>.crossroads-meats.pages.dev/`. Get latest build ID via `curl -H "Authorization: Bearer $CF_API" "https://api.cloudflare.com/client/v4/accounts/$ACCT/pages/projects/crossroads-meats/deployments?per_page=1"`. |
 | 2026-07-13 | GBP photo upload via API (16 photos, uniform 1920×1080). Revises the `google-business-profile-optimization` skill pitfall #4: `mybusiness.googleapis.com/v4/.../media` IS alive, single-call upload works. |
 | 2026-07-13 | `www` redirect CANCELLED; Registrar transfer DEFERRED. Squarespace holds 3-yr registration (~Jun 2029). Apex is canonical. |
 | 2026-07-13 | NS flipped to Cloudflare; prod apex LIVE. CF Pages custom domain attached, SSL via Google CA, audit clean. |
