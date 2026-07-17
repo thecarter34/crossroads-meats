@@ -1,0 +1,8 @@
+# Cloudflare Pages redirect rules
+# Format: <source> <destination> <status>
+
+# Cabin Provisions page removed (folded into homepage location section)
+# 301 keeps any external links working and preserves SEO equity if indexed.
+/cabin-provisions         /#location   301
+/cabin-provisions/        /#location   301
+/cabin-provisions.html    /#location   301

@@ -2226,6 +2226,74 @@
         border: 0;
       }
 
+      /* Headed Up North? — traveler callout folded in from cabin-provisions */
+      .location-traveler {
+        max-width: 1240px;
+        margin: 56px auto 0;
+      }
+      .location-traveler-inner {
+        display: flex;
+        gap: 28px;
+        align-items: flex-start;
+        padding: 32px 36px;
+        background: var(--bg-alt);
+        border-left: 4px solid var(--accent);
+        border-radius: 0 6px 6px 0;
+      }
+      .location-traveler-icon {
+        flex-shrink: 0;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-primary);
+        border: 1px solid var(--rule);
+        border-radius: 50%;
+        color: var(--accent);
+      }
+      .location-traveler-icon i {
+        font-size: 1.5rem;
+      }
+      .location-traveler-title {
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin: 0 0 10px;
+      }
+      .location-traveler-body p {
+        font-size: 0.98rem;
+        line-height: 1.65;
+        color: var(--ink-muted);
+        margin: 0 0 10px;
+      }
+      .location-traveler-body p:last-child {
+        margin-bottom: 0;
+      }
+      .location-traveler-tip strong {
+        color: var(--ink);
+      }
+      .location-traveler-body a {
+        color: var(--ink);
+        border-bottom: 1px solid var(--rule);
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+        padding-bottom: 1px;
+      }
+      .location-traveler-body a:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+      @media (max-width: 720px) {
+        .location-traveler-inner {
+          flex-direction: column;
+          gap: 18px;
+          padding: 24px 22px;
+        }
+      }
+
       /* ============================================
        FINAL CTA — single dark moment
        ============================================ */
@@ -2594,7 +2662,6 @@
       <ul class="nav-links">
         <li><a href="#products">What We Carry</a></li>
         <li><a href="custom-cutting">Custom Cutting</a></li>
-        <li><a href="cabin-provisions">Cabin Provisions</a></li>
         <li><a href="gift-baskets">Gift Baskets</a></li>
         <li><a href="venison-processing">Venison &amp; Wild Game</a></li>
         <li><a href="hiring">Now Hiring</a></li>
@@ -2621,7 +2688,6 @@
     <div class="mobile-menu" id="mobileMenu">
       <a href="#products">What We Carry</a>
       <a href="custom-cutting">Custom Cutting</a>
-      <a href="cabin-provisions">Cabin Provisions</a>
       <a href="gift-baskets">Gift Baskets</a>
       <a href="venison-processing">Venison &amp; Wild Game</a>
       <a href="hiring">Now Hiring</a>
@@ -2668,7 +2734,7 @@
         </div>
 
         <h1>
-          A neighborhood butcher, cellar, and cabin-provisions stop in downtown
+          A neighborhood butcher and curated cellar in downtown
           Spooner.
         </h1>
         <p class="hero-sub">
@@ -3883,6 +3949,30 @@
           ></iframe>
         </div>
       </div>
+
+      <!-- HEADED UP NORTH? — traveler use-case callout (folded from cabin-provisions page) -->
+      <aside class="location-traveler" aria-label="Headed up north?">
+        <div class="location-traveler-inner">
+          <span class="location-traveler-icon" aria-hidden="true">
+            <i class="ph ph-road-horizon"></i>
+          </span>
+          <div class="location-traveler-body">
+            <h3 class="location-traveler-title">Headed up north?</h3>
+            <p>
+              Spooner is roughly the halfway point on Hwy 63 between
+              Minneapolis and Duluth — about a 2½-hour drive from each. We're
+              two blocks off the highway with easy parking, and most cabin
+              visitors are in and out in 15 minutes.
+            </p>
+            <p class="location-traveler-tip">
+              <strong>Pre-order by message on Facebook</strong> if you've got a
+              long drive planned — we'll have it bagged and ready when you pull
+              in. Curbside pickup available — call
+              <a href="tel:+17154160989">(715) 416-0989</a> when you arrive.
+            </p>
+          </div>
+        </div>
+      </aside>
     </section>
 
     <!-- FINAL CTA — Messenger + 3-field email form -->
@@ -3928,7 +4018,6 @@
           <ul>
             <li><a href="index.html#products">What We Carry</a></li>
             <li><a href="custom-cutting.html">Custom Cutting</a></li>
-            <li><a href="cabin-provisions.html">Cabin Provisions</a></li>
             <li><a href="gift-baskets.html">Gift Baskets</a></li>
             <li>
               <a href="venison-processing.html">Venison &amp; Wild Game</a>
