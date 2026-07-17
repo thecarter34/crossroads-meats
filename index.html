@@ -45,18 +45,18 @@
     />
     <meta
       property="og:image"
-      content="https://crossroadsmeatsandcellar.com/assets/hero-bg.jpg"
+      content="https://crossroadsmeatsandcellar.com/assets/og-image.jpg"
     />
     <meta
       property="og:image:secure_url"
-      content="https://crossroadsmeatsandcellar.com/assets/hero-bg.jpg"
+      content="https://crossroadsmeatsandcellar.com/assets/og-image.jpg"
     />
     <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1600" />
-    <meta property="og:image:height" content="900" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="Crossroads of the North storefront at 118 Ash Street, Spooner"
+      content="Crossroads of the North Meats & Cellar storefront at 118 Ash Street, Spooner, Wisconsin — neighborhood meat market and curated cellar just off Hwy 63"
     />
     <meta property="og:locale" content="en_US" />
     <meta
@@ -1009,6 +1009,85 @@
         max-width: 920px;
         margin: 0 auto;
         display: contents;
+      }
+
+      /* === Hero 2-column layout (text + storefront photo) === */
+      .hero-inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+        gap: 64px;
+        align-items: center;
+        width: 100%;
+        max-width: 1240px;
+        margin: 0 auto;
+      }
+      .hero-content {
+        max-width: none;
+        margin: 0;
+        display: block;
+        text-align: left;
+      }
+      .hero-image {
+        position: relative;
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow:
+          0 1px 2px rgba(0, 0, 0, 0.05),
+          0 24px 48px -12px rgba(20, 20, 20, 0.18);
+        aspect-ratio: 1400 / 917;
+      }
+      .hero-image img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      /* Reset hero-content children that were center-aligned for the old single-column layout */
+      .hero-content .hero-logo {
+        margin: 0 0 32px;
+      }
+      .hero-content .hero-opening-badge {
+        margin: 0 0 32px;
+      }
+      .hero-content .hero-opening-rule {
+        width: 48px;
+      }
+      .hero-content .hero-opening-rule:first-child {
+        display: none;
+      }
+      .hero-content .hero-sub {
+        margin: 0 0 32px;
+      }
+      .hero-content .hero-actions {
+        justify-content: flex-start;
+      }
+      @media (max-width: 900px) {
+        .hero-inner {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .hero-content {
+          text-align: center;
+        }
+        .hero-content .hero-logo {
+          margin: 0 auto 32px;
+        }
+        .hero-content .hero-opening-badge {
+          margin: 0 auto 32px;
+        }
+        .hero-content .hero-opening-rule:first-child {
+          display: block;
+        }
+        .hero-content .hero-opening-rule {
+          width: 80px;
+        }
+        .hero-content .hero-sub {
+          margin: 0 auto 32px;
+        }
+        .hero-content .hero-actions {
+          justify-content: center;
+        }
       }
 
       .hero-logo {
@@ -2095,6 +2174,65 @@
       }
 
       /* ============================================
+         FAQ FUNNIES — owner-requested humor section.
+         Wraps a .faq-list with .faq-item accordions
+         so the existing FAQ JS handles it. Kept out
+         of FAQPage JSON-LD so it doesn't dilute SEO.
+         ============================================ */
+      .faq-funnies {
+        max-width: 760px;
+        margin: 64px auto 0;
+        padding: 40px 32px 8px;
+        background: var(--bg-primary);
+        border: 1px solid var(--rule);
+        border-radius: 6px;
+      }
+      .faq-funnies-header {
+        text-align: center;
+        margin-bottom: 24px;
+      }
+      .faq-funnies-header .section-label {
+        margin-bottom: 8px;
+      }
+      .faq-funnies-title {
+        font-family: var(--font-display);
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin: 0 0 12px;
+      }
+      .faq-funnies-sub {
+        font-size: 0.95rem;
+        line-height: 1.65;
+        color: var(--ink-muted);
+        max-width: 540px;
+        margin: 0 auto 24px;
+        font-style: italic;
+      }
+      /* The accordion list inside funnies sits flush to the wrapper edges */
+      .faq-funnies > .faq-list {
+        max-width: none;
+        margin: 0 -8px;
+      }
+      .faq-funnies > .faq-list .faq-question {
+        padding: 22px 8px;
+        font-size: 1.05rem;
+      }
+      .faq-funnies > .faq-list .faq-answer-inner {
+        padding: 0 8px 22px 8px;
+        font-size: 0.95rem;
+      }
+      @media (max-width: 600px) {
+        .faq-funnies {
+          padding: 28px 20px 4px;
+          margin-top: 48px;
+        }
+        .faq-funnies-title {
+          font-size: 1.4rem;
+        }
+      }
+
+      /* ============================================
        LOCATION — 2-col, hairline rules
        ============================================ */
       .location {
@@ -2165,6 +2303,74 @@
         min-height: 460px;
         display: block;
         border: 0;
+      }
+
+      /* Headed Up North? — traveler callout folded in from cabin-provisions */
+      .location-traveler {
+        max-width: 1240px;
+        margin: 56px auto 0;
+      }
+      .location-traveler-inner {
+        display: flex;
+        gap: 28px;
+        align-items: flex-start;
+        padding: 32px 36px;
+        background: var(--bg-alt);
+        border-left: 4px solid var(--accent);
+        border-radius: 0 6px 6px 0;
+      }
+      .location-traveler-icon {
+        flex-shrink: 0;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-primary);
+        border: 1px solid var(--rule);
+        border-radius: 50%;
+        color: var(--accent);
+      }
+      .location-traveler-icon i {
+        font-size: 1.5rem;
+      }
+      .location-traveler-title {
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin: 0 0 10px;
+      }
+      .location-traveler-body p {
+        font-size: 0.98rem;
+        line-height: 1.65;
+        color: var(--ink-muted);
+        margin: 0 0 10px;
+      }
+      .location-traveler-body p:last-child {
+        margin-bottom: 0;
+      }
+      .location-traveler-tip strong {
+        color: var(--ink);
+      }
+      .location-traveler-body a {
+        color: var(--ink);
+        border-bottom: 1px solid var(--rule);
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+        padding-bottom: 1px;
+      }
+      .location-traveler-body a:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+      @media (max-width: 720px) {
+        .location-traveler-inner {
+          flex-direction: column;
+          gap: 18px;
+          padding: 24px 22px;
+        }
       }
 
       /* ============================================
@@ -2535,7 +2741,6 @@
       <ul class="nav-links">
         <li><a href="#products">What We Carry</a></li>
         <li><a href="custom-cutting">Custom Cutting</a></li>
-        <li><a href="cabin-provisions">Cabin Provisions</a></li>
         <li><a href="gift-baskets">Gift Baskets</a></li>
         <li><a href="venison-processing">Venison &amp; Wild Game</a></li>
         <li><a href="hiring">Now Hiring</a></li>
@@ -2562,7 +2767,6 @@
     <div class="mobile-menu" id="mobileMenu">
       <a href="#products">What We Carry</a>
       <a href="custom-cutting">Custom Cutting</a>
-      <a href="cabin-provisions">Cabin Provisions</a>
       <a href="gift-baskets">Gift Baskets</a>
       <a href="venison-processing">Venison &amp; Wild Game</a>
       <a href="hiring">Now Hiring</a>
@@ -2576,84 +2780,100 @@
     <!-- HERO -->
     <section class="hero" id="home">
       <div class="hero-glow" aria-hidden="true"></div>
-      <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
-      <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
-      <div class="hero-orb hero-orb-3" aria-hidden="true"></div>
 
-      <div class="hero-content">
-        <div class="hero-logo">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-logo">
+            <img
+              src="assets/logo.jpeg"
+              alt="Crossroads of the North Meats &amp; Cellar logo"
+              loading="eager"
+              fetchpriority="high"
+              width="1320"
+              height="712"
+            />
+          </div>
+
+          <div
+            class="hero-opening-badge"
+            aria-label="Grand Opening Saturday, July 18 at 118 Ash Street, Spooner, WI"
+          >
+            <span class="hero-opening-rule" aria-hidden="true"></span>
+            <span class="hero-opening-text">
+              <span class="hero-opening-eyebrow"
+                >Grand Opening · Saturday, July 18</span
+              >
+              <span class="hero-opening-date"
+                >2026 · 118 Ash Street, Spooner</span
+              >
+            </span>
+            <span class="hero-opening-rule" aria-hidden="true"></span>
+          </div>
+
+          <h1>
+            A neighborhood meat market and curated cellar in downtown
+            Spooner.
+          </h1>
+          <p class="hero-sub">
+            We're the Lutz family's new shop on Ash Street — right off Hwy 63
+            between Minneapolis and Duluth. Wisconsin cheese, curated wine,
+            hand-selected cuts from our sister store Amery Meat Market, gift
+            baskets, and brats grilled fresh Friday through Labor Day. Grand
+            opening Saturday, July 18. Come in, look around, stay a minute.
+          </p>
+
+          <div class="hero-actions">
+            <a
+              href="https://m.me/61590342133702"
+              target="_blank"
+              rel="noopener"
+              class="btn-primary"
+            >
+              <i class="ph ph-chat-circle-dots" aria-hidden="true"></i>
+              Send us a message
+            </a>
+            <a href="#location" class="btn-outline">
+              <i class="ph ph-map-pin" aria-hidden="true"></i>
+              Visit us in Spooner
+            </a>
+          </div>
+
+          <div class="hero-trust">
+            <span class="trust-item"
+              ><i class="ph ph-house-line" aria-hidden="true"></i
+              >Family-Owned</span
+            >
+            <span class="trust-sep" aria-hidden="true"></span>
+            <span class="trust-item"
+              ><i class="ph ph-storefront" aria-hidden="true"></i>Downtown
+              Spooner</span
+            >
+            <span class="trust-sep" aria-hidden="true"></span>
+            <span class="trust-item"
+              ><i class="ph ph-map-pin" aria-hidden="true"></i>Off Hwy 63</span
+            >
+            <span class="trust-sep" aria-hidden="true"></span>
+            <span class="trust-item"
+              ><i class="ph ph-fork-knife" aria-hidden="true"></i>Hand-Cut
+              in Amery</span
+            >
+          </div>
+        </div>
+
+        <div class="hero-image">
           <img
-            src="assets/logo.jpeg"
-            alt="Crossroads of the North Meats &amp; Cellar logo"
+            src="assets/shop-storefront-hero.jpg"
+            srcset="
+              assets/shop-storefront-mobile.jpg 700w,
+              assets/shop-storefront-hero.jpg 1400w
+            "
+            sizes="(max-width: 900px) 100vw, 50vw"
+            alt="The Crossroads of the North Meats &amp; Cellar storefront at 118 Ash Street, Spooner — stonework facade with the NOW OPEN sign and patriotic bunting"
             loading="eager"
             fetchpriority="high"
-            width="1320"
-            height="712"
+            width="1400"
+            height="917"
           />
-        </div>
-
-        <div
-          class="hero-opening-badge"
-          aria-label="Grand Opening Saturday, July 18 at 118 Ash Street, Spooner, WI"
-        >
-          <span class="hero-opening-rule" aria-hidden="true"></span>
-          <span class="hero-opening-text">
-            <span class="hero-opening-eyebrow"
-              >Grand Opening · Saturday, July 18</span
-            >
-            <span class="hero-opening-date"
-              >2026 · 118 Ash Street, Spooner</span
-            >
-          </span>
-          <span class="hero-opening-rule" aria-hidden="true"></span>
-        </div>
-
-        <h1>
-          30-day aged steaks. 30+ brat flavors. Wisconsin cheese, wine, and
-          craft beer.
-        </h1>
-        <p class="hero-sub">
-          Grand opening Saturday, July 18. 30-day aged steaks, 30+ Amery brat
-          recipes grilled fresh Friday through Labor Day, Wisconsin cheese,
-          freezer beef packages, custom meat bundles, gift baskets &amp; boxes,
-          and a curated wine and craft beer selection — at 118 Ash Street in
-          Spooner, just off Hwy 63. Curbside pickup available.
-        </p>
-
-        <div class="hero-actions">
-          <a
-            href="https://m.me/61590342133702"
-            target="_blank"
-            rel="noopener"
-            class="btn-primary"
-          >
-            <i class="ph ph-chat-circle-dots" aria-hidden="true"></i>
-            Send us a message
-          </a>
-          <a href="#products" class="btn-outline">
-            <i class="ph ph-shopping-bag" aria-hidden="true"></i>
-            See what we carry
-          </a>
-        </div>
-
-        <div class="hero-trust">
-          <span class="trust-item"
-            ><i class="ph ph-house-line" aria-hidden="true"></i
-            >Family-Owned</span
-          >
-          <span class="trust-sep" aria-hidden="true"></span>
-          <span class="trust-item"
-            ><i class="ph ph-fire" aria-hidden="true"></i>30+ Brat Flavors</span
-          >
-          <span class="trust-sep" aria-hidden="true"></span>
-          <span class="trust-item"
-            ><i class="ph ph-star" aria-hidden="true"></i>30-Day Aged</span
-          >
-          <span class="trust-sep" aria-hidden="true"></span>
-          <span class="trust-item"
-            ><i class="ph ph-map-pin" aria-hidden="true"></i>Local
-            Wisconsin</span
-          >
         </div>
       </div>
 
@@ -2668,15 +2888,15 @@
     <!-- INTRO -->
     <section class="intro" id="about-intro">
       <p>
-        CRN Meats &amp; Cellar is a family-owned meat market and cellar in
-        Spooner, Wisconsin, just off Hwy 63 between Minneapolis and Duluth. Walk
-        in for hand-selected cuts sourced from our sister store Amery Meat
-        Market, brats grilled fresh Friday through Labor Day, Wisconsin cheese,
-        wine, craft beer, and gifts.
+        The Lutz family has been in the meat business in northwestern
+        Wisconsin for over two decades. CRN Meats &amp; Cellar is their new
+        shop on Ash Street — built for slow browsing, weekend pickups,
+        gift runs, and the kind of customer who likes to know who's behind
+        the counter.
       </p>
     </section>
 
-    <!-- WHAT WE CARRY (replaces .services 4-card grid) -->
+    <!-- WHAT WE CARRY -->
     <section class="products" id="products" aria-labelledby="products-heading">
       <header class="section-header">
         <p class="section-label">What We Carry</p>
@@ -2684,9 +2904,10 @@
           What we'll have on the counter.
         </h2>
         <p class="section-sub">
-          Hand-cut at our sister store Amery Meat Market (20+ years),
-          Wisconsin-sourced where we can, and aged 30 days. Here's what you'll
-          find on the counter when we open.
+          Hand-cut at our sister store Amery Meat Market, Wisconsin-sourced
+          where we can, and aged 30 days. Walk in and you'll also find cheese,
+          curated wine, brats grilling fresh Friday through Labor Day, and
+          gift baskets for cabin weekends and holidays.
         </p>
       </header>
       <div class="products-grid" role="list">
@@ -2931,9 +3152,7 @@
               <div>
                 <h3>Cut &amp; packaged in Amery</h3>
                 <p>
-                  Steaks, chops, and roasts are hand-cut at our sister store
-                  Amery Meat Market, dry-aged 30 days, and vacuum-sealed there
-                  for the Spooner counter.
+                  Our sister store does the cutting — we do the bragging.
                 </p>
               </div>
             </div>
@@ -2943,7 +3162,7 @@
               ></span>
               <div>
                 <h3>Wisconsin-sourced first</h3>
-                <p>Local farms and cheesemakers whenever we can.</p>
+                <p>If it's not from Wisconsin, it better be from somewhere interesting.</p>
               </div>
             </div>
             <div class="about-pillar">
@@ -3169,17 +3388,65 @@
                 carrying.
               </figcaption>
             </figure>
+            
             <figure class="interior-figure">
               <img
-                src="assets/shop-merch-towels.jpg"
-                alt="Rustic home goods display featuring humorous printed tea towels on a black wire rack, with a wood-paneled wall behind"
+                src="assets/shop-cellartasting.jpg"
+                alt="Wide view of the cellar room — whiskey-barrel tasting table in front of black metal shelving filled with curated bottles, cutting boards, tumblers, and bottles of wine"
                 loading="lazy"
-                width="600"
-                height="800"
+                width="450"
+                height="600"
               />
               <figcaption>
-                Printed tea towels and kitchen linens. Humor optional, quality
-                required.
+                The cellar. A tasting table built on a bourbon barrel.
+              </figcaption>
+            </figure>
+            <figure class="interior-figure">
+              <img
+                src="assets/shop-tasting-room.jpg"
+                alt="The cellar's tasting room — central whiskey barrel set up with stemware, a glass-door merchandiser with local craft beer beside it, and a full wine rack against the wall"
+                loading="lazy"
+                width="450"
+                height="600"
+              />
+              <figcaption>
+                Tasting room. Pull up a stool, we'll pour.
+              </figcaption>
+            </figure>
+            <figure class="interior-figure">
+              <img
+                src="assets/shop-apparel-room.jpg"
+                alt="The apparel side of the shop — tees, hoodies, and crewnecks hanging on rolling racks against a raw wood accent wall, with the meat counter visible in the background"
+                loading="lazy"
+                width="600"
+                height="450"
+              />
+              <figcaption>
+                Apparel, ready to wear. Hoodies, tees, and the Wisconsin shirt.
+              </figcaption>
+            </figure>
+            <figure class="interior-figure">
+              <img
+                src="assets/shop-charcuterie.jpg"
+                alt="A wooden charcuterie board set on a shop counter, loaded with Wisconsin cheese, cured meats, bread, and glass cloches, with Crossroads of the North branded butcher paper underneath"
+                loading="lazy"
+                width="450"
+                height="600"
+              />
+              <figcaption>
+                A charcuterie board, made in-house.
+              </figcaption>
+            </figure>
+            <figure class="interior-figure">
+              <img
+                src="assets/shop-hallway.jpg"
+                alt="Looking through the shop toward the front entrance — branded apparel against a landscape wood accent wall and the OPEN neon visible through the glass"
+                loading="lazy"
+                width="450"
+                height="600"
+              />
+              <figcaption>
+                The hallway, leading up to the front counter.
               </figcaption>
             </figure>
           </div>
@@ -3254,14 +3521,55 @@
                 height="600"
               />
             </figure>
+            
             <figure class="interior-figure">
               <img
-                src="assets/shop-merch-towels.jpg"
+                src="assets/shop-cellartasting.jpg"
+                alt=""
+                loading="eager"
+                role="presentation"
+                width="450"
+                height="600"
+              />
+            </figure>
+            <figure class="interior-figure">
+              <img
+                src="assets/shop-tasting-room.jpg"
+                alt=""
+                loading="eager"
+                role="presentation"
+                width="450"
+                height="600"
+              />
+            </figure>
+            <figure class="interior-figure">
+              <img
+                src="assets/shop-apparel-room.jpg"
                 alt=""
                 loading="eager"
                 role="presentation"
                 width="600"
-                height="800"
+                height="450"
+              />
+            </figure>
+            <figure class="interior-figure">
+              <img
+                src="assets/shop-charcuterie.jpg"
+                alt=""
+                loading="eager"
+                role="presentation"
+                width="450"
+                height="600"
+              />
+            </figure>
+            <figure class="interior-figure">
+              <img
+                src="assets/shop-hallway.jpg"
+                alt=""
+                loading="eager"
+                role="presentation"
+                width="450"
+                height="600"
               />
             </figure>
           </div>
@@ -3290,9 +3598,10 @@
             We're putting the team together.
           </h2>
           <p class="hiring-cta-sub">
-            The Lutz family is hiring for the counter and the cleaning crew.
-            Full job descriptions, schedules, and apply instructions live on the
-            hiring page.
+            If you can lift a brisket, smile at strangers, and explain to a
+            Wisconsinite why their cheese needs to be sharper — we should talk.
+            Full job descriptions, schedules, and apply instructions live on
+            the hiring page.
           </p>
           <ul class="hiring-cta-roles" aria-label="Open positions">
             <li>
@@ -3552,6 +3861,177 @@
           </div>
         </div>
       </div>
+
+      <!-- BUTCHER SHOP HUMOR — owner-requested section. Uses the same
+         accordion pattern as the rest of the FAQ so the existing JS
+         picks it up via .faq-question. Kept out of FAQPage schema so
+         it doesn't dilute SEO of real questions. -->
+      <div class="faq-funnies" aria-label="Butcher shop humor">
+        <header class="faq-funnies-header">
+          <p class="section-label">A Little Humor</p>
+          <h3 class="faq-funnies-title">From the cutting board.</h3>
+          <p class="faq-funnies-sub">
+            Dennis tries to bring the same humor to the website that he
+            brings to our social posts — pressed for material, but we
+            obliged. Brisket the ice.
+          </p>
+        </header>
+        <div class="faq-list" role="list">
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span>What's a butcher's favorite Beatles song?</span>
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">"Let It Beef."</div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span>Why did the steer refuse to leave the pasture?</span>
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                He was a little shellfish — no, wait, that's us at the
+                seafood counter. He was a little <em>stuck</em>.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span>What do you call cheese that isn't yours?</span>
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Nacho cheese.</div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span>How do you organize a party in space?</span>
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                You <em>planet</em>. Ours come with a cheese board and a
+                bottle of red.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span>Why don't eggs tell jokes?</span>
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                They'd crack each other up. Same reason we don't let them
+                near the meat slicer.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span>What's the difference between a butcher and a banker?</span>
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                The butcher knows the cuts. (We'll see ourselves out.)
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span
+                >I bought some Bologna from the deli and it had a great
+                personality.</span
+              >
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">We had to put it down. (Sorry.)</div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span>What did the grape say when it got stepped on?</span>
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Nothing — but it let out a little wine. The Lutz family
+                would like you to know our reds are pressed, not
+                pressed-upon.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span>What did the brat say when it got flipped on the grill?</span>
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                "Well, this is a turn for the <em>wurst</em>." We grill
+                Amery's brats fresh Friday through Labor Day — bring an
+                appetite, leave with a smirk.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span
+                >Why doesn't Santa let the elves run the kitchen?</span
+              >
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                The steaks are too high. (We hear it's also a
+                <em>bristle</em> of a commute up there.)
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span>How do you know someone is from Wisconsin?</span>
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                They'll have opinions about your cheese. Walk in
+                unprepared and you'll get a 20-minute tutorial on why
+                cheddar should be sharper.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span>Why don't you ever see a lost gift basket?</span>
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                It's always at the cabin. We build 'em to travel — cheese,
+                jerky, and a bottle, packed for the cooler.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- LOCATION / VISIT US -->
@@ -3586,7 +4066,7 @@
               <p>
                 Thursday – Sunday<br />10 AM – 6 PM<br /><span
                   style="color: var(--ink-muted); font-size: 0.85em"
-                  >Closed Monday, Tuesday, Wednesday</span
+                  >Closed Monday – Wednesday (we have to eat too)</span
                 >
               </p>
             </div>
@@ -3620,6 +4100,31 @@
           ></iframe>
         </div>
       </div>
+
+      <!-- HEADED UP NORTH? — traveler use-case callout (folded from cabin-provisions page) -->
+      <aside class="location-traveler" aria-label="Headed up north?">
+        <div class="location-traveler-inner">
+          <span class="location-traveler-icon" aria-hidden="true">
+            <i class="ph ph-road-horizon"></i>
+          </span>
+          <div class="location-traveler-body">
+            <h3 class="location-traveler-title">Headed up north?</h3>
+            <p>
+              Spooner is roughly the halfway point on Hwy 63 between
+              Minneapolis and Duluth — about a 2½-hour drive from each. We're
+              two blocks off the highway with easy parking, and most cabin
+              visitors are in and out in 15 minutes. Time it for lunchtime
+              Friday – Sunday and we'll have brats on the grill for you.
+            </p>
+            <p class="location-traveler-tip">
+              <strong>Pre-order by message on Facebook</strong> if you've got a
+              long drive planned — we'll have it bagged and ready when you pull
+              in. Curbside pickup available — call
+              <a href="tel:+17154160989">(715) 416-0989</a> when you arrive.
+            </p>
+          </div>
+        </div>
+      </aside>
     </section>
 
     <!-- FINAL CTA — Messenger + 3-field email form -->
@@ -3655,9 +4160,9 @@
             height="712"
           />
           <p>
-            CRN Meats &amp; Cellar — hand-selected cuts from our sister store
-            Amery Meat Market, aged 30 days, and a curated cellar in Spooner,
-            Wisconsin.
+            CRN Meats &amp; Cellar — hand-selected cuts, Wisconsin cheese,
+            curated wine, and a few good jokes. Weighing things, slicing
+            things, pointing you toward the cheese in Spooner, Wisconsin.
           </p>
         </div>
         <div class="footer-links">
@@ -3665,7 +4170,6 @@
           <ul>
             <li><a href="index.html#products">What We Carry</a></li>
             <li><a href="custom-cutting.html">Custom Cutting</a></li>
-            <li><a href="cabin-provisions.html">Cabin Provisions</a></li>
             <li><a href="gift-baskets.html">Gift Baskets</a></li>
             <li>
               <a href="venison-processing.html">Venison &amp; Wild Game</a>
