@@ -2095,6 +2095,86 @@
       }
 
       /* ============================================
+         FAQ FUNNIES — owner-requested humor section
+         (kept out of FAQPage schema so it doesn't
+         dilute SEO of real questions)
+         ============================================ */
+      .faq-funnies {
+        max-width: 760px;
+        margin: 64px auto 0;
+        padding: 40px 32px 32px;
+        background: var(--bg-primary);
+        border: 1px solid var(--rule);
+        border-radius: 6px;
+      }
+      .faq-funnies-header {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+      .faq-funnies-header .section-label {
+        margin-bottom: 8px;
+      }
+      .faq-funnies-title {
+        font-family: var(--font-display);
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin: 0 0 12px;
+      }
+      .faq-funnies-sub {
+        font-size: 0.95rem;
+        line-height: 1.65;
+        color: var(--ink-muted);
+        max-width: 540px;
+        margin: 0 auto;
+        font-style: italic;
+      }
+      .faq-funnies-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+      .faq-funny {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 20px 24px;
+        background: var(--bg-alt);
+        border-left: 3px solid var(--accent);
+        border-radius: 0 4px 4px 0;
+      }
+      .faq-funny-q {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--ink);
+      }
+      .faq-funny-a {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: var(--ink-muted);
+      }
+      .faq-funny-a em {
+        color: var(--ink);
+        font-style: italic;
+      }
+      @media (max-width: 600px) {
+        .faq-funnies {
+          padding: 28px 20px;
+          margin-top: 48px;
+        }
+        .faq-funnies-title {
+          font-size: 1.4rem;
+        }
+        .faq-funny {
+          padding: 16px 18px;
+        }
+      }
+
+      /* ============================================
        LOCATION — 2-col, hairline rules
        ============================================ */
       .location {
@@ -2668,11 +2748,11 @@
     <!-- INTRO -->
     <section class="intro" id="about-intro">
       <p>
-        CRN Meats &amp; Cellar is a family-owned meat market and cellar in
-        Spooner, Wisconsin, just off Hwy 63 between Minneapolis and Duluth. Walk
-        in for hand-selected cuts sourced from our sister store Amery Meat
-        Market, brats grilled fresh Friday through Labor Day, Wisconsin cheese,
-        wine, craft beer, and gifts.
+        A neighborhood butcher, cellar, and cabin-provisions stop in downtown
+        Spooner — right off Hwy 63 between Minneapolis and Duluth. Wisconsin
+        cheese, curated wine, craft beer, hand-selected cuts from our sister
+        store Amery Meat Market, gift baskets, and brats grilled fresh Friday
+        through Labor Day. Come in, look around, stay a minute.
       </p>
     </section>
 
@@ -2690,6 +2770,51 @@
         </p>
       </header>
       <div class="products-grid" role="list">
+        <article class="product-card reveal" role="listitem">
+          <div class="product-image">
+            <img
+              src="assets/stock-cheese.jpg"
+              alt="Wisconsin cheese and cheese curds"
+              loading="lazy"
+              width="900"
+              height="600"
+            />
+          </div>
+          <div class="product-body">
+            <span class="product-icon"
+              ><i class="ph ph-cow" aria-hidden="true"></i
+            ></span>
+            <h3>Wisconsin Cheese</h3>
+            <p>
+              Curds, blocks, and specialty cheeses from cheesemakers across the
+              state.
+            </p>
+          </div>
+        </article>
+
+        <article class="product-card reveal reveal-delay-1" role="listitem">
+          <div class="product-image">
+            <img
+              src="assets/stock-wine.jpg"
+              alt="Curated wine, craft beer and local gifts"
+              loading="lazy"
+              width="600"
+              height="900"
+            />
+          </div>
+          <div class="product-body">
+            <span class="product-icon"
+              ><i class="ph ph-wine" aria-hidden="true"></i
+            ></span>
+            <h3>Local Wine &amp; Craft Beer Recommendations</h3>
+            <p>
+              The Lutz family's personal picks for the cellar — curated bottles
+              and six-packs, chosen for weeknight dinners and cabin weekends.
+              Pet food &amp; treats also stocked.
+            </p>
+          </div>
+        </article>
+
         <article class="product-card reveal" role="listitem">
           <div class="product-image">
             <img
@@ -2776,51 +2901,6 @@
               Hand-seasoned and smoked in-house. Wild game trim from your deer
               turned into snack sticks and jerky by request — through our sister
               store Amery Meat Market.
-            </p>
-          </div>
-        </article>
-
-        <article class="product-card reveal" role="listitem">
-          <div class="product-image">
-            <img
-              src="assets/stock-cheese.jpg"
-              alt="Wisconsin cheese and cheese curds"
-              loading="lazy"
-              width="900"
-              height="600"
-            />
-          </div>
-          <div class="product-body">
-            <span class="product-icon"
-              ><i class="ph ph-cow" aria-hidden="true"></i
-            ></span>
-            <h3>Wisconsin Cheese</h3>
-            <p>
-              Curds, blocks, and specialty cheeses from cheesemakers across the
-              state.
-            </p>
-          </div>
-        </article>
-
-        <article class="product-card reveal reveal-delay-1" role="listitem">
-          <div class="product-image">
-            <img
-              src="assets/stock-wine.jpg"
-              alt="Curated wine, craft beer and local gifts"
-              loading="lazy"
-              width="600"
-              height="900"
-            />
-          </div>
-          <div class="product-body">
-            <span class="product-icon"
-              ><i class="ph ph-wine" aria-hidden="true"></i
-            ></span>
-            <h3>Local Wine &amp; Craft Beer Recommendations</h3>
-            <p>
-              The Lutz family's personal picks for the cellar — curated bottles
-              and six-packs, chosen for weeknight dinners and cabin weekends.
-              Pet food &amp; treats also stocked.
             </p>
           </div>
         </article>
@@ -3640,6 +3720,53 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- BUTCHER SHOP HUMOR — owner-requested section. Kept out of FAQPage schema so it doesn't dilute SEO. -->
+      <div class="faq-funnies" aria-label="Butcher shop humor">
+        <header class="faq-funnies-header">
+          <p class="section-label">A Little Humor</p>
+          <h3 class="faq-funnies-title">From the cutting board.</h3>
+          <p class="faq-funnies-sub">
+            Dennis tries to bring the same humor to the website that he brings
+            to our social posts. Pressed for a joke section, we obliged. Brisket
+            the ice.
+          </p>
+        </header>
+        <ul class="faq-funnies-list">
+          <li class="faq-funny">
+            <span class="faq-funny-q">What's a butcher's favorite Beatles song?</span>
+            <span class="faq-funny-a">"Let It Beef."</span>
+          </li>
+          <li class="faq-funny">
+            <span class="faq-funny-q">Why did the steer refuse to leave the pasture?</span>
+            <span class="faq-funny-a">He was a little shellfish — no, wait, that's us at the seafood counter. He was a little <em>stuck</em>.</span>
+          </li>
+          <li class="faq-funny">
+            <span class="faq-funny-q">What do you call cheese that isn't yours?</span>
+            <span class="faq-funny-a">Nacho cheese.</span>
+          </li>
+          <li class="faq-funny">
+            <span class="faq-funny-q">How do you organize a party in space?</span>
+            <span class="faq-funny-a">You <em>planet</em>. Ours come with a cheese board and a bottle of red.</span>
+          </li>
+          <li class="faq-funny">
+            <span class="faq-funny-q">Why don't eggs tell jokes?</span>
+            <span class="faq-funny-a">They'd crack each other up. Same reason we don't let them near the meat slicer.</span>
+          </li>
+          <li class="faq-funny">
+            <span class="faq-funny-q">What's the difference between a butcher and a banker?</span>
+            <span class="faq-funny-a">The butcher knows the cuts. (We'll see ourselves out.)</span>
+          </li>
+          <li class="faq-funny">
+            <span class="faq-funny-q">I bought some Bologna from the deli and it had a great personality.</span>
+            <span class="faq-funny-a">We had to put it down. (Sorry.)</span>
+          </li>
+          <li class="faq-funny">
+            <span class="faq-funny-q">What did the grape say when it got stepped on?</span>
+            <span class="faq-funny-a">Nothing — but it let out a little wine. The Lutz family would like you to know our reds are pressed, not pressed-upon.</span>
+          </li>
+        </ul>
       </div>
     </section>
 
