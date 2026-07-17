@@ -1011,6 +1011,85 @@
         display: contents;
       }
 
+      /* === Hero 2-column layout (text + storefront photo) === */
+      .hero-inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+        gap: 64px;
+        align-items: center;
+        width: 100%;
+        max-width: 1240px;
+        margin: 0 auto;
+      }
+      .hero-content {
+        max-width: none;
+        margin: 0;
+        display: block;
+        text-align: left;
+      }
+      .hero-image {
+        position: relative;
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow:
+          0 1px 2px rgba(0, 0, 0, 0.05),
+          0 24px 48px -12px rgba(20, 20, 20, 0.18);
+        aspect-ratio: 1400 / 917;
+      }
+      .hero-image img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      /* Reset hero-content children that were center-aligned for the old single-column layout */
+      .hero-content .hero-logo {
+        margin: 0 0 32px;
+      }
+      .hero-content .hero-opening-badge {
+        margin: 0 0 32px;
+      }
+      .hero-content .hero-opening-rule {
+        width: 48px;
+      }
+      .hero-content .hero-opening-rule:first-child {
+        display: none;
+      }
+      .hero-content .hero-sub {
+        margin: 0 0 32px;
+      }
+      .hero-content .hero-actions {
+        justify-content: flex-start;
+      }
+      @media (max-width: 900px) {
+        .hero-inner {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .hero-content {
+          text-align: center;
+        }
+        .hero-content .hero-logo {
+          margin: 0 auto 32px;
+        }
+        .hero-content .hero-opening-badge {
+          margin: 0 auto 32px;
+        }
+        .hero-content .hero-opening-rule:first-child {
+          display: block;
+        }
+        .hero-content .hero-opening-rule {
+          width: 80px;
+        }
+        .hero-content .hero-sub {
+          margin: 0 auto 32px;
+        }
+        .hero-content .hero-actions {
+          justify-content: center;
+        }
+      }
+
       .hero-logo {
         max-width: 220px;
         margin: 0 auto 32px;
@@ -2701,85 +2780,100 @@
     <!-- HERO -->
     <section class="hero" id="home">
       <div class="hero-glow" aria-hidden="true"></div>
-      <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
-      <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
-      <div class="hero-orb hero-orb-3" aria-hidden="true"></div>
 
-      <div class="hero-content">
-        <div class="hero-logo">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-logo">
+            <img
+              src="assets/logo.jpeg"
+              alt="Crossroads of the North Meats &amp; Cellar logo"
+              loading="eager"
+              fetchpriority="high"
+              width="1320"
+              height="712"
+            />
+          </div>
+
+          <div
+            class="hero-opening-badge"
+            aria-label="Grand Opening Saturday, July 18 at 118 Ash Street, Spooner, WI"
+          >
+            <span class="hero-opening-rule" aria-hidden="true"></span>
+            <span class="hero-opening-text">
+              <span class="hero-opening-eyebrow"
+                >Grand Opening · Saturday, July 18</span
+              >
+              <span class="hero-opening-date"
+                >2026 · 118 Ash Street, Spooner</span
+              >
+            </span>
+            <span class="hero-opening-rule" aria-hidden="true"></span>
+          </div>
+
+          <h1>
+            A neighborhood meat market and curated cellar in downtown
+            Spooner.
+          </h1>
+          <p class="hero-sub">
+            We're the Lutz family's new shop on Ash Street — right off Hwy 63
+            between Minneapolis and Duluth. Wisconsin cheese, curated wine,
+            hand-selected cuts from our sister store Amery Meat Market, gift
+            baskets, and brats grilled fresh Friday through Labor Day. Grand
+            opening Saturday, July 18. Come in, look around, stay a minute.
+          </p>
+
+          <div class="hero-actions">
+            <a
+              href="https://m.me/61590342133702"
+              target="_blank"
+              rel="noopener"
+              class="btn-primary"
+            >
+              <i class="ph ph-chat-circle-dots" aria-hidden="true"></i>
+              Send us a message
+            </a>
+            <a href="#location" class="btn-outline">
+              <i class="ph ph-map-pin" aria-hidden="true"></i>
+              Visit us in Spooner
+            </a>
+          </div>
+
+          <div class="hero-trust">
+            <span class="trust-item"
+              ><i class="ph ph-house-line" aria-hidden="true"></i
+              >Family-Owned</span
+            >
+            <span class="trust-sep" aria-hidden="true"></span>
+            <span class="trust-item"
+              ><i class="ph ph-storefront" aria-hidden="true"></i>Downtown
+              Spooner</span
+            >
+            <span class="trust-sep" aria-hidden="true"></span>
+            <span class="trust-item"
+              ><i class="ph ph-map-pin" aria-hidden="true"></i>Off Hwy 63</span
+            >
+            <span class="trust-sep" aria-hidden="true"></span>
+            <span class="trust-item"
+              ><i class="ph ph-fork-knife" aria-hidden="true"></i>Hand-Cut
+              in Amery</span
+            >
+          </div>
+        </div>
+
+        <div class="hero-image">
           <img
-            src="assets/logo.jpeg"
-            alt="Crossroads of the North Meats &amp; Cellar logo"
+            src="assets/shop-storefront-hero.jpg"
+            srcset="
+              assets/shop-storefront-mobile.jpg 700w,
+              assets/shop-storefront-hero.jpg 1400w
+            "
+            sizes="(max-width: 900px) 100vw, 50vw"
+            alt="The Crossroads of the North Meats &amp; Cellar storefront at 118 Ash Street, Spooner — stonework facade with the NOW OPEN sign and patriotic bunting"
             loading="eager"
             fetchpriority="high"
-            width="1320"
-            height="712"
+            width="1400"
+            height="917"
           />
-        </div>
-
-        <div
-          class="hero-opening-badge"
-          aria-label="Grand Opening Saturday, July 18 at 118 Ash Street, Spooner, WI"
-        >
-          <span class="hero-opening-rule" aria-hidden="true"></span>
-          <span class="hero-opening-text">
-            <span class="hero-opening-eyebrow"
-              >Grand Opening · Saturday, July 18</span
-            >
-            <span class="hero-opening-date"
-              >2026 · 118 Ash Street, Spooner</span
-            >
-          </span>
-          <span class="hero-opening-rule" aria-hidden="true"></span>
-        </div>
-
-        <h1>
-          A neighborhood meat market and curated cellar in downtown
-          Spooner.
-        </h1>
-        <p class="hero-sub">
-          We're the Lutz family's new shop on Ash Street — right off Hwy 63
-          between Minneapolis and Duluth. Wisconsin cheese, curated wine,
-          hand-selected cuts from our sister store Amery Meat Market, gift
-          baskets, and brats grilled fresh Friday through Labor Day. Grand
-          opening Saturday, July 18. Come in, look around, stay a minute.
-        </p>
-
-        <div class="hero-actions">
-          <a
-            href="https://m.me/61590342133702"
-            target="_blank"
-            rel="noopener"
-            class="btn-primary"
-          >
-            <i class="ph ph-chat-circle-dots" aria-hidden="true"></i>
-            Send us a message
-          </a>
-          <a href="#location" class="btn-outline">
-            <i class="ph ph-map-pin" aria-hidden="true"></i>
-            Visit us in Spooner
-          </a>
-        </div>
-
-        <div class="hero-trust">
-          <span class="trust-item"
-            ><i class="ph ph-house-line" aria-hidden="true"></i
-            >Family-Owned</span
-          >
-          <span class="trust-sep" aria-hidden="true"></span>
-          <span class="trust-item"
-            ><i class="ph ph-storefront" aria-hidden="true"></i>Downtown
-            Spooner</span
-          >
-          <span class="trust-sep" aria-hidden="true"></span>
-          <span class="trust-item"
-            ><i class="ph ph-map-pin" aria-hidden="true"></i>Off Hwy 63</span
-          >
-          <span class="trust-sep" aria-hidden="true"></span>
-          <span class="trust-item"
-            ><i class="ph ph-fork-knife" aria-hidden="true"></i>Hand-Cut
-            in Amery</span
-          >
         </div>
       </div>
 
