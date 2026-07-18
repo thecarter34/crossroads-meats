@@ -1808,6 +1808,89 @@
       }
 
       /* ============================================
+       INSIDE THE SHOP — 4-tile merchandising photo grid
+       Mirrors .rooms styling for visual consistency
+       ============================================ */
+      .shop-grid {
+        padding: var(--section-padding) 24px;
+        background: var(--bg-alt);
+        border-top: 1px solid var(--rule);
+      }
+      .shop-grid .container {
+        max-width: 1320px;
+        margin: 0 auto;
+      }
+      .shop-grid-tiles {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 32px;
+        margin-top: 56px;
+      }
+      .shop-tile {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .shop-tile-frame {
+        position: relative;
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+        background: var(--bg-primary);
+        margin-bottom: 24px;
+      }
+      .shop-tile-frame--portrait {
+        aspect-ratio: 3 / 4;
+      }
+      .shop-tile-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition:
+          transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+          filter 0.5s ease;
+      }
+      .shop-tile:hover .shop-tile-frame img {
+        transform: scale(1.04);
+        filter: saturate(0.92);
+      }
+      .shop-tile-num {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: 0.95rem;
+        color: var(--accent);
+        letter-spacing: 0.02em;
+        margin: 0 0 6px;
+        line-height: 1;
+      }
+      .shop-tile-title {
+        font-family: var(--font-display);
+        font-size: clamp(1.2rem, 1.6vw, 1.45rem);
+        font-weight: 700;
+        color: var(--ink);
+        margin: 0 0 8px;
+        line-height: 1.25;
+        letter-spacing: -0.005em;
+      }
+      .shop-tile-desc {
+        font-size: 0.92rem;
+        line-height: 1.65;
+        color: var(--ink-muted);
+        margin: 0;
+      }
+      @media (max-width: 1100px) {
+        .shop-grid-tiles {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 40px 32px;
+        }
+      }
+      @media (max-width: 640px) {
+        .shop-grid-tiles {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+      }
+
+      /* ============================================
        NOW HIRING CTA — full-width accent band, primary "we want you" surface
        ============================================ */
       .hiring-cta {
@@ -2981,11 +3064,11 @@
         <article class="product-card reveal reveal-delay-3" role="listitem">
           <div class="product-image">
             <img
-              src="assets/stock-snack-sticks.jpeg"
-              alt="Smoked cheese-filled snack sticks in a vintage pail"
+              src="assets/jerky-cheese-shelf.jpg"
+              alt="In-house snack sticks and jerky in Crossroads-branded Original Beef Strips and Teriyaki Beef Strips packaging, displayed alongside a Wisconsin cheese selection"
               loading="lazy"
-              width="800"
-              height="800"
+              width="1600"
+              height="1200"
             />
           </div>
           <div class="product-body">
@@ -3004,11 +3087,11 @@
         <article class="product-card reveal" role="listitem">
           <div class="product-image">
             <img
-              src="assets/stock-cheese.jpg"
-              alt="Wisconsin cheese and cheese curds"
+              src="assets/cheese-cooler.jpg"
+              alt="Glass-door cheese cooler stocked with Wisconsin cheese — Roth, Yodelay, Widmer, North Country, Alpine Lace, and more, curated cheesemaker by cheesemaker"
               loading="lazy"
-              width="900"
-              height="600"
+              width="1600"
+              height="1200"
             />
           </div>
           <div class="product-body">
@@ -3045,6 +3128,110 @@
             </p>
           </div>
         </article>
+      </div>
+    </section>
+
+    <!-- INSIDE THE SHOP — in-store merchandising photo grid -->
+    <section class="shop-grid" id="shop-grid" aria-labelledby="shop-grid-heading">
+      <div class="container">
+        <header class="section-header reveal">
+          <p class="section-label">Inside the Shop</p>
+          <h2 class="section-title" id="shop-grid-heading">
+            More than the meat counter.
+          </h2>
+          <p class="section-sub">
+            Walk through the door and you'll find a working kitchen, a working
+            cellar, and a working gift shelf — stocked with the brands we trust
+            at home and the goods we wished someone in Spooner carried.
+          </p>
+        </header>
+
+        <div class="shop-grid-tiles">
+          <figure class="shop-tile reveal">
+            <div class="shop-tile-frame">
+              <img
+                src="assets/cheese-cooler.jpg"
+                alt="Glass-door cheese cooler stocked with Wisconsin cheese — Roth, Yodelay, Widmer, North Country, Alpine Lace, and more"
+                loading="lazy"
+                width="1600"
+                height="1200"
+              />
+            </div>
+            <p class="shop-tile-num">01 — Wisconsin Cheese</p>
+            <h3 class="shop-tile-title">
+              A cooler built around Wisconsin cheesemakers.
+            </h3>
+            <p class="shop-tile-desc">
+              Curds, blocks, and aged specialties from Roth, Yodelay, Widmer,
+              North Country, Alpine Lace, and more — picked to cover the dinner
+              board, the grilled cheese, and the late-night snack.
+            </p>
+          </figure>
+
+          <figure class="shop-tile reveal reveal-delay-1">
+            <div class="shop-tile-frame">
+              <img
+                src="assets/jerky-cheese-shelf.jpg"
+                alt="In-house snack sticks and jerky in Crossroads-branded Original Beef Strips and Teriyaki Beef Strips packaging on the shelf above a Wisconsin cheese selection"
+                loading="lazy"
+                width="1600"
+                height="1200"
+              />
+            </div>
+            <p class="shop-tile-num">02 — House-Branded Snacks</p>
+            <h3 class="shop-tile-title">
+              Crossroads-branded jerky and snack sticks.
+            </h3>
+            <p class="shop-tile-desc">
+              Original and Teriyaki beef strips, hand-packaged in our branded
+              bags. Throw one in the cooler for the cabin — or grab a few for
+              the drive home.
+            </p>
+          </figure>
+
+          <figure class="shop-tile reveal reveal-delay-2">
+            <div class="shop-tile-frame shop-tile-frame--portrait">
+              <img
+                src="assets/dry-goods-condiments-shelf.jpg"
+                alt="Industrial pipe shelving against a fieldstone wall stocked with BBQ sauces, rubs, hot sauces, honey, bread buns, and house favorites"
+                loading="lazy"
+                width="900"
+                height="1200"
+              />
+            </div>
+            <p class="shop-tile-num">03 — Dry Goods &amp; Condiments</p>
+            <h3 class="shop-tile-title">
+              Sauces, rubs, honey, and the dry goods that finish a meal.
+            </h3>
+            <p class="shop-tile-desc">
+              BBQ sauces, hot sauces, spice rubs, honey, bread buns, and
+              pantry staples from regional and national brands we cook with
+              ourselves. Stocked against the fieldstone wall, between the
+              counter and the coolers.
+            </p>
+          </figure>
+
+          <figure class="shop-tile reveal reveal-delay-3">
+            <div class="shop-tile-frame">
+              <img
+                src="assets/knives-victorinox.jpg"
+                alt="Backlit Victorinox retail display board with kitchen knives, santokus, paring knives with color-coded handles, kitchen shears, and sharpening steel"
+                loading="lazy"
+                width="1600"
+                height="1036"
+              />
+            </div>
+            <p class="shop-tile-num">04 — Knives &amp; Kitchen Tools</p>
+            <h3 class="shop-tile-title">
+              The Victorinox board. Sharp knives for the kitchen that cooks.
+            </h3>
+            <p class="shop-tile-desc">
+              Chef knives, santokus, paring knives, bread knives, slicers,
+              shears, and sharpening steel — the same knives the pros use,
+              color-coded by handle, sized for real hands.
+            </p>
+          </figure>
+        </div>
       </div>
     </section>
 
@@ -3449,6 +3636,54 @@
                 The hallway, leading up to the front counter.
               </figcaption>
             </figure>
+            <figure class="interior-figure">
+              <img
+                src="assets/cheese-cooler.jpg"
+                alt="Glass-door cheese cooler stocked with Wisconsin cheese — Roth, Yodelay, Widmer, North Country, Alpine Lace, and more"
+                loading="lazy"
+                width="1600"
+                height="1200"
+              />
+              <figcaption>
+                The cheese cooler. Wisconsin cheesemakers, curated.
+              </figcaption>
+            </figure>
+            <figure class="interior-figure">
+              <img
+                src="assets/jerky-cheese-shelf.jpg"
+                alt="In-house snack sticks and jerky in Crossroads-branded Original Beef Strips and Teriyaki Beef Strips packaging on the shelf above a Wisconsin cheese selection"
+                loading="lazy"
+                width="1600"
+                height="1200"
+              />
+              <figcaption>
+                Hand-packaged snacks. Crossroads-branded beef strips.
+              </figcaption>
+            </figure>
+            <figure class="interior-figure">
+              <img
+                src="assets/dry-goods-condiments-shelf.jpg"
+                alt="Industrial pipe shelving against a fieldstone wall stocked with BBQ sauces, rubs, hot sauces, honey, bread buns, and house favorites"
+                loading="lazy"
+                width="900"
+                height="1200"
+              />
+              <figcaption>
+                The dry-goods shelf. Rubs, sauces, honey, and more.
+              </figcaption>
+            </figure>
+            <figure class="interior-figure">
+              <img
+                src="assets/knives-victorinox.jpg"
+                alt="Backlit Victorinox retail display board with kitchen knives, santokus, paring knives with color-coded handles, kitchen shears, and sharpening steel"
+                loading="lazy"
+                width="1600"
+                height="1036"
+              />
+              <figcaption>
+                The Victorinox board. Sharp knives, sharp cooks.
+              </figcaption>
+            </figure>
           </div>
           <div class="interior-track">
             <figure class="interior-figure">
@@ -3570,6 +3805,46 @@
                 role="presentation"
                 width="450"
                 height="600"
+              />
+            </figure>
+            <figure class="interior-figure">
+              <img
+                src="assets/cheese-cooler.jpg"
+                alt=""
+                loading="eager"
+                role="presentation"
+                width="1600"
+                height="1200"
+              />
+            </figure>
+            <figure class="interior-figure">
+              <img
+                src="assets/jerky-cheese-shelf.jpg"
+                alt=""
+                loading="eager"
+                role="presentation"
+                width="1600"
+                height="1200"
+              />
+            </figure>
+            <figure class="interior-figure">
+              <img
+                src="assets/dry-goods-condiments-shelf.jpg"
+                alt=""
+                loading="eager"
+                role="presentation"
+                width="900"
+                height="1200"
+              />
+            </figure>
+            <figure class="interior-figure">
+              <img
+                src="assets/knives-victorinox.jpg"
+                alt=""
+                loading="eager"
+                role="presentation"
+                width="1600"
+                height="1036"
               />
             </figure>
           </div>
