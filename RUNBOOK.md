@@ -1,9 +1,9 @@
 # Crossroads of the North Meats & Cellar — Client Runbook
 
 > **Status:** Maintenance
-> **Next:** Site revamp shipped to prd 2026-07-17 (squash commit 5e0e7b4). Includes cabin-provisions page deletion, hero redesign with storefront photo, FAQ jokes expansion, 404 rewrite, voice moments across the site, and new OG social card. Awaiting client feedback post-launch.
+> **Next:** 2026-07-19 — added 4 new GBP photos (commit 792d32e on dev): WI cheese display, Crossroads-branded beef strips + cheese, wine tasting event, shop interior overview. Smart-cropped to 1920×1080 GBP variants. Uploaded via Media.Create — GBP total 19 → 23. Source URLs use dev.pages.dev (Josh to merge dev→prd when convenient; Google CDN has already cached the bytes). Awaiting client feedback post-launch.
 > **Blocker:** None
-> **Last touched:** 2026-07-17
+> **Last touched:** 2026-07-19
 
 > Living document for the JJCTech engagement with **Jen & Dennis Lutz**
 > Owner: Josh (JJCTech)
