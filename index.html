@@ -2046,6 +2046,15 @@
           transform 0.8s var(--ease-out-expo),
           filter 0.6s ease;
       }
+      .shop-tile-frame--duo {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 4px;
+      }
+      .shop-tile-frame--duo img {
+        height: 100%;
+        object-fit: cover;
+      }
       .shop-tile:hover .shop-tile-frame {
         box-shadow: var(--shadow-card-hover);
         transform: translateY(-4px);
@@ -3386,19 +3395,19 @@
             </p>
           </figure>
 
-          <figure class="shop-tile reveal reveal-delay-1">
-            <div class="shop-tile-frame">
-              <img src="assets/shop-merch-towels.jpg" alt="Crossroads tees, hoodies, and butcher-joke tea towels on rolling racks against a cedar wall" loading="lazy" width="1600" height="1200">
+          <figure class="shop-tile shop-tile--duo reveal reveal-delay-1">
+            <div class="shop-tile-frame shop-tile-frame--duo">
+              <img src="assets/coasters.jpg" alt="Tipsy brand absorbent coasters displayed on a whiskey barrel at the Crossroads shop" loading="lazy" width="600" height="800">
+              <img src="assets/shop-merch-towels.jpg" alt="Crossroads butcher-joke tea towels on rolling racks" loading="lazy" width="1600" height="1200">
             </div>
-            <p class="shop-tile-num">02 — Branded Apparel</p>
+            <p class="shop-tile-num">02 — Coasters &amp; Tea Towels</p>
             <h3 class="shop-tile-title">
-              Wear the shop home.
+              The little things that get grabbed first.
             </h3>
             <p class="shop-tile-desc">
-              Soft tees, hoodies, crewnecks, and the butcher-joke tea towels.
-              Designed for the drive home, the cookout, and the cabin weekend —
-              or for the friend who keeps asking what you brought back from
-              Spooner.
+              Tipsy absorbent coasters with witty sayings, and the
+              butcher-joke tea towels people grab for friends and hostess gifts.
+              Pick one up at the barrel by the counter.
             </p>
           </figure>
 
@@ -3446,21 +3455,6 @@
               pantry staples from regional and national brands we cook with
               ourselves — stocked against the fieldstone wall, between the
               counter and the coolers.
-            </p>
-          </figure>
-
-          <figure class="shop-tile reveal reveal-delay-5">
-            <div class="shop-tile-frame">
-              <img src="assets/coasters.jpg" alt="Tipsy brand absorbent coasters displayed on a whiskey barrel at the Crossroads shop — witty sayings for every drink" loading="lazy" width="600" height="800">
-            </div>
-            <p class="shop-tile-num">06 — Coasters &amp; Curiosities</p>
-            <h3 class="shop-tile-title">
-              The little gifts that get grabbed first.
-            </h3>
-            <p class="shop-tile-desc">
-              Tipsy absorbent drink coasters with witty sayings, giftable
-              kitchen curiosities, and the small things you'll toss in the
-              bag on the way out. Pick one up at the barrel by the counter.
             </p>
           </figure>
         </div>
