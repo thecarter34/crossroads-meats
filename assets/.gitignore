@@ -1,17 +1,16 @@
-
-# Whitelist the 19 image files actively used on the live site.
-# Negation patterns must come BEFORE ignore patterns and be more specific.
-
+# Asset files actively used on the live site (tracked).
+# Everything else in this directory stays on disk but is gitignored.
 # Homepage (index.html):
 !/logo.jpeg
-!/shop-storefront-hero.jpg
-!/shop-storefront-mobile.jpg
+!/hero-bg.jpg
 !/og-image.jpg
+!/shop-storefront-hero.jpg
 !/coasters.jpg
 !/cheese-cooler.jpg
 !/dry-goods-condiments-shelf.jpg
 !/freezer-beef-rolls.jpg
 !/gbp-shop-interior-overview.jpg
+!/gbp-storefront-portrait-1080x1350.jpg
 !/gbp-v2-stock-dryaged.jpeg
 !/jerky-cheese-shelf.jpg
 !/knives-victorinox.jpg
@@ -25,7 +24,7 @@
 !/stock-handcut.jpeg
 !/stock-cheese.jpg
 
-# Ignore everything else (more specific extensions first)
+# Explicit ignore rules for unused photos (still on disk, not tracked):
 /beef-strips-cheese.jpeg
 /cheese-cooler-v2.jpeg
 /gbp-cover-storefront-1920x1080.jpg
@@ -42,7 +41,6 @@
 /gbp-shop-merch-cuts.jpg
 /gbp-shop-merch-towels.jpg
 /gbp-shop-wine-tasting.jpg
-/gbp-storefront-portrait-1080x1350.jpg
 /gbp-v2-hero-bg.jpg
 /gbp-v2-jen-IMG_7221.jpg
 /gbp-v2-jen-IMG_7222.jpg
@@ -50,7 +48,6 @@
 /gbp-v2-logo.jpeg
 /gbp-v2-stock-cheese.jpg
 /gbp-v2-stock-handcut.jpeg
-/hero-bg.jpg
 /jen-IMG_7221.jpg
 /jen-IMG_7222.jpg
 /jen-IMG_7223.jpg
@@ -65,12 +62,8 @@
 /shop-interior-event.jpeg
 /shop-storefront-mobile.jpg
 /shop-tasting-room.jpg
-/shop-storefront-mobile.jpg
-/shop-tasting-room.jpg
 /stock-about.jpg
-/stock-cheese.jpg
 /stock-dryaged.jpeg
-/stock-handcut.jpeg
 /stock-snack-sticks.jpeg
 /stock-wine.jpg
 /wine-tasting-event.jpeg
