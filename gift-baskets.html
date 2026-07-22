@@ -391,6 +391,114 @@
       .reveal { opacity: 1; transform: none; transition: none; }
     }
   </style>
+  <style>
+    /* ==========================================================================
+       Premium polish — propagated from main site for design consistency.
+       Appended at end of head so cascade wins over the base block above.
+       ========================================================================== */
+    :root {
+      --shadow-xs: 0 1px 2px rgba(42, 42, 42, 0.04);
+      --shadow-sm: 0 1px 4px rgba(42, 42, 42, 0.06), 0 1px 2px rgba(42, 42, 42, 0.04);
+      --shadow-md: 0 4px 16px rgba(42, 42, 42, 0.08), 0 2px 6px rgba(42, 42, 42, 0.04);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    ::selection { background: rgba(192, 57, 43, 0.18); color: var(--ink); }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--ink-muted); }
+
+    .navbar { border-bottom: 1px solid rgba(229, 224, 213, 0.7); }
+
+    .nav-cta {
+      box-shadow: var(--shadow-xs), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      transition: background 0.3s var(--ease-out-expo),
+                  transform 0.3s var(--ease-out-expo),
+                  box-shadow 0.3s var(--ease-out-expo);
+    }
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm), 0 0 20px rgba(192, 57, 43, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    .nav-cta:active { transform: translateY(0); box-shadow: var(--shadow-xs); }
+    .nav-cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .hamburger:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
+    .mobile-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+    .btn-primary,
+    .cta-primary,
+    .cta-btn-primary,
+    .hiring-apply {
+      box-shadow: var(--shadow-xs), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      transition: background 0.3s var(--ease-out-expo),
+                  transform 0.3s var(--ease-out-expo),
+                  box-shadow 0.3s var(--ease-out-expo);
+    }
+    .btn-primary:hover,
+    .cta-primary:hover,
+    .cta-btn-primary:hover,
+    .hiring-apply:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md), 0 0 24px rgba(192, 57, 43, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    .btn-primary:active,
+    .cta-primary:active,
+    .cta-btn-primary:active,
+    .hiring-apply:active { transform: translateY(0); box-shadow: var(--shadow-xs); }
+    .btn-primary:focus-visible,
+    .cta-primary:focus-visible,
+    .cta-btn-primary:focus-visible,
+    .hiring-apply:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .btn-secondary,
+    .cta-secondary,
+    .cta-btn-secondary {
+      box-shadow: var(--shadow-xs);
+      transition: background 0.3s var(--ease-out-expo),
+                  color 0.3s var(--ease-out-expo),
+                  border-color 0.3s var(--ease-out-expo),
+                  transform 0.3s var(--ease-out-expo),
+                  box-shadow 0.3s var(--ease-out-expo);
+    }
+    .btn-secondary:hover,
+    .cta-secondary:hover,
+    .cta-btn-secondary:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+    .btn-secondary:active,
+    .cta-secondary:active,
+    .cta-btn-secondary:active { transform: translateY(0); box-shadow: var(--shadow-xs); }
+    .btn-secondary:focus-visible,
+    .cta-secondary:focus-visible,
+    .cta-btn-secondary:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+    .footer-links a,
+    .footer-contact a {
+      position: relative;
+      display: inline-block;
+      transition: color 0.3s var(--ease-out-expo);
+    }
+    .footer-links a::after,
+    .footer-contact a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 0;
+      height: 1px;
+      background: var(--accent-light);
+      transition: width 0.3s var(--ease-out-expo);
+    }
+    .footer-links a:hover,
+    .footer-contact a:hover { color: var(--accent-light); }
+    .footer-links a:hover::after,
+    .footer-contact a:hover::after { width: 100%; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 <body>
 

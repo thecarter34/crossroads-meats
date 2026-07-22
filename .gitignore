@@ -4,3 +4,6 @@
 
 # Local Hermes working notes (plans/desktop-attachments) — not part of site repo
 .hermes/
+
+# Windows thumbnail cache (smugmug upload side effect)
+Thumbs.db
