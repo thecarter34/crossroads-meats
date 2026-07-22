@@ -2171,29 +2171,42 @@
         display: inline-flex;
         align-items: center;
         gap: 10px;
-        padding: 14px 28px;
+        padding: 16px 32px;
         background: var(--ink);
         color: var(--bg-alt);
-        border: none;
+        border: 1px solid rgba(255,255,255,0.08);
         font-family: inherit;
-        font-size: 0.85rem;
+        font-size: 0.82rem;
         font-weight: 600;
-        letter-spacing: 0.12em;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
         text-decoration: none;
         cursor: pointer;
-        border-radius: 2px;
+        border-radius: 3px;
+        box-shadow: 0 2px 8px rgba(10,10,10,0.15), inset 0 1px 0 rgba(255,255,255,0.04);
         transition:
-          background 0.18s ease,
-          transform 0.18s ease;
+          background 0.25s var(--ease-out-expo),
+          transform 0.25s var(--ease-out-expo),
+          box-shadow 0.25s var(--ease-out-expo),
+          border-color 0.25s var(--ease-out-expo);
       }
       .hiring-cta-cta:hover {
-        background: var(--accent);
-        color: #fff;
-        transform: translateY(-1px);
+        background: var(--ink);
+        color: var(--bg-alt);
+        border-color: rgba(255,255,255,0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(10,10,10,0.25), inset 0 1px 0 rgba(255,255,255,0.08);
+      }
+      .hiring-cta-cta:active {
+        transform: translateY(0px);
+        box-shadow: 0 2px 8px rgba(10,10,10,0.15);
       }
       .hiring-cta-cta i {
-        font-size: 1rem;
+        font-size: 1.05rem;
+        transition: transform 0.25s var(--ease-out-expo);
+      }
+      .hiring-cta-cta:hover i {
+        transform: translateX(3px);
       }
 
       .hiring-cta-side {
