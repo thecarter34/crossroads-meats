@@ -187,8 +187,7 @@ All JSON-LD blocks extracted and validated with Python `json.loads()`.
 ```
 **✅ Valid JSON.** Complete — name, address, geo, areaServed, sameAs (Facebook), hasOfferCatalog, potentialAction.
 
-**❌ MISSING: `telephone`** — no phone number anywhere in schema.  
-**❌ MISSING: `openingHoursSpecification`** — no hours in schema (known gap, see Section F).
+**❌ MISSING: `telephone`** — no phone number anywhere in schema. 
 
 ### Block 2 — FAQPage
 ```json
@@ -320,9 +319,18 @@ The hero section has no background photo (CSS gradient-only), so no large photog
 ✅ All four geo meta tags present. `ICBM` is a legacy tag but harmless.
 
 ### OpeningHoursSpecification
-❌ **Not present in schema.** Confirmed by string search and JSON parse — `openingHoursSpecification` is absent from all schema blocks.
-
-The FAQ states hours are TBD. This is acceptable for a pre-opening site, but as soon as hours are set, `openingHoursSpecification` must be added to the LocalBusiness schema. Google's local pack explicitly weights this field.
+✅ **Resolved 2026-07-23.** JSON-LD `@graph` on the homepage now carries a 2-period `openingHoursSpecification`:
+```json
+"openingHoursSpecification": [
+  { "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Thursday", "Friday", "Saturday"],
+    "opens": "10:00", "closes": "18:00" },
+  { "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Sunday"],
+    "opens": "10:00", "closes": "15:00" }
+]
+```
+Mon/Tue/Wed closed by absence (Google treats missing days as closed). Confirms via `re.findall('<script type="application/ld\+json">(.*?)</script>', index.html)` + JSON parse. Sun's close changed from 18:00 → 15:00 per Dennis 2026-07-23 message — was added when the site launched with all four days 10–6.
 
 ### LocalBusiness Schema Completeness
 | Field | Present? |
@@ -572,7 +580,7 @@ for u in urls:
 
 | # | Severity | Finding | Status |
 |---|---|---|---|
-| 1 | **HIGH** | Missing `openingHoursSpecification` in LocalBusiness schema | Known gap; hours TBD; must add once confirmed |
+| 1 | **HIGH** | Missing `openingHoursSpecification` in LocalBusiness schema | ✅ RESOLVED 2026-07-23 (per Dennis: Sun 10-3, Thu-Sat 10-6) |
 | 2 | **HIGH** | No telephone anywhere on site (schema, meta, body, footer) | Must add |
 | 3 | **MED** | Missing JobPosting schema for Weekly Cleaning Specialist | Must add |
 | 4 | **MED** | 29/30 images lack explicit `width`/`height` (CLS risk) | Should fix |
